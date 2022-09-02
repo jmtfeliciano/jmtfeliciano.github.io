@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<title>Dashboard Test</title>
+</head>
+<body>
+    <script src="https://publicdashboards.dl.usda.gov/javascripts/api/tableau-2.min.js"></script>
+    <script src="https://publicdashboards.dl.usda.gov/javascripts/api/tableau-2.9.0.min.js"></script>
+    <div class="tableauPlaceHolder" id="vizContainer" style="width:100%"></div>
+    <div class="tableauPlaceHolder" id="vizContainer2" style="width:100%"></div>
+
+<script>
+   function initViz() {
+    let containerDiv = document.getElementById("vizContainer");
+    let url = "https://publicdashboards-dev.dl.usda.gov/t/RD_PUB/views/Overview/Overview-MainContent";
+    let widthControl = containerDiv.offsetWidth;
+
+    let desktopHeight = 1600, tabletHeight = 2100, mobileHeight = 2700;	
+    let computedHeight = ( widthControl >= 800 ? desktopHeight : widthControl >= 500 ? tabletHeight : mobileHeight );
+ 	
+
+    let options = {
+	hideTabs: true,
+	hideToolbar: true,
+        width: '100%',
+	height: computedHeight + 'px'
+	}	
+    let viz = new tableau.Viz(containerDiv, url, options);
+}
+
+initViz();
+
+</script>
+
+<script>
+    function initViz2() {
+     let containerDiv = document.getElementById("vizContainer2");
+     let url = "https://publicdashboards-dev.dl.usda.gov/t/RD_PUB/views/ProgramArea/DEMO-ProgramArea";
+     let widthControl = containerDiv.offsetWidth;
+ 
+     let desktopHeight = 1600, tabletHeight = 2100, mobileHeight = 2700;	
+     let computedHeight = ( widthControl >= 800 ? desktopHeight : widthControl >= 500 ? tabletHeight : mobileHeight );
+      
+ 
+     let options = {
+     hideTabs: true,
+     hideToolbar: true,
+         width: '100%',
+     height: computedHeight + 'px'
+     }	
+     let viz = new tableau.Viz(containerDiv, url, options);
+ }
+ 
+ initViz2();
+ 
+ </script>
+
+
+</body>
+</html>
+
