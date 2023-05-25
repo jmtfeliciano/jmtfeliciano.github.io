@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Introduction to Tabular Data in R: Using usaspending.gov</title>
+  <meta name="description" content="Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Introduction to Tabular Data in R: Using usaspending.gov" />
+  
+  
+  
+
+<meta name="author" content="Office of Chief Data Officer Office of Performance Management and the Chief Financial Officer U.S. Small Business Administration (SBA)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="data-download-from-usaspending.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Learning R with usaspending.gov data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> R Tutorials and Data from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-this-tutorial-differs-from-other-tutorials"><i class="fa fa-check"></i><b>1.1</b> How this tutorial differs from other tutorials</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#what-is-usaspending.gov"><i class="fa fa-check"></i><b>1.2</b> What is USAspending.gov?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#official-training-videos"><i class="fa fa-check"></i><b>1.3</b> Official Training Videos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#how-to-request-official-training-from-usaspending.gov"><i class="fa fa-check"></i><b>1.4</b> How to request official training from usaspending.gov</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#signing-up-for-usaspending.gov-mailing-list"><i class="fa fa-check"></i><b>1.5</b> Signing up for usaspending.gov mailing list</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#usaspending-agency-profile"><i class="fa fa-check"></i><b>1.6</b> USASpending: Agency Profile</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#usaspending-recipient-profile"><i class="fa fa-check"></i><b>1.7</b> USASpending: Recipient Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html"><i class="fa fa-check"></i><b>2</b> Data Download from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#how-sba-assistance-programs-are-represented-in-the-data"><i class="fa fa-check"></i><b>2.1</b> How SBA assistance programs are represented in the data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#warning-against-using-older-data"><i class="fa fa-check"></i><b>2.2</b> Warning against using older data</a></li>
+<li class="chapter" data-level="2.3" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-1-advanced-search"><i class="fa fa-check"></i><b>2.3</b> Method 1: <code>Advanced Search</code></a></li>
+<li class="chapter" data-level="2.4" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-2-award-data-archive"><i class="fa fa-check"></i><b>2.4</b> Method 2: <code>Award Data Archive</code></a></li>
+<li class="chapter" data-level="2.5" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-3-custom-award-data"><i class="fa fa-check"></i><b>2.5</b> Method 3: <code>Custom Award Data</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html"><i class="fa fa-check"></i><b>3</b> USASpending Built-In Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#maps"><i class="fa fa-check"></i><b>3.1</b> Maps</a></li>
+<li class="chapter" data-level="3.2" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#time-trends"><i class="fa fa-check"></i><b>3.2</b> Time Trends</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html"><i class="fa fa-check"></i><b>4</b> Learning R: SBA Resources</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#getting-started"><i class="fa fa-check"></i><b>4.1</b> Getting Started</a></li>
+<li class="chapter" data-level="4.2" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#precipio"><i class="fa fa-check"></i><b>4.2</b> Precipio</a></li>
+<li class="chapter" data-level="4.3" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#if-you-already-know-r"><i class="fa fa-check"></i><b>4.3</b> If you already know R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>5</b> Reading Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="reading-data.html"><a href="reading-data.html#watch-this-before-proceeding"><i class="fa fa-check"></i><b>5.1</b> Watch this before proceeding</a></li>
+<li class="chapter" data-level="5.2" data-path="reading-data.html"><a href="reading-data.html#materials-needed-for-this-section"><i class="fa fa-check"></i><b>5.2</b> Materials needed for this section</a></li>
+<li class="chapter" data-level="5.3" data-path="reading-data.html"><a href="reading-data.html#opening-r-scripts-and-tabular-data"><i class="fa fa-check"></i><b>5.3</b> Opening R Scripts and Tabular Data</a></li>
+<li class="chapter" data-level="5.4" data-path="reading-data.html"><a href="reading-data.html#running-scripts"><i class="fa fa-check"></i><b>5.4</b> Running scripts</a></li>
+<li class="chapter" data-level="5.5" data-path="reading-data.html"><a href="reading-data.html#read.csv-reading-tabular-files"><i class="fa fa-check"></i><b>5.5</b> read.csv(): Reading tabular files</a></li>
+<li class="chapter" data-level="5.6" data-path="reading-data.html"><a href="reading-data.html#head-inspect-and-preview-data-frames"><i class="fa fa-check"></i><b>5.6</b> head(): Inspect and Preview Data Frames</a></li>
+<li class="chapter" data-level="5.7" data-path="reading-data.html"><a href="reading-data.html#practice-1"><i class="fa fa-check"></i><b>5.7</b> Practice 1</a></li>
+<li class="chapter" data-level="5.8" data-path="reading-data.html"><a href="reading-data.html#unique-and-table-finding-unique-values"><i class="fa fa-check"></i><b>5.8</b> unique() and table(): Finding Unique Values</a></li>
+<li class="chapter" data-level="5.9" data-path="reading-data.html"><a href="reading-data.html#practice-2"><i class="fa fa-check"></i><b>5.9</b> Practice 2</a></li>
+<li class="chapter" data-level="5.10" data-path="reading-data.html"><a href="reading-data.html#file-path-in-windows-advanced"><i class="fa fa-check"></i><b>5.10</b> File Path in Windows (Advanced)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html"><i class="fa fa-check"></i><b>6</b> Introduction to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#files-you-need-in-this-section"><i class="fa fa-check"></i><b>6.1</b> Files you need in this section</a></li>
+<li class="chapter" data-level="6.2" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#what-is-dplyr"><i class="fa fa-check"></i><b>6.2</b> What is dplyr?</a></li>
+<li class="chapter" data-level="6.3" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#select-to-subset-columns"><i class="fa fa-check"></i><b>6.3</b> select() to subset columns</a></li>
+<li class="chapter" data-level="6.4" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#write.csv-a-quick-detour"><i class="fa fa-check"></i><b>6.4</b> write.csv(): a quick detour</a></li>
+<li class="chapter" data-level="6.5" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#filter-to-subset-based-on-variable-values"><i class="fa fa-check"></i><b>6.5</b> filter() to subset based on variable values</a></li>
+<li class="chapter" data-level="6.6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#exercise"><i class="fa fa-check"></i><b>6.6</b> Exercise</a></li>
+<li class="chapter" data-level="6.7" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#arrange-to-sort-numerically-or-alphabetically"><i class="fa fa-check"></i><b>6.7</b> arrange() to sort numerically or alphabetically</a></li>
+<li class="chapter" data-level="6.8" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#summarize-to-create-summaries"><i class="fa fa-check"></i><b>6.8</b> summarize() to create summaries</a></li>
+<li class="chapter" data-level="6.9" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#practice"><i class="fa fa-check"></i><b>6.9</b> Practice:</a></li>
+<li class="chapter" data-level="6.10" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#discussing-the-operator-at-length"><i class="fa fa-check"></i><b>6.10</b> Discussing the %&gt;% operator at length</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html"><i class="fa fa-check"></i><b>7</b> Introduction to visualization</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#files-you-need-in-this-section-1"><i class="fa fa-check"></i><b>7.1</b> Files you need in this section</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#barplot-for-bar-plots-or-bar-charts"><i class="fa fa-check"></i><b>7.2</b> barplot() for bar plots or bar charts</a></li>
+<li class="chapter" data-level="7.3" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#practice-3"><i class="fa fa-check"></i><b>7.3</b> Practice</a></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#plot-for-scatter-and-line-plots"><i class="fa fa-check"></i><b>7.4</b> plot() for scatter and line plots</a></li>
+<li class="chapter" data-level="7.5" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#practice-4"><i class="fa fa-check"></i><b>7.5</b> Practice</a></li>
+<li class="chapter" data-level="7.6" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#further-customization-and-extra-resources"><i class="fa fa-check"></i><b>7.6</b> Further Customization and Extra Resources</a></li>
+<li class="chapter" data-level="7.7" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#section"><i class="fa fa-check"></i><b>7.7</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="detailed-code-template.html"><a href="detailed-code-template.html"><i class="fa fa-check"></i><b>8</b> Detailed code template</a></li>
+<li class="divider"></li>
+<li><a href="google" target="blank">Click this to leave feedback</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Tabular Data in R: Using usaspending.gov</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Introduction to Tabular Data in R: Using usaspending.gov</h1>
+<p class="author"><em>Office of Chief Data Officer<br>Office of Performance Management and the Chief Financial Officer<br>U.S. Small Business Administration (SBA)</em></p>
+<p class="date"><em>Created 2023-03-13 (Updated 2023-05-24)</em></p>
+</div>
+<div id="r-tutorials-and-data-from-usaspending.gov" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> R Tutorials and Data from USAspending.gov<a href="index.html#r-tutorials-and-data-from-usaspending.gov" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="how-this-tutorial-differs-from-other-tutorials" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> How this tutorial differs from other tutorials<a href="index.html#how-this-tutorial-differs-from-other-tutorials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R is built as a statistical and computing language. Unlike most R tutorials, the emphasis of this tutorial is to work extensively with tabular data that are represented in R as a <code>data frame</code> object (more on this later). We will then get you started you started with the <code>dplyr</code> package, one of the core data science packages from Posit (Formerly RStudio Inc).</p>
+<p>Moreover, although SBA has video tutorials using R within the Precipio platform (more on this later), the materials do not leverage SBA-specific data sets. At the end of this tutorials, we will provide you R code/script templates that you may use in the future for analyses.</p>
+</div>
+<div id="what-is-usaspending.gov" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> What is USAspending.gov?<a href="index.html#what-is-usaspending.gov" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>USAspending.gov is the official open data source website of federal spending information.</p>
+<p>USAspending.gov provides a trove of information and is the official source of data on federal spending idealized by the Federal Funding Accountability and Transparency Act of 2006 (FFATA), which was later amended and expanded by the 2008 Government Funding Transparency Act and the Digital Accountability and Transparency Act (DATA Act), respectively.</p>
+<p>The Department of the Treasury—which runs the site—has taken steps to provide transparent information and foster accountability to the public on government spending.
+The Small Business Administration (SBA) regularly provides USAspending.gov additional (1) contract data <strong>daily</strong> and (2) awards data <strong>twice a month</strong>.</p>
+</div>
+<div id="official-training-videos" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Official Training Videos<a href="index.html#official-training-videos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For official training videos, you may visit <a href="https://www.usaspending.gov/training-videos" class="uri">https://www.usaspending.gov/training-videos</a> which provides a link to various YouTube videos created by the usaspending.gov team.</p>
+<p>For your convenience, the following training videos are compiled below for your convenience:</p>
+<ul>
+<li>How to Find Federal Funding Recipients (<a href="https://www.youtube.com/watch?v=2GSWlHlPULE">Youtube</a>)</li>
+<li>How to Use USAspending Downloads (<a href="https://www.youtube.com/watch?v=5gMp2kyzEoo&amp;t=1s">Youtube</a>)</li>
+<li>How to Use USAspending API Endpoints (<a href="https://www.youtube.com/watch?v=AEKL2LOkRZY&amp;t=1s">Youtube</a>)</li>
+<li>How to Find Federal Grants (Tutorial) (<a href="https://www.youtube.com/watch?v=8-r7aSvl8tY&amp;t=1s">Youtube</a>)</li>
+<li>How to Find Federal Grants (Quick Start) (<a href="https://www.youtube.com/watch?v=apPBqcy6F1k">Youtube</a>)</li>
+<li>How to Find Government Contracts for Small Businesses (Tutorial) (<a href="https://www.youtube.com/watch?v=jYs3zq3Tvs0&amp;t=1s">Youtube</a>)</li>
+<li>How to Find Government Contracts for Small Businesses (Quick Start) (<a href="https://www.youtube.com/watch?v=Fzl4OIjP73A&amp;t=1s">Youtube</a>)</li>
+<li>How to Find COVID and Infrastructure Spending (Tutorial) (<a href="https://www.youtube.com/watch?v=b8l-ZBhQ900&amp;t=2s">Youtube</a>)</li>
+<li>How to Find COVID and Infrastructure Spending (Quick Start) (<a href="https://www.youtube.com/watch?v=hct0oHSGVHA&amp;t=1s">Youtube</a>)</li>
+<li>How to Find Government Spending to Your State (Tutorial) (<a href="https://www.youtube.com/watch?v=ZuvZQ33ZvAE&amp;t=1s">Youtube</a>)</li>
+<li>How to Find Government Spending to Your State (Quick Start) (<a href="https://www.youtube.com/watch?v=b9ABwzIyCNI">Youtube</a>)</li>
+</ul>
+</div>
+<div id="how-to-request-official-training-from-usaspending.gov" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> How to request official training from usaspending.gov<a href="index.html#how-to-request-official-training-from-usaspending.gov" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The USAspending.gov team is committed to helping audiences of all types learn more about our website’s tools and data.</p>
+<p>If your organization would like to request training, you may click (<a href="https://www.surveymonkey.com/r/YK963LJ">this link</a>) to submit a request. For more information on training requests directly from the usaspending.gov team, please visit the Training section of <a href="https://www.usaspending.gov/about" class="uri">https://www.usaspending.gov/about</a> for more information.</p>
+<p>According to usaspending.gov, a minimum of three participants is required for training requests.</p>
+</div>
+<div id="signing-up-for-usaspending.gov-mailing-list" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Signing up for usaspending.gov mailing list<a href="index.html#signing-up-for-usaspending.gov-mailing-list" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Data on <a href="https://usaspending.gov" class="uri">https://usaspending.gov</a> is constantly changing. For example, new data columns were recently added to highlight funding from IIJA (The Infrastructure Investment and Jobs Act).</p>
+<p>To receive updates and notes on future usaspending.gov changes, you may sign up to the usaspending.gov mailing list by emailing <code>join-usaspending@lists.fiscal.treasury.gov</code>. After your initial email, an automated email response will ask you to confirm that you’d want to be added to the mailing list.</p>
+<p>For any questions or concerns related to any key USAspending changes, you may email <code>USAspending.Help@fiscal.treasury.gov</code>.</p>
+</div>
+<div id="usaspending-agency-profile" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> USASpending: Agency Profile<a href="index.html#usaspending-agency-profile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure">
+<img src="images/Agency%20Profile.png" alt="" />
+<p class="caption">Preview of the Agency Profile Search Feature</p>
+</div>
+<p>Agency Profile allows you to learn more about each federal agency, their mission, and key budgetary summaries for recent FYs. The image above shows that you may locate this feature by clicking the Agency option under the Profiles tab.</p>
+<p>Once you in the window view above, simply type the full name of agency you’re interested in (e.g., Small Business Administration) and press enter. After that, the agency’s name should be displayed on the bottom which you will need to click. Once redirected, you should be able to view SBA’s Agency Profile.</p>
+<div class="figure">
+<img src="images/SBA%20agency%20profile.png" alt="" />
+<p class="caption">Preview of SBA’s Agency Profile</p>
+</div>
+<p>The image highlights two sections in red asterisks. First, the page states the agency mission. The second asterisked section shows you a hard-to-read button that allows you to change the FY of the overview data you would like to examine. If you anticipate a need to pull overview data for the agency, it could be a good idea to bookmark the full link to SBA’s Agency Profile page which is:
+<a href="https://www.usaspending.gov/agency/small-business-administration" class="uri">https://www.usaspending.gov/agency/small-business-administration</a></p>
+<div class="figure">
+<img src="images/SBA%20agency%20profile%20-%20part%202.png" alt="" />
+<p class="caption">Preview of FY 2023 Summary Data under SBA’s Agency Profile</p>
+</div>
+<p>The FY summary section displayed in the image above highlights key aggregate statistics on FY2023 that are provided by USASpending.gov.</p>
+<div class="figure">
+<img src="images/SBA%20agency%20profile%20-%20part%203.png" alt="" />
+<p class="caption">Preview of FY 2023 Summary Data under SBA’s Agency Profile</p>
+</div>
+<p>Another interesting section of the Agency Profile is the Award Sending section that displays a view containing aggregate summaries of contracts and assistance issued by the agency as shown above. Again, if you anticipate a need to pull overview data for the agency regularly, it could be a good idea to bookmark the full link to SBA’s Agency Profile page which is:
+<a href="https://www.usaspending.gov/agency/small-business-administration" class="uri">https://www.usaspending.gov/agency/small-business-administration</a></p>
+<p><strong>Important Note on Negative Numbers</strong></p>
+<div class="figure">
+<img src="images/SBA%20agency%20profile%20-%20negative.png" alt="" />
+<p class="caption">Preview of FY 2023 Loan Summary Data as of May 4th 2023</p>
+</div>
+<p>The underlying transaction data that powers USAspending.gov data may cause aggregate numbers for a given FY to be negative. Obligations from a previous FY could be fully or partially de-obligated in the subsequent FY which introduces data rows with negative obligations. In the image shown above, it shows a negative loan aggregate sum for FY 2023 as only 70,000 new loan awards have been issues thus far in FY2023.</p>
+</div>
+<div id="usaspending-recipient-profile" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> USASpending: Recipient Profile<a href="index.html#usaspending-recipient-profile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure">
+<img src="images/recipient.png" alt="" />
+<p class="caption">Preview of Recipient Profile</p>
+</div>
+<p>If you are interested in looking up obligations by recipient, you may also search by name, or if known, by the entity’s Unique Entity Identifier (UEI) or Legacy DUNS (Data Universal Numbering System) number. You may reach this Recipient Profile search page by clicking Recipients under Profiles.</p>
+<p>Please note that some federal agencies obligate awards to intermediaries. Even though the funds are eventually distributed to smaller entities, the awards data attribute the funds to the intermediaries as the recipients who directly applied for the funding.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="data-download-from-usaspending.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/master/index.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
