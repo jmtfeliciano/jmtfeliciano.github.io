@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 USASpending Built-In Data Visualizations | Introduction to Tabular Data in R: Using usaspending.gov</title>
+  <meta name="description" content="Chapter 3 USASpending Built-In Data Visualizations | Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 USASpending Built-In Data Visualizations | Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 USASpending Built-In Data Visualizations | Introduction to Tabular Data in R: Using usaspending.gov" />
+  
+  
+  
+
+<meta name="author" content="Office of Chief Data Officer Office of Performance Management and the Chief Financial Officer U.S. Small Business Administration (SBA)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-download-from-usaspending.html"/>
+<link rel="next" href="learning-r-sba-resources.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Learning R with usaspending.gov data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> R Tutorials and Data from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-this-tutorial-differs-from-other-tutorials"><i class="fa fa-check"></i><b>1.1</b> How this tutorial differs from other tutorials</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#what-is-usaspending.gov"><i class="fa fa-check"></i><b>1.2</b> What is USAspending.gov?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#official-training-videos"><i class="fa fa-check"></i><b>1.3</b> Official Training Videos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#how-to-request-official-training-from-usaspending.gov"><i class="fa fa-check"></i><b>1.4</b> How to request official training from usaspending.gov</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#signing-up-for-usaspending.gov-mailing-list"><i class="fa fa-check"></i><b>1.5</b> Signing up for usaspending.gov mailing list</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#usaspending-agency-profile"><i class="fa fa-check"></i><b>1.6</b> USASpending: Agency Profile</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#usaspending-recipient-profile"><i class="fa fa-check"></i><b>1.7</b> USASpending: Recipient Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html"><i class="fa fa-check"></i><b>2</b> Data Download from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#how-sba-assistance-programs-are-represented-in-the-data"><i class="fa fa-check"></i><b>2.1</b> How SBA assistance programs are represented in the data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#warning-against-using-older-data"><i class="fa fa-check"></i><b>2.2</b> Warning against using older data</a></li>
+<li class="chapter" data-level="2.3" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-1-advanced-search"><i class="fa fa-check"></i><b>2.3</b> Method 1: <code>Advanced Search</code></a></li>
+<li class="chapter" data-level="2.4" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-2-award-data-archive"><i class="fa fa-check"></i><b>2.4</b> Method 2: <code>Award Data Archive</code></a></li>
+<li class="chapter" data-level="2.5" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-3-custom-award-data"><i class="fa fa-check"></i><b>2.5</b> Method 3: <code>Custom Award Data</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html"><i class="fa fa-check"></i><b>3</b> USASpending Built-In Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#maps"><i class="fa fa-check"></i><b>3.1</b> Maps</a></li>
+<li class="chapter" data-level="3.2" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#time-trends"><i class="fa fa-check"></i><b>3.2</b> Time Trends</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html"><i class="fa fa-check"></i><b>4</b> Learning R: SBA Resources</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#getting-started"><i class="fa fa-check"></i><b>4.1</b> Getting Started</a></li>
+<li class="chapter" data-level="4.2" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#precipio"><i class="fa fa-check"></i><b>4.2</b> Precipio</a></li>
+<li class="chapter" data-level="4.3" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#if-you-already-know-r"><i class="fa fa-check"></i><b>4.3</b> If you already know R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>5</b> Reading Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="reading-data.html"><a href="reading-data.html#watch-this-before-proceeding"><i class="fa fa-check"></i><b>5.1</b> Watch this before proceeding</a></li>
+<li class="chapter" data-level="5.2" data-path="reading-data.html"><a href="reading-data.html#materials-needed-for-this-section"><i class="fa fa-check"></i><b>5.2</b> Materials needed for this section</a></li>
+<li class="chapter" data-level="5.3" data-path="reading-data.html"><a href="reading-data.html#opening-r-scripts-and-tabular-data"><i class="fa fa-check"></i><b>5.3</b> Opening R Scripts and Tabular Data</a></li>
+<li class="chapter" data-level="5.4" data-path="reading-data.html"><a href="reading-data.html#running-scripts"><i class="fa fa-check"></i><b>5.4</b> Running scripts</a></li>
+<li class="chapter" data-level="5.5" data-path="reading-data.html"><a href="reading-data.html#read.csv-reading-tabular-files"><i class="fa fa-check"></i><b>5.5</b> read.csv(): Reading tabular files</a></li>
+<li class="chapter" data-level="5.6" data-path="reading-data.html"><a href="reading-data.html#head-inspect-and-preview-data-frames"><i class="fa fa-check"></i><b>5.6</b> head(): Inspect and Preview Data Frames</a></li>
+<li class="chapter" data-level="5.7" data-path="reading-data.html"><a href="reading-data.html#practice-1-writing-your-script"><i class="fa fa-check"></i><b>5.7</b> Practice 1: Writing Your Script</a></li>
+<li class="chapter" data-level="5.8" data-path="reading-data.html"><a href="reading-data.html#unique-and-table-finding-unique-values"><i class="fa fa-check"></i><b>5.8</b> unique() and table(): Finding Unique Values</a></li>
+<li class="chapter" data-level="5.9" data-path="reading-data.html"><a href="reading-data.html#practice-2-tally-by-sba-office"><i class="fa fa-check"></i><b>5.9</b> Practice 2: Tally by SBA Office</a></li>
+<li class="chapter" data-level="5.10" data-path="reading-data.html"><a href="reading-data.html#file-path-in-windows-advanced"><i class="fa fa-check"></i><b>5.10</b> File Path in Windows (Advanced)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html"><i class="fa fa-check"></i><b>6</b> Introduction to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#files-you-need-in-this-section"><i class="fa fa-check"></i><b>6.1</b> Files you need in this section</a></li>
+<li class="chapter" data-level="6.2" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#what-is-dplyr"><i class="fa fa-check"></i><b>6.2</b> What is dplyr?</a></li>
+<li class="chapter" data-level="6.3" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#select-to-subset-columns"><i class="fa fa-check"></i><b>6.3</b> select() to subset columns</a></li>
+<li class="chapter" data-level="6.4" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#write.csv-a-quick-detour"><i class="fa fa-check"></i><b>6.4</b> write.csv(): a quick detour</a></li>
+<li class="chapter" data-level="6.5" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#filter-to-subset-based-on-variable-values"><i class="fa fa-check"></i><b>6.5</b> filter() to subset based on variable values</a></li>
+<li class="chapter" data-level="6.6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#exercise-filter-to-subset-based-on-variable-values"><i class="fa fa-check"></i><b>6.6</b> Exercise: filter() to subset based on variable values</a></li>
+<li class="chapter" data-level="6.7" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#arrange-to-sort-numerically-or-alphabetically"><i class="fa fa-check"></i><b>6.7</b> arrange() to sort numerically or alphabetically</a></li>
+<li class="chapter" data-level="6.8" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#summarize-to-create-summaries"><i class="fa fa-check"></i><b>6.8</b> summarize() to create summaries</a></li>
+<li class="chapter" data-level="6.9" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#practice"><i class="fa fa-check"></i><b>6.9</b> Practice:</a></li>
+<li class="chapter" data-level="6.10" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#discussing-the-operator-at-length"><i class="fa fa-check"></i><b>6.10</b> Discussing the %&gt;% operator at length</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html"><i class="fa fa-check"></i><b>7</b> Introduction to visualization</a></li>
+<li class="divider"></li>
+<li><a href="google" target="blank">Click this to leave feedback</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Tabular Data in R: Using usaspending.gov</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="usaspending-built-in-data-visualizations" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> USASpending Built-In Data Visualizations<a href="usaspending-built-in-data-visualizations.html#usaspending-built-in-data-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This section revisits</p>
+<div id="maps" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Maps<a href="usaspending-built-in-data-visualizations.html#maps" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="time-trends" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Time Trends<a href="usaspending-built-in-data-visualizations.html#time-trends" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-download-from-usaspending.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="learning-r-sba-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/master/03-notablefeatures.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/master/03-notablefeatures.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

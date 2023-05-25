@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Introduction to dplyr | Introduction to Tabular Data in R: Using usaspending.gov</title>
+  <meta name="description" content="Chapter 6 Introduction to dplyr | Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Introduction to dplyr | Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Introduction to dplyr | Introduction to Tabular Data in R: Using usaspending.gov" />
+  
+  
+  
+
+<meta name="author" content="Office of Chief Data Officer Office of Performance Management and the Chief Financial Officer U.S. Small Business Administration (SBA)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="reading-data.html"/>
+<link rel="next" href="introduction-to-visualization.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Learning R with usaspending.gov data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> R Tutorials and Data from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-this-tutorial-differs-from-other-tutorials"><i class="fa fa-check"></i><b>1.1</b> How this tutorial differs from other tutorials</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#what-is-usaspending.gov"><i class="fa fa-check"></i><b>1.2</b> What is USAspending.gov?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#official-training-videos"><i class="fa fa-check"></i><b>1.3</b> Official Training Videos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#how-to-request-official-training-from-usaspending.gov"><i class="fa fa-check"></i><b>1.4</b> How to request official training from usaspending.gov</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#signing-up-for-usaspending.gov-mailing-list"><i class="fa fa-check"></i><b>1.5</b> Signing up for usaspending.gov mailing list</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#usaspending-agency-profile"><i class="fa fa-check"></i><b>1.6</b> USASpending: Agency Profile</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#usaspending-recipient-profile"><i class="fa fa-check"></i><b>1.7</b> USASpending: Recipient Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html"><i class="fa fa-check"></i><b>2</b> Data Download from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#how-sba-assistance-programs-are-represented-in-the-data"><i class="fa fa-check"></i><b>2.1</b> How SBA assistance programs are represented in the data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#warning-against-using-older-data"><i class="fa fa-check"></i><b>2.2</b> Warning against using older data</a></li>
+<li class="chapter" data-level="2.3" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-1-advanced-search"><i class="fa fa-check"></i><b>2.3</b> Method 1: <code>Advanced Search</code></a></li>
+<li class="chapter" data-level="2.4" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-2-award-data-archive"><i class="fa fa-check"></i><b>2.4</b> Method 2: <code>Award Data Archive</code></a></li>
+<li class="chapter" data-level="2.5" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-3-custom-award-data"><i class="fa fa-check"></i><b>2.5</b> Method 3: <code>Custom Award Data</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html"><i class="fa fa-check"></i><b>3</b> USASpending Built-In Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#maps"><i class="fa fa-check"></i><b>3.1</b> Maps</a></li>
+<li class="chapter" data-level="3.2" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#time-trends"><i class="fa fa-check"></i><b>3.2</b> Time Trends</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html"><i class="fa fa-check"></i><b>4</b> Learning R: SBA Resources</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#getting-started"><i class="fa fa-check"></i><b>4.1</b> Getting Started</a></li>
+<li class="chapter" data-level="4.2" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#precipio"><i class="fa fa-check"></i><b>4.2</b> Precipio</a></li>
+<li class="chapter" data-level="4.3" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#if-you-already-know-r"><i class="fa fa-check"></i><b>4.3</b> If you already know R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>5</b> Reading Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="reading-data.html"><a href="reading-data.html#watch-this-before-proceeding"><i class="fa fa-check"></i><b>5.1</b> Watch this before proceeding</a></li>
+<li class="chapter" data-level="5.2" data-path="reading-data.html"><a href="reading-data.html#materials-needed-for-this-section"><i class="fa fa-check"></i><b>5.2</b> Materials needed for this section</a></li>
+<li class="chapter" data-level="5.3" data-path="reading-data.html"><a href="reading-data.html#opening-r-scripts-and-tabular-data"><i class="fa fa-check"></i><b>5.3</b> Opening R Scripts and Tabular Data</a></li>
+<li class="chapter" data-level="5.4" data-path="reading-data.html"><a href="reading-data.html#running-scripts"><i class="fa fa-check"></i><b>5.4</b> Running scripts</a></li>
+<li class="chapter" data-level="5.5" data-path="reading-data.html"><a href="reading-data.html#read.csv-reading-tabular-files"><i class="fa fa-check"></i><b>5.5</b> read.csv(): Reading tabular files</a></li>
+<li class="chapter" data-level="5.6" data-path="reading-data.html"><a href="reading-data.html#head-inspect-and-preview-data-frames"><i class="fa fa-check"></i><b>5.6</b> head(): Inspect and Preview Data Frames</a></li>
+<li class="chapter" data-level="5.7" data-path="reading-data.html"><a href="reading-data.html#practice-1"><i class="fa fa-check"></i><b>5.7</b> Practice 1</a></li>
+<li class="chapter" data-level="5.8" data-path="reading-data.html"><a href="reading-data.html#unique-and-table-finding-unique-values"><i class="fa fa-check"></i><b>5.8</b> unique() and table(): Finding Unique Values</a></li>
+<li class="chapter" data-level="5.9" data-path="reading-data.html"><a href="reading-data.html#practice-2"><i class="fa fa-check"></i><b>5.9</b> Practice 2</a></li>
+<li class="chapter" data-level="5.10" data-path="reading-data.html"><a href="reading-data.html#file-path-in-windows-advanced"><i class="fa fa-check"></i><b>5.10</b> File Path in Windows (Advanced)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html"><i class="fa fa-check"></i><b>6</b> Introduction to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#files-you-need-in-this-section"><i class="fa fa-check"></i><b>6.1</b> Files you need in this section</a></li>
+<li class="chapter" data-level="6.2" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#what-is-dplyr"><i class="fa fa-check"></i><b>6.2</b> What is dplyr?</a></li>
+<li class="chapter" data-level="6.3" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#select-to-subset-columns"><i class="fa fa-check"></i><b>6.3</b> select() to subset columns</a></li>
+<li class="chapter" data-level="6.4" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#write.csv-a-quick-detour"><i class="fa fa-check"></i><b>6.4</b> write.csv(): a quick detour</a></li>
+<li class="chapter" data-level="6.5" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#filter-to-subset-based-on-variable-values"><i class="fa fa-check"></i><b>6.5</b> filter() to subset based on variable values</a></li>
+<li class="chapter" data-level="6.6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#exercise"><i class="fa fa-check"></i><b>6.6</b> Exercise</a></li>
+<li class="chapter" data-level="6.7" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#arrange-to-sort-numerically-or-alphabetically"><i class="fa fa-check"></i><b>6.7</b> arrange() to sort numerically or alphabetically</a></li>
+<li class="chapter" data-level="6.8" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#summarize-to-create-summaries"><i class="fa fa-check"></i><b>6.8</b> summarize() to create summaries</a></li>
+<li class="chapter" data-level="6.9" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#practice"><i class="fa fa-check"></i><b>6.9</b> Practice:</a></li>
+<li class="chapter" data-level="6.10" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#discussing-the-operator-at-length"><i class="fa fa-check"></i><b>6.10</b> Discussing the %&gt;% operator at length</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html"><i class="fa fa-check"></i><b>7</b> Introduction to visualization</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#files-you-need-in-this-section-1"><i class="fa fa-check"></i><b>7.1</b> Files you need in this section</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#barplot-for-bar-plots-or-bar-charts"><i class="fa fa-check"></i><b>7.2</b> barplot() for bar plots or bar charts</a></li>
+<li class="chapter" data-level="7.3" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#practice-3"><i class="fa fa-check"></i><b>7.3</b> Practice</a></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#plot-for-scatter-and-line-plots"><i class="fa fa-check"></i><b>7.4</b> plot() for scatter and line plots</a></li>
+<li class="chapter" data-level="7.5" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#practice-4"><i class="fa fa-check"></i><b>7.5</b> Practice</a></li>
+<li class="chapter" data-level="7.6" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#further-customization-and-extra-resources"><i class="fa fa-check"></i><b>7.6</b> Further Customization and Extra Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="detailed-code-template.html"><a href="detailed-code-template.html"><i class="fa fa-check"></i><b>8</b> Detailed code template</a></li>
+<li class="divider"></li>
+<li><a href="google" target="blank">Click this to leave feedback</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Tabular Data in R: Using usaspending.gov</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-dplyr" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Introduction to dplyr<a href="introduction-to-dplyr.html#introduction-to-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="files-you-need-in-this-section" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Files you need in this section<a href="introduction-to-dplyr.html#files-you-need-in-this-section" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section will focus on FY2019 loans data.</p>
+<p>You will need to revisit the SBA Box.com folder by clicking <a href="https://sba.box.com/s/sojxvw818o1hqovv6phcgsvi8bz8i5tf">this</a>. Once you are able to access the folder, please download a copy of the following files:</p>
+<ul>
+<li><p>FY2019SBALoanData.csv, a loans-only SBA for FY2019.</p></li>
+<li><p>DataFrameManipulation.R, an R script file with scripts we will be running today</p></li>
+</ul>
+<p>Like you did from an earlier section, please make sure to download and save a copy within the <code>USASpending</code> folder you created under <code>Documents</code>.</p>
+<p>Please open the <code>DataFrameManipulation.R</code> file by double clicking the copy you saved under <code>USASpending</code>. This will open the R script within the RStudio IDE.</p>
+<p>After opening the R file, run line 4 within the script which is:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction-to-dplyr.html#cb1-1" aria-hidden="true" tabindex="-1"></a>loans_data_fy19 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/USASpending/FY2019SBALoanData.csv&quot;</span>)</span></code></pre></div>
+<p>As a reminder from the previous section, this script reads the FY2019SBALoanData.csv file you saved under the USASpending folder you created. This data frame is then saved as loans_data_fy19, which should appear in your Environment pane as shown below.</p>
+<div class="figure">
+<img src="images/environmentpane2.png" alt="" />
+<p class="caption">Preview of the Environment Pane after creating loans_data_fy19</p>
+</div>
+<p><strong>Note:</strong> The pane tells you that the data frame contains 106 variables with 184,367 rows of data.</p>
+</div>
+<div id="what-is-dplyr" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> What is dplyr?<a href="introduction-to-dplyr.html#what-is-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>dplyr is a Tidyverse package, a set of data science tools we will go over later, focused on data wrangling.</p>
+<p>dplyr has a list of <em>verbs</em> or functions focused on specific data tasks.</p>
+<p>Here are four notable verbs we will go over:</p>
+<ul>
+<li><code>select()</code> picks variables based on their names.</li>
+<li><code>filter()</code> picks cases based on their values.</li>
+<li><code>arrange()</code> changes the ordering of the rows.</li>
+<li><code>summarise()</code> reduces multiple values down to a single summary.</li>
+</ul>
+<p>Before moving forward, please make sure dplyr is installed. To install, you may run the following script:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction-to-dplyr.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<p>After the initial installation, you need to load dplyr prior in your current R session.</p>
+<p>You are able to load dplyr by running this <code>library()</code> script:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introduction-to-dplyr.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+</div>
+<div id="select-to-subset-columns" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> select() to subset columns<a href="introduction-to-dplyr.html#select-to-subset-columns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><code>select()</code> is the verb or function from the <code>dplyr</code> package to <em>select</em> columns or variables you want to keep. There are few ways to use dplyr’s select() but it is most common to list the variable names you want to keep.</li>
+</ul>
+<p>One case use of select() is to create a smaller subset of data to only include a specified list of variables or columns.</p>
+<p>Suppose we are interested in creating another variable called <strong>loans_data_version2</strong> that only includes the following variables: recipient_name, cfda_title, face_value_of_loan, and original_loan_subsidy_cost</p>
+<p>To create this variable, you need to run the following script which are provided in lines 18-19 of the R Script. Highlight lines 18-19 and press the Run button. Alternatively, click anywhere on line 18, and RStudio will also run 19 by itself due to the presence of the <code>%&gt;%</code> operator on line 18.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction-to-dplyr.html#cb4-1" aria-hidden="true" tabindex="-1"></a>loans_data_version2 <span class="ot">&lt;-</span> loans_data_fy19 <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="introduction-to-dplyr.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(recipient_name, cfda_title, face_value_of_loan, original_loan_subsidy_cost, primary_place_of_performance_state_name)</span></code></pre></div>
+<p>At the far end of this section, we will further explain the <code>%&gt;%</code> syntax provided above. But you may think of it right now as directing the loans_data_fy19 object into the select() verb/function. More on this later.</p>
+<p>After running the scripts on lines 17-19, you will see that loans_data_version2 is now displayed under the Environment pane. Please notice that the number of variables is now down to 4 from 106, which confirms that our script worked as intended.</p>
+<div class="figure">
+<img src="images/environmentpane3.png" alt="" />
+<p class="caption">Preview of the Environment Pane after creating loans_data_version2</p>
+</div>
+<p>There are many reasons why an analyst could be interested in creating a data version with a limited set of columns or variables. But when working with data intensive tasks with large volumes of data in R in a computer, including large volumes of unnecessary data can easily affect computer performance and computing speed.</p>
+</div>
+<div id="write.csv-a-quick-detour" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> write.csv(): a quick detour<a href="introduction-to-dplyr.html#write.csv-a-quick-detour" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>From the select() subsection, we created loans_data_version2 which contains far less variables which you may need to email to SBA colleagues.</p>
+<p>One useful script you may need in future work is write.csv() which allows you to save data frame objects into csv files.</p>
+<p>To save the loans_data_version2 data frame we created as a file named <strong>FY2019LoanDataVersion2.csv</strong>, you need to run the script below from line 21:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introduction-to-dplyr.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(loans_data_version2, <span class="at">file =</span> <span class="st">&quot;~/USASpending/FY2019LoanDataVersion2.csv&quot;</span>)</span></code></pre></div>
+<p>After running the line 21 script, a <code>FY2019LoanDataVersion2.csv</code> file should appear under the USASpending folder.</p>
+</div>
+<div id="filter-to-subset-based-on-variable-values" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> filter() to subset based on variable values<a href="introduction-to-dplyr.html#filter-to-subset-based-on-variable-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For this example, let us use the loans_data_version2 data we created. Before proceeding, let us run the head() function to preview the loans_data_version2 we previously created.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="introduction-to-dplyr.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(loans_data_version2)</span></code></pre></div>
+<pre><code>##                                                    recipient_name
+## 1                                          A&amp;M NW ENTERPRISES LLC
+## 2                                             REDACTED DUE TO PII
+## 3                                         EPIC AIR DESIGN, L.L.C.
+## 4                                    CAP PROPERTIES OF JOPLIN LLC
+## 5 STRATTON AND BRATT LANDSCAPES, LLC  N AND BRATT LANDSCAPES, LLC
+## 6 STRATTON AND BRATT LANDSCAPES, LLC  N AND BRATT LANDSCAPES, LLC
+##                        cfda_title face_value_of_loan original_loan_subsidy_cost
+## 1            7(A) LOAN GUARANTEES             277500                       0.00
+## 2       DISASTER ASSISTANCE LOANS              20300                    2494.87
+## 3            7(A) LOAN GUARANTEES             100000                       0.00
+## 4 504 CERTIFIED DEVELOPMENT LOANS             693000                       0.00
+## 5          SURETY BOND GUARANTEES              12500                       0.00
+## 6          SURETY BOND GUARANTEES             -12500                       0.00
+##   primary_place_of_performance_state_name
+## 1                                  OREGON
+## 2                                  ALASKA
+## 3                                   TEXAS
+## 4                                MISSOURI
+## 5                                    UTAH
+## 6                                    UTAH</code></pre>
+<p>Now, using loans_data_version2, let us create data frame data that only contains disaster loans data. In other words, we are only interested in the data whenever cfda_title variable is equivalent to “DISASTER ASSISTANCE LOANS”. Let us save name this data in R as disaster_only.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="introduction-to-dplyr.html#cb8-1" aria-hidden="true" tabindex="-1"></a>sba7a_only <span class="ot">&lt;-</span> loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="introduction-to-dplyr.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cfda_title <span class="sc">==</span> <span class="st">&quot;7(A) LOAN GUARANTEES&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introduction-to-dplyr.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sba7a_only)</span></code></pre></div>
+<pre><code>##                         recipient_name           cfda_title face_value_of_loan
+## 1               A&amp;M NW ENTERPRISES LLC 7(A) LOAN GUARANTEES             277500
+## 2              EPIC AIR DESIGN, L.L.C. 7(A) LOAN GUARANTEES             100000
+## 3                       SPEEDYCHEM INC 7(A) LOAN GUARANTEES              50000
+## 4       CARTER COMMODITY MARKETING LLC 7(A) LOAN GUARANTEES              50000
+## 5                            ANDY TRAN 7(A) LOAN GUARANTEES              50000
+## 6 JEFF&#39;S IMPORT &amp; DOMESTIC REPAIR, LLC 7(A) LOAN GUARANTEES              10000
+##   original_loan_subsidy_cost primary_place_of_performance_state_name
+## 1                          0                                  OREGON
+## 2                          0                                   TEXAS
+## 3                          0                                NEW YORK
+## 4                          0                              CALIFORNIA
+## 5                          0                                 INDIANA
+## 6                          0                               WISCONSIN</code></pre>
+<p>In the script we just went over, we were only interested in loans with cfda_title equals to “7(A) LOAN GUARANTEES”. But suppose we are interested in multiple program data. Here’s a quick example template on how you may accomplish this with dplyr by using the <code>%in%</code> operator.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="introduction-to-dplyr.html#cb11-1" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">&lt;-</span> loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="introduction-to-dplyr.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cfda_title <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;MICROLOAN PROGRAM&quot;</span>, <span class="st">&quot;DISASTER ASSISTANCE LOANS&quot;</span>))</span></code></pre></div>
+<p>Another way we may use filter() is to filter data based on a numerical threshold. Suppose you are tasked to identify large 7a loans from SBA with a minimum threshold cutoff of $100,000.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction-to-dplyr.html#cb12-1" aria-hidden="true" tabindex="-1"></a>large_sba7a_only <span class="ot">&lt;-</span> sba7a_only <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="introduction-to-dplyr.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(face_value_of_loan <span class="sc">&gt;=</span> <span class="dv">100000</span>)</span>
+<span id="cb12-3"><a href="introduction-to-dplyr.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="introduction-to-dplyr.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(large_sba7a_only)</span></code></pre></div>
+<pre><code>##                        recipient_name           cfda_title face_value_of_loan
+## 1              A&amp;M NW ENTERPRISES LLC 7(A) LOAN GUARANTEES             277500
+## 2             EPIC AIR DESIGN, L.L.C. 7(A) LOAN GUARANTEES             100000
+## 3 MAR-BON GOLDEN DAYS SOCIAL CLUB LLC 7(A) LOAN GUARANTEES             463000
+## 4                         JC3NITY LLC 7(A) LOAN GUARANTEES             116250
+## 5                         JC3NITY LLC 7(A) LOAN GUARANTEES             265000
+## 6                       KEVIN L JONES 7(A) LOAN GUARANTEES             150000
+##   original_loan_subsidy_cost primary_place_of_performance_state_name
+## 1                          0                                  OREGON
+## 2                          0                                   TEXAS
+## 3                          0                                NEW YORK
+## 4                          0                                 GEORGIA
+## 5                          0                                 GEORGIA
+## 6                          0                                   TEXAS</code></pre>
+</div>
+<div id="exercise" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Exercise<a href="introduction-to-dplyr.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Write a script to that will filter the sba7a_only data to only include data in Florida. In other words, filter for data whenever primary_place_of_performance_state_name is equal to “TEXAS”.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="introduction-to-dplyr.html#cb14-1" aria-hidden="true" tabindex="-1"></a>sba7a_texas_only <span class="ot">&lt;-</span> sba7a_only <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="introduction-to-dplyr.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(primary_place_of_performance_state_name <span class="sc">==</span> <span class="st">&quot;TEXAS&quot;</span>)</span></code></pre></div>
+</div>
+<div id="arrange-to-sort-numerically-or-alphabetically" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> arrange() to sort numerically or alphabetically<a href="introduction-to-dplyr.html#arrange-to-sort-numerically-or-alphabetically" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let us work with sba7a_only again. But we are interested in sorting the recipient_name alphabetically. To do this, let us run the arrange script from line 5 but instead of assigning the arranged data to another variable name, assign it to sba7a_only which effectively overrides the unarranged data with the arranged data.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introduction-to-dplyr.html#cb15-1" aria-hidden="true" tabindex="-1"></a>sba7a_only <span class="ot">&lt;-</span> sba7a_only <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="introduction-to-dplyr.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(recipient_name)</span>
+<span id="cb15-3"><a href="introduction-to-dplyr.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="introduction-to-dplyr.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sba7a_only)</span></code></pre></div>
+<pre><code>##                         recipient_name           cfda_title face_value_of_loan
+## 1         #1 AUSTIN STONE STORAGE, LLC 7(A) LOAN GUARANTEES             125000
+## 2 #1 SAMANTHA &amp; YOANNA&#39;S CARE HOME LLC 7(A) LOAN GUARANTEES             897700
+## 3                              #13 LLC 7(A) LOAN GUARANTEES            -525000
+## 4                              #13 LLC 7(A) LOAN GUARANTEES             525000
+## 5                              #13 LLC 7(A) LOAN GUARANTEES             -50000
+## 6                              #13 LLC 7(A) LOAN GUARANTEES              50000
+##   original_loan_subsidy_cost primary_place_of_performance_state_name
+## 1                          0                                   TEXAS
+## 2                          0                              WASHINGTON
+## 3                          0                                  OREGON
+## 4                          0                                  OREGON
+## 5                          0                                  OREGON
+## 6                          0                                  OREGON</code></pre>
+</div>
+<div id="summarize-to-create-summaries" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> summarize() to create summaries<a href="introduction-to-dplyr.html#summarize-to-create-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>summarize is arguably the most powerful verb/function from dplyr as it allows you to create basic but meaningful summaries across categorical groupings.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introduction-to-dplyr.html#cb17-1" aria-hidden="true" tabindex="-1"></a>loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="introduction-to-dplyr.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">fy2019_total_loans =</span> <span class="fu">sum</span>(face_value_of_loan))</span></code></pre></div>
+<pre><code>##   fy2019_total_loans
+## 1        28802398684</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introduction-to-dplyr.html#cb19-1" aria-hidden="true" tabindex="-1"></a>loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="introduction-to-dplyr.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">number_rows =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>##   number_rows
+## 1      184367</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introduction-to-dplyr.html#cb21-1" aria-hidden="true" tabindex="-1"></a>loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="introduction-to-dplyr.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">number_rows =</span> <span class="fu">n</span>(), <span class="at">fy2019_total_loans =</span> <span class="fu">sum</span>(face_value_of_loan))</span></code></pre></div>
+<pre><code>##   number_rows fy2019_total_loans
+## 1      184367        28802398684</code></pre>
+<p>The true power of summarize(), however, is maximized when you use the group_by() function in order to break down statistics by some categorical grouping (e.g., by state, program, etc.). Here’s a template you should think of</p>
+<pre><code>new_data &lt;- some_data %&gt;%
+  group_by(categorical_variable) %&gt;%
+  summarize(you_name_this = some_function(variable1))</code></pre>
+<p>Now, suppose we want a breakdown of FY2019 loan data by</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="introduction-to-dplyr.html#cb24-1" aria-hidden="true" tabindex="-1"></a>loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="introduction-to-dplyr.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cfda_title) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="introduction-to-dplyr.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum_loans =</span> <span class="fu">sum</span>(face_value_of_loan))</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 2
+##   cfda_title                             sum_loans
+##   &lt;chr&gt;                                      &lt;dbl&gt;
+## 1 504 CERTIFIED DEVELOPMENT LOANS      4020687782 
+## 2 7(A) LOAN GUARANTEES                20085083166.
+## 3 7(A)EXPORT LOAN GUARANTEES            561929855.
+## 4 DISASTER ASSISTANCE LOANS             951905844.
+## 5 MICROLOAN PROGRAM                      39352000 
+## 6 SMALL BUSINESS INVESTMENT COMPANIES  1220040000 
+## 7 SURETY BOND GUARANTEES               1923400037.</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="introduction-to-dplyr.html#cb26-1" aria-hidden="true" tabindex="-1"></a>loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="introduction-to-dplyr.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cfda_title, primary_place_of_performance_state_name) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="introduction-to-dplyr.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum_loans =</span> <span class="fu">sum</span>(face_value_of_loan))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;cfda_title&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 304 × 3
+## # Groups:   cfda_title [7]
+##    cfda_title                      primary_place_of_performance_state_…¹ sum_l…²
+##    &lt;chr&gt;                           &lt;chr&gt;                                   &lt;dbl&gt;
+##  1 504 CERTIFIED DEVELOPMENT LOANS ALABAMA                                1.99e7
+##  2 504 CERTIFIED DEVELOPMENT LOANS ALASKA                                 1.29e6
+##  3 504 CERTIFIED DEVELOPMENT LOANS ARIZONA                                9.78e7
+##  4 504 CERTIFIED DEVELOPMENT LOANS ARKANSAS                               4.60e6
+##  5 504 CERTIFIED DEVELOPMENT LOANS CALIFORNIA                             9.81e8
+##  6 504 CERTIFIED DEVELOPMENT LOANS COLORADO                               1.14e8
+##  7 504 CERTIFIED DEVELOPMENT LOANS CONNECTICUT                            3.63e7
+##  8 504 CERTIFIED DEVELOPMENT LOANS DELAWARE                               3.09e6
+##  9 504 CERTIFIED DEVELOPMENT LOANS DISTRICT OF COLUMBIA                  -1.72e5
+## 10 504 CERTIFIED DEVELOPMENT LOANS FLORIDA                                3.16e8
+## # … with 294 more rows, and abbreviated variable names
+## #   ¹​primary_place_of_performance_state_name, ²​sum_loans</code></pre>
+</div>
+<div id="practice" class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Practice:<a href="introduction-to-dplyr.html#practice" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using loans_data_fy19, write a script on line ___ to create a column called ‘sum_loans’ that tallies the loan total by awarding_office_name. Name this data frame office_totals.</p>
+</div>
+<div id="discussing-the-operator-at-length" class="section level2 hasAnchor" number="6.10">
+<h2><span class="header-section-number">6.10</span> Discussing the %&gt;% operator at length<a href="introduction-to-dplyr.html#discussing-the-operator-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The pipe operator (%&gt;%) pipes your data into the next function. Technically, it is part of the magrittr package that is loaded and used by dplyr.</p>
+<p>More specifically, piping passes the previous data you have from the previous step into the first argument of the next function.</p>
+<p>The beautify of piping is that you can simplify your code and eliminates the need for having to save data from each intermediate step.</p>
+<p>From earlier steps, we created sba7a_only. And in one of the exercises you performed, you should have written a scri[t tp create sba7a_texas_only.</p>
+<p>Both codes are:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introduction-to-dplyr.html#cb29-1" aria-hidden="true" tabindex="-1"></a>sba7a_only <span class="ot">&lt;-</span> loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="introduction-to-dplyr.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cfda_title <span class="sc">==</span> <span class="st">&quot;7(A) LOAN GUARANTEES&quot;</span>)</span>
+<span id="cb29-3"><a href="introduction-to-dplyr.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-4"><a href="introduction-to-dplyr.html#cb29-4" aria-hidden="true" tabindex="-1"></a>sba7a_texas_only <span class="ot">&lt;-</span> sba7a_only <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="introduction-to-dplyr.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(primary_place_of_performance_state_name <span class="sc">==</span> <span class="st">&quot;TEXAS&quot;</span>)</span></code></pre></div>
+<p>But in reality, if the ultimate goal is to filter for TX-only 7(A) loans and we are not interested in keeping any intermediate steps, we could have written this equivalent R script:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introduction-to-dplyr.html#cb30-1" aria-hidden="true" tabindex="-1"></a>sba7a_texas_only <span class="ot">&lt;-</span> loans_data_version2 <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="introduction-to-dplyr.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cfda_title <span class="sc">==</span> <span class="st">&quot;7(A) LOAN GUARANTEES&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="introduction-to-dplyr.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(primary_place_of_performance_state_name <span class="sc">==</span> <span class="st">&quot;TEXAS&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="reading-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/master/06-dplyr.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/master/06-dplyr.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

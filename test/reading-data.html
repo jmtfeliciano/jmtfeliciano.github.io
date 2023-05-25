@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Reading Data | Introduction to Tabular Data in R: Using usaspending.gov</title>
+  <meta name="description" content="Chapter 5 Reading Data | Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Reading Data | Introduction to Tabular Data in R: Using usaspending.gov" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Reading Data | Introduction to Tabular Data in R: Using usaspending.gov" />
+  
+  
+  
+
+<meta name="author" content="Office of Chief Data Officer Office of Performance Management and the Chief Financial Officer U.S. Small Business Administration (SBA)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="learning-r-sba-resources.html"/>
+<link rel="next" href="introduction-to-dplyr.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Learning R with usaspending.gov data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> R Tutorials and Data from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-this-tutorial-differs-from-other-tutorials"><i class="fa fa-check"></i><b>1.1</b> How this tutorial differs from other tutorials</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#what-is-usaspending.gov"><i class="fa fa-check"></i><b>1.2</b> What is USAspending.gov?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#official-training-videos"><i class="fa fa-check"></i><b>1.3</b> Official Training Videos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#how-to-request-official-training-from-usaspending.gov"><i class="fa fa-check"></i><b>1.4</b> How to request official training from usaspending.gov</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#signing-up-for-usaspending.gov-mailing-list"><i class="fa fa-check"></i><b>1.5</b> Signing up for usaspending.gov mailing list</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#usaspending-agency-profile"><i class="fa fa-check"></i><b>1.6</b> USASpending: Agency Profile</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#usaspending-recipient-profile"><i class="fa fa-check"></i><b>1.7</b> USASpending: Recipient Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html"><i class="fa fa-check"></i><b>2</b> Data Download from USAspending.gov</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#how-sba-assistance-programs-are-represented-in-the-data"><i class="fa fa-check"></i><b>2.1</b> How SBA assistance programs are represented in the data</a></li>
+<li class="chapter" data-level="2.2" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#warning-against-using-older-data"><i class="fa fa-check"></i><b>2.2</b> Warning against using older data</a></li>
+<li class="chapter" data-level="2.3" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-1-advanced-search"><i class="fa fa-check"></i><b>2.3</b> Method 1: <code>Advanced Search</code></a></li>
+<li class="chapter" data-level="2.4" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-2-award-data-archive"><i class="fa fa-check"></i><b>2.4</b> Method 2: <code>Award Data Archive</code></a></li>
+<li class="chapter" data-level="2.5" data-path="data-download-from-usaspending.html"><a href="data-download-from-usaspending.html#method-3-custom-award-data"><i class="fa fa-check"></i><b>2.5</b> Method 3: <code>Custom Award Data</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html"><i class="fa fa-check"></i><b>3</b> USASpending Built-In Data Visualizations</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#maps"><i class="fa fa-check"></i><b>3.1</b> Maps</a></li>
+<li class="chapter" data-level="3.2" data-path="usaspending-built-in-data-visualizations.html"><a href="usaspending-built-in-data-visualizations.html#time-trends"><i class="fa fa-check"></i><b>3.2</b> Time Trends</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html"><i class="fa fa-check"></i><b>4</b> Learning R: SBA Resources</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#getting-started"><i class="fa fa-check"></i><b>4.1</b> Getting Started</a></li>
+<li class="chapter" data-level="4.2" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#precipio"><i class="fa fa-check"></i><b>4.2</b> Precipio</a></li>
+<li class="chapter" data-level="4.3" data-path="learning-r-sba-resources.html"><a href="learning-r-sba-resources.html#if-you-already-know-r"><i class="fa fa-check"></i><b>4.3</b> If you already know R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="reading-data.html"><a href="reading-data.html"><i class="fa fa-check"></i><b>5</b> Reading Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="reading-data.html"><a href="reading-data.html#watch-this-before-proceeding"><i class="fa fa-check"></i><b>5.1</b> Watch this before proceeding</a></li>
+<li class="chapter" data-level="5.2" data-path="reading-data.html"><a href="reading-data.html#materials-needed-for-this-section"><i class="fa fa-check"></i><b>5.2</b> Materials needed for this section</a></li>
+<li class="chapter" data-level="5.3" data-path="reading-data.html"><a href="reading-data.html#opening-r-scripts-and-tabular-data"><i class="fa fa-check"></i><b>5.3</b> Opening R Scripts and Tabular Data</a></li>
+<li class="chapter" data-level="5.4" data-path="reading-data.html"><a href="reading-data.html#running-scripts"><i class="fa fa-check"></i><b>5.4</b> Running scripts</a></li>
+<li class="chapter" data-level="5.5" data-path="reading-data.html"><a href="reading-data.html#read.csv-reading-tabular-files"><i class="fa fa-check"></i><b>5.5</b> read.csv(): Reading tabular files</a></li>
+<li class="chapter" data-level="5.6" data-path="reading-data.html"><a href="reading-data.html#head-inspect-and-preview-data-frames"><i class="fa fa-check"></i><b>5.6</b> head(): Inspect and Preview Data Frames</a></li>
+<li class="chapter" data-level="5.7" data-path="reading-data.html"><a href="reading-data.html#practice-1"><i class="fa fa-check"></i><b>5.7</b> Practice 1</a></li>
+<li class="chapter" data-level="5.8" data-path="reading-data.html"><a href="reading-data.html#unique-and-table-finding-unique-values"><i class="fa fa-check"></i><b>5.8</b> unique() and table(): Finding Unique Values</a></li>
+<li class="chapter" data-level="5.9" data-path="reading-data.html"><a href="reading-data.html#practice-2"><i class="fa fa-check"></i><b>5.9</b> Practice 2</a></li>
+<li class="chapter" data-level="5.10" data-path="reading-data.html"><a href="reading-data.html#file-path-in-windows-advanced"><i class="fa fa-check"></i><b>5.10</b> File Path in Windows (Advanced)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html"><i class="fa fa-check"></i><b>6</b> Introduction to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#files-you-need-in-this-section"><i class="fa fa-check"></i><b>6.1</b> Files you need in this section</a></li>
+<li class="chapter" data-level="6.2" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#what-is-dplyr"><i class="fa fa-check"></i><b>6.2</b> What is dplyr?</a></li>
+<li class="chapter" data-level="6.3" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#select-to-subset-columns"><i class="fa fa-check"></i><b>6.3</b> select() to subset columns</a></li>
+<li class="chapter" data-level="6.4" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#write.csv-a-quick-detour"><i class="fa fa-check"></i><b>6.4</b> write.csv(): a quick detour</a></li>
+<li class="chapter" data-level="6.5" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#filter-to-subset-based-on-variable-values"><i class="fa fa-check"></i><b>6.5</b> filter() to subset based on variable values</a></li>
+<li class="chapter" data-level="6.6" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#exercise-filter-to-subset-based-on-variable-values"><i class="fa fa-check"></i><b>6.6</b> Exercise: filter() to subset based on variable values</a></li>
+<li class="chapter" data-level="6.7" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#arrange-to-sort-numerically-or-alphabetically"><i class="fa fa-check"></i><b>6.7</b> arrange() to sort numerically or alphabetically</a></li>
+<li class="chapter" data-level="6.8" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#summarize-to-create-summaries"><i class="fa fa-check"></i><b>6.8</b> summarize() to create summaries</a></li>
+<li class="chapter" data-level="6.9" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#practice"><i class="fa fa-check"></i><b>6.9</b> Practice:</a></li>
+<li class="chapter" data-level="6.10" data-path="introduction-to-dplyr.html"><a href="introduction-to-dplyr.html#discussing-the-operator-at-length"><i class="fa fa-check"></i><b>6.10</b> Discussing the %&gt;% operator at length</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html"><i class="fa fa-check"></i><b>7</b> Introduction to visualization</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#barplot-for-bar-plots-or-bar-charts"><i class="fa fa-check"></i><b>7.1</b> barplot() for bar plots or bar charts</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#plot-for-scatter-and-line-plots"><i class="fa fa-check"></i><b>7.2</b> plot() for scatter and line plots</a></li>
+<li class="chapter" data-level="7.3" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#practice-3"><i class="fa fa-check"></i><b>7.3</b> Practice</a></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-visualization.html"><a href="introduction-to-visualization.html#further-customization-and-extra-resources"><i class="fa fa-check"></i><b>7.4</b> Further Customization and Extra Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="detailed-code-template-for-grants.html"><a href="detailed-code-template-for-grants.html"><i class="fa fa-check"></i><b>8</b> Detailed Code Template for Grants</a></li>
+<li class="chapter" data-level="9" data-path="modify-as-needed.html"><a href="modify-as-needed.html"><i class="fa fa-check"></i><b>9</b> Modify as needed</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="modify-as-needed.html"><a href="modify-as-needed.html#load-the-grants-data"><i class="fa fa-check"></i><b>9.1</b> Load the grants data</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="google" target="blank">Click this to leave feedback</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Tabular Data in R: Using usaspending.gov</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reading-data" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Reading Data<a href="reading-data.html#reading-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="watch-this-before-proceeding" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Watch this before proceeding<a href="reading-data.html#watch-this-before-proceeding" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Please glance over the SBA Precipio video on <a href="https://sba.percipio.com/courses/430d8a5b-cbf7-4d70-8942-d3f80195f1b0/videos/cd9129b9-41ce-4cb9-acc1-7c53785dff52"><strong>Datasets in R: Loading &amp; Saving Data</strong></a> to familiarize yourself with how basic R scripts are ran and how the RStudio interface looks like.</p>
+</div>
+<div id="materials-needed-for-this-section" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Materials needed for this section<a href="reading-data.html#materials-needed-for-this-section" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Within the <code>Documents</code> folder in your Windows computer, create a folder named <code>USASpending</code> folder.</p>
+<p>Now, you need to access and download two specific files from an SBA Box.com folder by clicking <a href="https://sba.box.com/s/sojxvw818o1hqovv6phcgsvi8bz8i5tf">this</a>. Once you are able to access the folder, please download a copy of the following files:</p>
+<ul>
+<li><p><code>FY2019_073_Assistance_Full_20230309_1.csv</code>, a CSV file from USASpending.gov containing SBA awards for FY2019.</p></li>
+<li><p><code>ReadingFiles.R</code>, an R script we will go over for this section.</p></li>
+</ul>
+<p>Again, please make sure to download and save a copy within the <code>USASpending</code> folder you created under <code>Documents</code>.</p>
+</div>
+<div id="opening-r-scripts-and-tabular-data" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Opening R Scripts and Tabular Data<a href="reading-data.html#opening-r-scripts-and-tabular-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Please open the <code>ReadingFiles.R</code> file by double clicking the copy you saved under <code>USASpending</code>. This will open the R script within the RStudio IDE.</p>
+<p>Upon opening the file, your window should look like this:</p>
+<div class="figure">
+<img src="images/running.png" alt="" />
+<p class="caption">Opened ReadingFiles.R file in RStudio</p>
+</div>
+</div>
+<div id="running-scripts" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Running scripts<a href="reading-data.html#running-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Any rows within an R Script that starts with a ‘#’ is considered a comment, thereby instructing R to not run those lines as R commands/scripts.</p>
+<div class="figure">
+<img src="images/running2.png" alt="" />
+<p class="caption">Opened ReadingFiles.R file in RStudio</p>
+</div>
+<p>Within the <code>ReadingFiles.R</code> file, the first line of R code that you can technically run is line 11. To run the line 11 code by itself, click anywhere on line 11 and click the <code>Run</code>.</p>
+</div>
+<div id="read.csv-reading-tabular-files" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> read.csv(): Reading tabular files<a href="reading-data.html#read.csv-reading-tabular-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tabular files (e.g, USASpending .csv data) are typically read as <code>data frame</code> objects within the R environment.</p>
+<p>In R, you are able to read csv files into data frame by running this script:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="reading-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a>awards_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/USASpending/FY2019_073_Assistance_Full_20230309_1.csv&quot;</span>)</span></code></pre></div>
+<p><strong>How to interpret Line 11 code:</strong> The script above uses the built-in read.csv() R function to locate and read the <code>FY2019_073_Assistance_Full_20230309_1.csv</code> file. The <code>&lt;-</code> operator then assigns the tabular data frame data to a variable named <code>awards_data</code>.</p>
+<p>Once <code>awards_data</code> is created, you will see the <code>awards_data</code> under the environment pane:</p>
+<p><img src="images/environmentpane.png" alt="Preview of the Environment Pane which specifies that the data has 101 variables with 185,054 data rows" />
+After the creation of <code>awards_data</code>, we can use other R functions to inspect basic properties of this <code>data frame</code> object.</p>
+</div>
+<div id="head-inspect-and-preview-data-frames" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> head(): Inspect and Preview Data Frames<a href="reading-data.html#head-inspect-and-preview-data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Suppose you want to get a preview and print the first five rows of <code>awards_data</code>. In this case, you may run the <code>head(awards_data, n = 5)</code> script provided in line 14. Again, click anywhere on line 14 and press Run as you did with line 11. This function tells R to print the first five rows of <code>awards_data</code>.</p>
+<p>The <code>head(awards_data, n = 5)</code> script should produce an output similar to the one displayed below with more columns:</p>
+<pre><code>##   assistance_transaction_unique_key assistance_award_unique_key award_id_fain
+## 1   7300_4009417004_-NONE-_59.012_1    ASST_NON_4009417004_7300    4009417004
+## 2  7300_3306117010_-NONE-_59.008_15    ASST_NON_3306117010_7300    3306117010
+## 3  7300_3599287007_-NONE-_59.008_23    ASST_NON_3599287007_7300    3599287007
+## 4  7300_3882327001_-NONE-_59.008_17    ASST_NON_3882327001_7300    3882327001
+## 5   7300_4008777005_-NONE-_59.012_1    ASST_NON_4008777005_7300    4008777005
+##   modification_number award_id_uri sai_number federal_action_obligation
+## 1                   1           NA SAI EXEMPT                         0
+## 2                  15           NA SAI EXEMPT                         0
+## 3                  23           NA SAI EXEMPT                         0
+## 4                  17           NA SAI EXEMPT                         0
+## 5                   1           NA SAI EXEMPT                         0
+##   total_obligated_amount indirect_cost_federal_share_amount
+## 1                      0                                 NA
+## 2                      0                                 NA
+## 3                      0                                 NA
+## 4                      0                                 NA
+## 5                      0                                 NA
+##   non_federal_funding_amount
+## 1                          0
+## 2                          0
+## 3                          0
+## 4                          0
+## 5                          0</code></pre>
+</div>
+<div id="practice-1" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Practice 1<a href="reading-data.html#practice-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The code above assigns a value of 5 to the parameter n which tells R to print the first five rows of the data.</p>
+<p>On line 17 of ReadingFiles.R, write a similar script to the line 14 script. But instead of assigning 5 to n, assign a value of 2 and run the script.</p>
+<p>Were you able to run the script that you typed yourself successfully and was it able to print the first two rows of the data? If you answer yes to the two questions, you are done!</p>
+<p><strong>Note:</strong> <code>tail()</code> is a similar function to <code>head()</code> that prints the last few rows of the data instead. A <code>tail(awards_data, n = 5)</code> script will print the last 5 data rows of awards_data instead.</p>
+</div>
+<div id="unique-and-table-finding-unique-values" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> unique() and table(): Finding Unique Values<a href="reading-data.html#unique-and-table-finding-unique-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Suppose you are a new SBA employee and you need to identify the unique program names with FY2019 obligations. As a reminder, program names is equivalent to the cfda_title variable in USASpending data.</p>
+<p>For this task, we may use either unique() or table().</p>
+<p>In the unique() provided below, the input to the function is <code>awards_data$cfda_title</code>. The <code>$cfda_title</code> suffix indicates that we are only feeding the data provided under the cfda_title variable. In other words, the script below asks R to find the unique values of the cfda_title variable.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="reading-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(awards_data<span class="sc">$</span>cfda_title)</span></code></pre></div>
+<pre><code>##  [1] &quot;7(A) LOAN GUARANTEES&quot;                            
+##  [2] &quot;DISASTER ASSISTANCE LOANS&quot;                       
+##  [3] &quot;504 CERTIFIED DEVELOPMENT LOANS&quot;                 
+##  [4] &quot;7(A)EXPORT LOAN GUARANTEES&quot;                      
+##  [5] &quot;MICROLOAN PROGRAM&quot;                               
+##  [6] &quot;SMALL BUSINESS INVESTMENT COMPANIES&quot;             
+##  [7] &quot;WOMEN&#39;S BUSINESS OWNERSHIP ASSISTANCE&quot;           
+##  [8] &quot;SMALL BUSINESS DEVELOPMENT CENTERS&quot;              
+##  [9] &quot;SURETY BOND GUARANTEES&quot;                          
+## [10] &quot;PRIME TECHNICAL ASSISTANCE&quot;                      
+## [11] &quot;7(J) TECHNICAL ASSISTANCE&quot;                       
+## [12] &quot;VETERANS OUTREACH PROGRAM&quot;                       
+## [13] &quot;STATE TRADE EXPANSION&quot;                           
+## [14] &quot;FEDERAL AND STATE TECHNOLOGY PARTNERSHIP PROGRAM&quot;
+## [15] &quot;SCORE&quot;                                           
+## [16] &quot;SMALL DISADVANTAGED BUSINESSES&quot;</code></pre>
+<p>table(), a similar function to unique, can also be ran. The difference, however, is that table() will provide the counts associated with those unique values. The script below tallies the number of data rows associated with each unique awarding_office_name.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="reading-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(awards_data<span class="sc">$</span>cfda_title)</span></code></pre></div>
+<pre><code>## 
+##                  504 CERTIFIED DEVELOPMENT LOANS 
+##                                             9317 
+##                             7(A) LOAN GUARANTEES 
+##                                            67744 
+##                       7(A)EXPORT LOAN GUARANTEES 
+##                                              492 
+##                        7(J) TECHNICAL ASSISTANCE 
+##                                                9 
+##                        DISASTER ASSISTANCE LOANS 
+##                                            88949 
+## FEDERAL AND STATE TECHNOLOGY PARTNERSHIP PROGRAM 
+##                                               25 
+##                                MICROLOAN PROGRAM 
+##                                              258 
+##                       PRIME TECHNICAL ASSISTANCE 
+##                                               34 
+##                                            SCORE 
+##                                                2 
+##               SMALL BUSINESS DEVELOPMENT CENTERS 
+##                                              150 
+##              SMALL BUSINESS INVESTMENT COMPANIES 
+##                                               66 
+##                   SMALL DISADVANTAGED BUSINESSES 
+##                                                1 
+##                            STATE TRADE EXPANSION 
+##                                               45 
+##                           SURETY BOND GUARANTEES 
+##                                            17722 
+##                        VETERANS OUTREACH PROGRAM 
+##                                               43 
+##            WOMEN&#39;S BUSINESS OWNERSHIP ASSISTANCE 
+##                                              197</code></pre>
+</div>
+<div id="practice-2" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> Practice 2<a href="reading-data.html#practice-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On line 26 of ReadingFiles.R, write a <code>table()</code> script to list all the unique awarding_office_name offices within SBA. Which SBA office has the most award data within awards_data?</p>
+</div>
+<div id="file-path-in-windows-advanced" class="section level2 hasAnchor" number="5.10">
+<h2><span class="header-section-number">5.10</span> File Path in Windows (Advanced)<a href="reading-data.html#file-path-in-windows-advanced" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A file path is the complete location of where a file is located.</p>
+<p>To load <code>.csv</code> or Excel (<code>.xls</code>, <code>.xlsx</code>) files into R, you must know the file path to help R locate the relevant file(s) and the information contained within them.</p>
+<p>In Windows, the easiest way to get the full file path of a tabular data file is by opening the file in Excel. After the relevant file is open in Excel, click <code>File</code> which should open a side bar on the left. You then need to click <code>Info</code> which should enable the appearance of a <code>Copy local path</code> icon which you need to click. If you were to right click and paste the copied information, you may see an information similar to the one below:</p>
+<p><code>C:\Users\user\OneDrive - U.S. Small Business Administration\Documents\USASpending FY21 Data.xlsx</code></p>
+<p>However, R reads files using forward slash (<code>/</code>) which is the norm in non-windows environment (e.g., Unix, Linux, Mac OSX). So when working with file paths in R, you need to replace the backward slash (<code>\</code>) with forward slash.</p>
+<p>When working with R, this file path is the appropriate file path after replacing <code>\</code> with <code>/</code>:</p>
+<p><code>C:/Users/user/OneDrive - U.S. Small Business Administration/Documents/USASpending FY21 Data.xlsx</code></p>
+<p>When loading data into R via functions such as read.csv(), you may feed this entire path (surrounded by quotation marks as you did in line 11) as an alternative.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="learning-r-sba-resources.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/master/05-Files.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/master/05-Files.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
