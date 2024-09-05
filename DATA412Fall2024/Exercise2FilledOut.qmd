@@ -1,0 +1,396 @@
+---
+title: "Exercise 2: Introduction to ggplot2 using palmerpenguins"
+author: "Josemari Feliciano"
+format: 
+  html:
+    self-contained: true
+editor: visual
+---
+
+## Load packages and dependencies
+
+It is good practice to load all the packages you need to use before everything else. This is a common convention I expect you to follow.
+
+**This is something I will expect from you and your future work.**
+
+**Practice 1:** Load the tidyverse, palmerpenguins, and ggthemes packages below:
+
+```{r}
+# filled during class:
+library(tidyverse)
+library(palmerpenguins)
+library(ggthemes)
+```
+
+## Load penguins data into your environment
+
+**Practice 2:** Load **penguins**, a built-in data set, from palmerpenguins.
+
+```{r}
+# filled during class:
+data("penguins")
+```
+
+**Advanced tip:** within your console pane, type and run this script: ?penguins
+
+What do you see?
+
+Note: Data for **penguins** were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.
+
+## Viewing sample data
+
+**Practice 3:** Use any of the methods from Exercise1.R to help you visualize the data.
+
+It is common practice to visualize sample data on your data science notebook (here, Quarto document).
+
+Note: If you see 'NA', it means blank. This is formally referred to as *missing data*.
+
+```{r}
+# filled during class:
+head(penguins)
+```
+
+## Counts of Categorical (or Discrete Numeric) Variables
+
+In Exercise1.R, we ran **table(mpg\$cyl)** to print how many car models have 4, 6, 8 cylinders. Reminder: **mpg** was the data loaded into the R environment, and **cyl** is the variable representing the cyclinder counts.
+
+table() is a base R function which means it is built-in within R that doesn't require you to load a package before usage.
+
+You will learn the tidyverse equivalent of table() when you learn the dplyr package, another tidyverse package.
+
+Assuming we have no idea how many species of penguins are included in the dataset, we can run the following script to determine the species included and their respective counts by running table(penguins\$species), where penguins represent the data we loaded into the R environment, and species represents one of the variables within the data:
+
+```{r}
+table(penguins$species)
+```
+
+**Practice:** Create a table() script to determine the name of the relevant islands and how many penguins were sampled from each. The relevant variable here is **island**:
+
+```{r}
+# filled during class:
+table(penguins$island)
+```
+
+## Basic ggplot2 syntax
+
+When you load the tidyverse packages, it loads a bunch of tidyverse packages (so-called tidyverse packages). One of those packages is ggplot2.
+
+Note: I'd argue that the syntax for data viz using ggplot2 is arguably the least intuitive compared to the other tidyverse packages you will learn. It really takes years to be fully comfortable with ggplot2.
+
+My advice for now is pay attention to the code and the specific cases when I run them.
+
+The goal of this class is to give you basic examples you can modify and use for your test cases. In fact, there is an entire book devoted on ggplot2 alone: <https://ggplot2-book.org/>
+
+Generally, plotting the ggplot2 package follows this format:
+
+ggplot(data = **data you're interested in**,
+
+mapping = aes(**variables you want to plot**)) +
+
+**geom_something() +**
+
+**further_customization() +**
+
+..... +
+
+**further_customization()**
+
+where **geom_something()** represents the type of data visualization you want to create. The first type we will use is **geom_point()** to create scatterplots. **further_customizations()** you may present additional customization such as adding a trend line.
+
+This syntax may be referred to as grammar of graphics.
+
+**Note:** ggplot2 is the package, but ggplot() is the function or tool we need.
+
+## geom_point(): Scatterplot for two numerical axes
+
+geom_point() is used to create a scatterplot where you have two numerical data on x and y axes.
+
+Here is an example using geom_point() to explore the relationship between flipper length (plotted on x-axis) and body mass (plotted on y-axis):
+
+```{r}
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point()
+```
+
+**Note: Pay attention to a warning R may give you.**
+
+Ask yourselves: what does it mean?
+
+## geom_point() and adding a linear trend line
+
+To add a trend line, you simply need to add the plus symbol after **geom_point()** and **geom_smooth(method = "lm")** on the next line. This trend line is based on a fitted linear model (least-squares).
+
+For the purpose of this class, we will informally refer to this process as fitting a *linear trend line*.
+
+Note: This is not a statistics or an applied differential equations class. For example, instead of **method = "lm"**, you may fit other type of smoothing functions (e.g., "gam" which stands for *generative additive models*, "loess" which stands for *locally estimated scatterplot smoothing regression*). To learn more about geom_smooth(), visit its ggplot2 documenation in: <https://ggplot2.tidyverse.org/reference/geom_smooth.html>
+
+Now, run the following script to generate a linear trend line:
+
+```{r}
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+## geom_point(): Scatterplot for two numerical axes AND color coding (controlling) for one categorical information
+
+Suppose we are interested in using geom_point() to explore the relationship between flipper length (plotted on x-axis) and body mass (plotted on y-axis), however this time, we want to factor or control for a categorical variable through color-coding to assess any difference between species:
+
+```{r}
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
+) +
+ geom_point()
+```
+
+**How you may interpret the graph we generated:** There appears to be a linear relationship between flipper length and body mass among penguins. Gentoo generally presents larger flipper length and body mass compared to Chinstrap and Adelie.
+
+**Note:** When you generate a data visualization for me, make sure to summarize any trend (or lack of trend) within 1-2 sentences. This is something I expect from you.
+
+## Making Professional Images
+
+Consider your audience when sharing data visuals. For example, leaving "flipper_length_mm" as an axis is considered unprofessional and it is not effective scientific communication.
+
+We can use labs() for customization as demonstrated below to label our viz appropriately.
+
+This will also work with other data viz types (e.g., **geom_bar()**).
+
+```{r}
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
+) +
+  geom_point() +
+  labs(
+    title = "Relationship between penguin body mass and flipper length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    color = "Penguin Species", 
+    x = "Flipper length (mm)", 
+    y = "Body mass (g)"
+  )
+```
+
+## Consideration: Creating Visualizations for People with Color Blindness
+
+ggtheme's **scale_color_colorblind()** customization help R users to create color blind-friendly data viz.
+
+You may accomplish this by adding the **scale_color_colorblind()** customization at the end of your code.
+
+```{r}
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
+) +
+  geom_point() +
+  labs(
+    title = "Relationship between penguin body mass and flipper length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    color = "Penguin Species", 
+    x = "Flipper length (mm)", 
+    y = "Body mass (g)"
+  ) +
+  scale_color_colorblind()
+```
+
+## 5-10 minute practice:
+
+Five minute practice to create your own scatter plot using **bill_depth_mm** and **flipper_length_mm.**
+
+Customize (or not customize) your code however you want here:
+
+```{r}
+# filled during class:
+ggplot(
+  data = penguins,
+  mapping = aes(x = bill_depth_mm, y = flipper_length_mm, color = species)
+) +
+ geom_point()
+```
+
+## geom_bar(): Bar plot to Visualize Counts of Categorical Data
+
+Here is the simplest way of plotting counts of categorical data in R:
+
+```{r}
+ggplot(penguins, aes(x = species)) +
+  geom_bar() 
+```
+
+For effective communication of your results/data, it is often better to show the order sequentially based on trend (e.g., descending order based on counts). Here, wrapping **species** with **fct_infreq()** will do the job as shown below:
+
+```{r}
+ggplot(penguins, aes(x = fct_infreq(species))) +
+  geom_bar()
+```
+
+Suppose we want to fill our bar plots with another color. We can do this by including fill inside geom_bar with the color we want in the following script below.
+
+```{r}
+ggplot(penguins, aes(x = fct_infreq(species))) +
+  geom_bar(fill = "blue")
+```
+
+Note: See page 3 of <https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf> to see which text color you are allowed to use. Replace **blue** with another color from the referenced document.
+
+```{r}
+ggplot(penguins, aes(x = fct_infreq(species))) +
+  geom_bar(fill = "pink")
+```
+
+## geom_histogram(): Distribution/bins of one numerical value
+
+Suppose we want to create a histogram to show the distribution of penguin body mass. Here is a script you need to run to accomplish this task:
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram()
+```
+
+Pay attention to any printed message the **geom_histogram()** will print from running the script above.
+
+When running geom_histogram(), it is often best practice to find the width of your bins. Let us consider these to scenarios where we can use **binwidth** inside **geom_histogram().**
+
+**Scenario 1** (binwidth = 100)**:**
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(binwidth = 100)
+
+```
+
+**Scenario 2 (**binwidth = 2000):
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(binwidth = 2000)
+```
+
+**Concluding thoughts:** It is ultimately up to you to decide what is the optimal bin width. Consider what message you want to send to your audience.
+
+## geom_density(): Density plot of one numerical value
+
+Density plots. Alternative to histogram.
+
+Note that the numbers on the left are in scientific format.
+
+For example, 5E-04 means 5 x 10\^-4 (or 0.0005).
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_density()
+```
+
+## geom_density(): Density plot of one numerical value across or controlling for a categorical variable
+
+Suppose we want to create a density plot that controls/color codes based on categorical variable. Here is a viz that controls/colors for species:
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, color = species)) +
+  geom_density()
+```
+
+**Tip:** Best if you make the line width to be thicker which you can do by specifying linewidth as shown below:
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, color = species)) +
+  geom_density(linewidth = 0.75)
+```
+
+## geom_boxplot(): Density plot of one numerical value across (or controlling) for a categorical variable (e.g., species)
+
+Here's code you can run to generate a simple boxplot that shows the box plots
+
+```{r}
+ggplot(penguins, aes(x = species, y = body_mass_g)) +
+  geom_boxplot()
+```
+
+**Question for students:** How would you summarize plot above in 1-2 sentences?
+
+## geom_bar(): Stacked Bar Plots for two categorical variables with counts Y axis
+
+Suppose we want to create the counts for penguins in each island. But we want to indicate which species of penguins reside within those islands. For that, we can run the code below to create what are called stacked bar plots/charts:
+
+```{r}
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar()
+```
+
+## geom_bar(): Stacked Bar Plots for two categorical variables with proportion Y axis
+
+Suppose we are not interested in counts for the y-axis but instead, we want to display proportions:
+
+```{r}
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(position = "fill") 
+```
+
+Below is example of using labs() you learned from geom_point() applied to this geom_bar() example.
+
+```{r}
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Distribution of species across three islands",
+    x = "Sampled Island", 
+    y = "Proportion of sampled population"
+  ) 
+```
+
+Question: How would you interpret the visualization above in 1-2 sentences?
+
+## **Three or more variables**
+
+Below is a script where you can convey three or more variables information. I **personally do not recommend this.** Simplicity is often you friend.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island))
+```
+
+## Saving your plots as an external image:
+
+Suppose you want to save any image you create as a png image file. You may run **ggsave()** as demonstrated below by specifying the file name for your png file. Note: This image will be saved within the same folder where your Exercise2.qmd file resides.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
+
+ggsave(filename = "penguin-plot.png")
+```
+
+**Another way to save your file (my personal preferred method):** copy and paste your entire ggplot code and run it within your console pane instead. The Plots pane should show up with your plot where you can see an Export button you may leverage. Let us do a quick demo before leaving time for exercise.
+
+## Last note before your class exercise:
+
+This course and your book doesn't aim to make you a ggplot2 expert. But like your book, I expect you to be able to create basic data viz for visualization types demonstrated in lecture.
+
+As stated earlier, there is an entire book on ggplot2 should you want to form deep expertise: <https://ggplot2-book.org/>
+
+Posit, a company that maintains RStudio, also created a ggplot2 cheatsheet here for a deeper dive: <https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf>
+
+To give you an idea on what else you can make using ggplot2, check pgs 43-47 of this map-making workshop I gave for R-ladies St Louis: [https://jmtfeliciano.github.io/SpatialWorkshopPresentation#4](https://jmtfeliciano.github.io/SpatialWorkshopPresentation#44)3
+
+## **Exercise for the rest of the class:**
+
+Below is loads msleep, a built-in dataset from ggplot2, into your environment and prints the first six observations:
+
+```{r}
+data(msleep)
+head(msleep)
+```
+
+For detailed documentation on msleep, please see: <https://ggplot2.tidyverse.org/reference/msleep.html>
+
+Using msleep, create at least one data visualization you may have learned in the course below. Add additional R code chunks as needed if you want to create more than one data viz. Please attempt to use labs() customization from the *Making Professional Images* subsection for any ggplot images you create.
+
+```{r}
+# this is up to you
+```
