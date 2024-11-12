@@ -2836,8 +2836,8 @@ head(gss_cat)
 
 ---
 ### Sample data
-<div class="datatables html-widget html-fill-item" id="htmlwidget-8a5b1bd402a53c1c0749" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8a5b1bd402a53c1c0749">{"x":{"filter":"none","vertical":false,"data":[[2000,2000,2000,2000,2000],["Never married","Divorced","Widowed","Never married","Divorced"],[26,48,67,39,25],["White","White","White","White","White"],["$8000 to 9999","$8000 to 9999","Not applicable","Not applicable","Not applicable"],["Ind,near rep","Not str republican","Independent","Ind,near rep","Not str democrat"],["Protestant","Protestant","Protestant","Orthodox-christian","None"],["Southern baptist","Baptist-dk which","No denomination","Not applicable","Not applicable"],[12,null,2,4,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>year<\/th>\n      <th>marital<\/th>\n      <th>age<\/th>\n      <th>race<\/th>\n      <th>rincome<\/th>\n      <th>partyid<\/th>\n      <th>relig<\/th>\n      <th>denom<\/th>\n      <th>tvhours<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"tip","scrollX":"400px","columnDefs":[{"className":"dt-right","targets":[0,2,8]},{"name":"year","targets":0},{"name":"marital","targets":1},{"name":"age","targets":2},{"name":"race","targets":3},{"name":"rincome","targets":4},{"name":"partyid","targets":5},{"name":"relig","targets":6},{"name":"denom","targets":7},{"name":"tvhours","targets":8}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-adb825d669a8fb0d5e0b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-adb825d669a8fb0d5e0b">{"x":{"filter":"none","vertical":false,"data":[[2000,2000,2000,2000,2000],["Never married","Divorced","Widowed","Never married","Divorced"],[26,48,67,39,25],["White","White","White","White","White"],["$8000 to 9999","$8000 to 9999","Not applicable","Not applicable","Not applicable"],["Ind,near rep","Not str republican","Independent","Ind,near rep","Not str democrat"],["Protestant","Protestant","Protestant","Orthodox-christian","None"],["Southern baptist","Baptist-dk which","No denomination","Not applicable","Not applicable"],[12,null,2,4,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>year<\/th>\n      <th>marital<\/th>\n      <th>age<\/th>\n      <th>race<\/th>\n      <th>rincome<\/th>\n      <th>partyid<\/th>\n      <th>relig<\/th>\n      <th>denom<\/th>\n      <th>tvhours<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"tip","scrollX":"400px","columnDefs":[{"className":"dt-right","targets":[0,2,8]},{"name":"year","targets":0},{"name":"marital","targets":1},{"name":"age","targets":2},{"name":"race","targets":3},{"name":"rincome","targets":4},{"name":"partyid","targets":5},{"name":"relig","targets":6},{"name":"denom","targets":7},{"name":"tvhours","targets":8}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 ## Summarizing data and creating data visualization
@@ -3071,7 +3071,7 @@ For example, using `fct_lump_n(species, 2)` would only keep species designation 
 .tiny[
 
 ``` r
-starwars &lt;- starwars |&gt;
+starwars_v2 &lt;- starwars |&gt;
   mutate(species = fct_lump_min(species, 2))
 
 head(starwars)
@@ -3087,7 +3087,7 @@ head(starwars)
 ## 4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
 ## 5 Leia Org…    150    49 brown      light      brown           19   fema… femin…
 ## 6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…
-## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;fct&gt;, films &lt;list&gt;,
+## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 ## #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 ]
@@ -3097,7 +3097,7 @@ Let us rerun count() code earlier:
 
 
 ``` r
-starwars |&gt;
+starwars_v2 |&gt;
   count(species) |&gt;
   arrange(desc(n))
 ```
