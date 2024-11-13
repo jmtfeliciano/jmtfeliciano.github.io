@@ -3020,8 +3020,8 @@ head(gss_cat)</code></pre>
 ## 6  2000 Married          25 White $20000 - 24999 Strong dem… Prot… Sout…      NA</code></pre>
 <div id="sample-data" class="section level3">
 <h3>Sample data</h3>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a4748e49286f9c05140b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a4748e49286f9c05140b">{"x":{"filter":"none","vertical":false,"data":[[2000,2000,2000,2000,2000],["Never married","Divorced","Widowed","Never married","Divorced"],[26,48,67,39,25],["White","White","White","White","White"],["$8000 to 9999","$8000 to 9999","Not applicable","Not applicable","Not applicable"],["Ind,near rep","Not str republican","Independent","Ind,near rep","Not str democrat"],["Protestant","Protestant","Protestant","Orthodox-christian","None"],["Southern baptist","Baptist-dk which","No denomination","Not applicable","Not applicable"],[12,null,2,4,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>year<\/th>\n      <th>marital<\/th>\n      <th>age<\/th>\n      <th>race<\/th>\n      <th>rincome<\/th>\n      <th>partyid<\/th>\n      <th>relig<\/th>\n      <th>denom<\/th>\n      <th>tvhours<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"tip","scrollX":"400px","columnDefs":[{"className":"dt-right","targets":[0,2,8]},{"name":"year","targets":0},{"name":"marital","targets":1},{"name":"age","targets":2},{"name":"race","targets":3},{"name":"rincome","targets":4},{"name":"partyid","targets":5},{"name":"relig","targets":6},{"name":"denom","targets":7},{"name":"tvhours","targets":8}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-82d3795c11983a2d9215" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-82d3795c11983a2d9215">{"x":{"filter":"none","vertical":false,"data":[[2000,2000,2000,2000,2000],["Never married","Divorced","Widowed","Never married","Divorced"],[26,48,67,39,25],["White","White","White","White","White"],["$8000 to 9999","$8000 to 9999","Not applicable","Not applicable","Not applicable"],["Ind,near rep","Not str republican","Independent","Ind,near rep","Not str democrat"],["Protestant","Protestant","Protestant","Orthodox-christian","None"],["Southern baptist","Baptist-dk which","No denomination","Not applicable","Not applicable"],[12,null,2,4,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>year<\/th>\n      <th>marital<\/th>\n      <th>age<\/th>\n      <th>race<\/th>\n      <th>rincome<\/th>\n      <th>partyid<\/th>\n      <th>relig<\/th>\n      <th>denom<\/th>\n      <th>tvhours<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"dom":"tip","scrollX":"400px","columnDefs":[{"className":"dt-right","targets":[0,2,8]},{"name":"year","targets":0},{"name":"marital","targets":1},{"name":"age","targets":2},{"name":"race","targets":3},{"name":"rincome","targets":4},{"name":"partyid","targets":5},{"name":"relig","targets":6},{"name":"denom","targets":7},{"name":"tvhours","targets":8}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="summarizing-data-and-creating-data-visualization" class="section level2">
@@ -3186,7 +3186,7 @@ head(starwars)</code></pre>
 <p><code>fct_lump_min(variable, number_cut_off)</code> allows us to
 reclassify groupings for uncommon factors or groupings as “Other” based
 on a numeric threshold or cut off.</p>
-<p>For example, using <code>fct_lump_n(species, 2)</code> would only
+<p>For example, using <code>fct_lump_min(species, 2)</code> would only
 keep species designation if species count is 2 or more. In other words,
 species only appearing once is reclassified into “Other”.</p>
 <pre class="r"><code>starwars_v2 &lt;- starwars |&gt;
