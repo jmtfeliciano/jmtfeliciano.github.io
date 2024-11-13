@@ -1,0 +1,46 @@
+---
+title: Test Close Read
+format:
+  closeread-html
+---
+
+:::{.cr-section}
+
+:::{focus-on="cr-sad-cat"}
+# Test Close Read
+
+By Josemari Feliciano
+
+:::
+
+Sad story of betray. Blah
+Blah blah
+
+<br>
+Cat is super sad.
+
+:::{#cr-sad-cat .scale-to-fill}
+
+![](images/sadcat.jpg)
+
+:::
+
+:::{focus-on="cr-angry-cat"}
+## Angry cat era
+
+*2020-2024*
+
+Cat has entered an angry era.
+
+:::
+
+:::{#cr-angry-cat .scale-to-fill}
+
+![](images/angrycat.jpg)
+
+
+:::
+
+:::
+
+
