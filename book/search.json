@@ -1,0 +1,1179 @@
+[
+  {
+    "objectID": "SolutionHomework8.html",
+    "href": "SolutionHomework8.html",
+    "title": "9  Homework 8: Text Data",
+    "section": "",
+    "text": "9.1 Purpose\nThe purpose of this homework is to give you several opportunities to practice functions and tools taught in Lecture 8 using R. Once completed, submit both your quarto document (.qmd) and the rendered HTML file.\nFailure to submit a properly rendered HTML file will result in a grade of 0 for this homework.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#resources-to-consult",
+    "href": "SolutionHomework8.html#resources-to-consult",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.2 Resources to consult",
+    "text": "9.2 Resources to consult\n\nLecture Materials\n\nPresentation Version: https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture8\nUnpolished long (searchable) version: https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture8LongDraft.html\n\nIn Class Exercise Materials: https://jmtfeliciano.github.io/DATA412Fall2024/Exercise8FilledIn.html\n\nNote: You may need to copy and paste the links above into your web browser.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#preliminaries",
+    "href": "SolutionHomework8.html#preliminaries",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.3 Preliminaries",
+    "text": "9.3 Preliminaries\nLoad the following script to load the tidyverse package\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-1-1-pt",
+    "href": "SolutionHomework8.html#task-1-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.4 Task 1 (1 pt)",
+    "text": "9.4 Task 1 (1 pt)\nUsing the R chunk below, load the following seven files you were asked to download (under Homework 8 in Canvas) into your R env’t. Name them appropriately based on best practices.\n(1) HW8BusinessPrograms.csv\n(2) HW8CommunityFacilities.csv\n(3) HW8ElectricPrograms.csv\n(4) HW8MultifamilyHousing.csv\n(5) HW8SingleFamilyHousing.csv\n(6) HW8TelecommunicationsPrograms.csv\n(7) HW8WaterandEnvironmental.csv\n\n# Place your script below:\nbusiness_data &lt;- read_csv(\"data/HW8BusinessPrograms.csv\")\n\nRows: 675 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\ncf_data &lt;- read_csv(\"data/HW8CommunityFacilities.csv\")\n\nRows: 664 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nelectric_data &lt;- read_csv(\"data/HW8ElectricPrograms.csv\")\n\nRows: 401 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nmfh_data &lt;- read_csv(\"data/HW8MultifamilyHousing.csv\")\n\nRows: 663 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nsfh_data &lt;- read_csv(\"data/HW8SingleFamilyHousing.csv\")\n\nRows: 663 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\ntelecom_data &lt;- read_csv(\"data/HW8TelecommunicationsPrograms.csv\")\n\nRows: 462 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nwater_data &lt;- read_csv(\"data/HW8WaterandEnvironmental.csv\")\n\nRows: 641 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-2-1-pt",
+    "href": "SolutionHomework8.html#task-2-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.5 Task 2 (1 pt)",
+    "text": "9.5 Task 2 (1 pt)\nUsing the R chunk below, bind the seven tables you created in Task 1 into a single table (data frame) in your R environment. Make sure to print a sample of the data below too.\n\n# Place your script below:\ntask2_data &lt;- bind_rows(business_data, cf_data, electric_data, mfh_data, sfh_data, telecom_data, water_data)\nhead(task2_data)\n\n# A tibble: 6 × 6\n  fiscal_year state_name program_area  total_investment_dol…¹ number_investments\n        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                          &lt;dbl&gt;              &lt;dbl&gt;\n1        2012 Alabama    Business Pro…               16027910                 24\n2        2012 Alaska     Business Pro…               13622360                 20\n3        2012 Arizona    Business Pro…                6870209                 25\n4        2012 Arkansas   Business Pro…               16434779                 39\n5        2012 California Business Pro…               95962441                120\n6        2012 Colorado   Business Pro…               16127375                 35\n# ℹ abbreviated name: ¹​total_investment_dollars\n# ℹ 1 more variable: svi_investments &lt;dbl&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-3-0.5-pt",
+    "href": "SolutionHomework8.html#task-3-0.5-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.6 Task 3 (0.5 pt)",
+    "text": "9.6 Task 3 (0.5 pt)\nUsing the R chunk below and the data you created in Task 2, print the number of data rows within the data set for each program area:\n\n# Place your script below:\ntask2_data |&gt;\n  group_by(program_area) |&gt;\n  summarise(num_rows = n()) \n\n# A tibble: 7 × 2\n  program_area                num_rows\n  &lt;chr&gt;                          &lt;int&gt;\n1 Business Programs                675\n2 Community Facilities             664\n3 Electric Programs                401\n4 Multifamily Housing              663\n5 Single Family Housing            663\n6 Telecommunications Programs      462\n7 Water and Environmental          641",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-4-1-pt",
+    "href": "SolutionHomework8.html#task-4-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.7 Task 4 (1 pt)",
+    "text": "9.7 Task 4 (1 pt)\nUsing case_when() and the data you created in Task 2, create a new column or variable called rural_agency using the R chunk below. Save the resulting table (data frame) into your R environment (name it however you want but make sure it follows best practice). Make sure to print a sample of the data below too.\nFor your case_when(): rural_agency should be equals to “Rural Housing Service” if program area is either single or multifamily housing. rural_agency should be equals to “Rural Utilities Service” if program area is water and environmental, telecommunications, or electric. rural_agency should be equals to “Rural Business-Cooperative Service” if program area is Business programs.\n\n# Place your script below:\ntask4_data &lt;- task2_data |&gt;\n  mutate(rural_agency = case_when(\n    program_area == 'Single Family Housing' ~ 'Rural Housing Service',\n    program_area == 'Multifamily Housing' ~ 'Rural Housing Service', \n    program_area == 'Water and Environmental' ~ 'Rural Utilities Service',\n    program_area == 'Telecommunications Programs' ~ 'Rural Utilities Service', \n    program_area == 'Electric Programs' ~ 'Rural Utilities Service',\n    program_area == 'Business Programs' ~ 'Rural Business-Cooperative Service',\n  ))",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-5-0.5-pt",
+    "href": "SolutionHomework8.html#task-5-0.5-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.8 Task 5 (0.5 pt)",
+    "text": "9.8 Task 5 (0.5 pt)\nThe code below creates two tables (employees_2023, employees_2024) in your R environment.\nMake sure you run the code below before moving forward. Read the two tables accordingly as well.\n\nemployees_2023 &lt;- data.frame(\n  EmployeeID = c(1, 2, 3),\n  Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n  Department = c(\"HR\", \"IT\", \"Finance\"),\n  Salary = c(50000, 60000, 55000)\n)\n\nemployees_2024 &lt;- data.frame(\n  EmployeeID = c(4, 5),\n  Name = c(\"Diana\", \"Eve\"),\n  Department = c(\"HR\", \"IT\"),\n  Salary = c(52000, 61000)\n)\n\nglimpse(employees_2023)\n\nRows: 3\nColumns: 4\n$ EmployeeID &lt;dbl&gt; 1, 2, 3\n$ Name       &lt;chr&gt; \"Alice\", \"Bob\", \"Charlie\"\n$ Department &lt;chr&gt; \"HR\", \"IT\", \"Finance\"\n$ Salary     &lt;dbl&gt; 50000, 60000, 55000\n\nglimpse(employees_2024)\n\nRows: 2\nColumns: 4\n$ EmployeeID &lt;dbl&gt; 4, 5\n$ Name       &lt;chr&gt; \"Diana\", \"Eve\"\n$ Department &lt;chr&gt; \"HR\", \"IT\"\n$ Salary     &lt;dbl&gt; 52000, 61000\n\n\nEach table (data frame) has the columns: EmployeeID, Name, Department, and Salary.\n\nemployees_2023 contains data for employees in 2023.\nemployees_2024 contains data for new hires in 2024.\n\nUsing the code chunk below, bind the two data frames together to create a table that is essentially a master list of all employees across both years. Save this data into your R environment and name it appropriately based on best practices. Make sure to print the data below too.\n\n# Place your script below:\ntask5_data &lt;- bind_rows(employees_2023, employees_2024)\n\nhead(task5_data)\n\n  EmployeeID    Name Department Salary\n1          1   Alice         HR  50000\n2          2     Bob         IT  60000\n3          3 Charlie    Finance  55000\n4          4   Diana         HR  52000\n5          5     Eve         IT  61000",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-6-0.5-pt",
+    "href": "SolutionHomework8.html#task-6-0.5-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.9 Task 6 (0.5 pt)",
+    "text": "9.9 Task 6 (0.5 pt)\nThe code below creates two tables (group_a, group_b) in your R environment.\nMake sure you run the code below before moving forward. Read the two tables accordingly as well.\n\ngroup_a &lt;- data.frame(\n  ParticipantID = c(\"A1\", \"A2\", \"A3\"),\n  Age = c(25, 30, 35),\n  Score = c(88, 92, 85)\n)\n\ngroup_b &lt;- data.frame(\n  ParticipantID = c(\"B1\", \"B2\", \"B3\"),\n  Age = c(25, 30, 40),\n  Score = c(90, 89, 95)\n)\n\ngroup_a\n\n  ParticipantID Age Score\n1            A1  25    88\n2            A2  30    92\n3            A3  35    85\n\ngroup_b\n\n  ParticipantID Age Score\n1            B1  25    90\n2            B2  30    89\n3            B3  40    95\n\n\nYou are conducting a study and have collected data from two groups of participants, group_a and group_b, on their age and test scores. Each data frame has columns: ParticipantID, Age, and Score.\n\ngroup_a is a table (data frame) that contains data for participants in Group A.\ngroup_b is a table (data frame) that contains data for participants in Group B.\n\nBind the two tables (data frames) to create a single data set of all participants using the R chunk below. Save this data into your R environment and name it appropriately based on best practices. Make sure to print the data below too.\n\n# Place your script below:\ntask6_data &lt;- bind_rows(group_a, group_b)\nhead(task6_data)\n\n  ParticipantID Age Score\n1            A1  25    88\n2            A2  30    92\n3            A3  35    85\n4            B1  25    90\n5            B2  30    89\n6            B3  40    95",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-7-1-pt",
+    "href": "SolutionHomework8.html#task-7-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.10 Task 7 (1 pt)",
+    "text": "9.10 Task 7 (1 pt)\nThe code blow creates a table (data frame) called address_df. Run the code below before proceeding forward and make sure to pay attention to the printed data:\n\naddress_df &lt;- data.frame(street = c(\"123 Main St\", \"456 Oak Ave\", \"789 Pine Rd\"),\n                         city = c(\"Springfield\", \"Riverdale\", \"Greendale\"),\n                         state = c(\"IL\", \"NY\", \"CA\"))\naddress_df\n\n       street        city state\n1 123 Main St Springfield    IL\n2 456 Oak Ave   Riverdale    NY\n3 789 Pine Rd   Greendale    CA\n\n\nUse str_c() within the R chunk below to combine the three variables from address_df into a full address, formatted as “Street, City, State.” Name this new variable/column full_address.\n\n# Place your script below:\naddress_df |&gt;\n  mutate(full_address = str_c(street, city, state, sep = \", \"))\n\n       street        city state                 full_address\n1 123 Main St Springfield    IL 123 Main St, Springfield, IL\n2 456 Oak Ave   Riverdale    NY   456 Oak Ave, Riverdale, NY\n3 789 Pine Rd   Greendale    CA   789 Pine Rd, Greendale, CA",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-8-1-pt",
+    "href": "SolutionHomework8.html#task-8-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.11 Task 8 (1 pt)",
+    "text": "9.11 Task 8 (1 pt)\nThe code blow creates a table (data frame) called pricing_table. Run the code below before proceeding forward and make sure to pay attention to the printed data:\n\npricing_table &lt;- data.frame(product = c(\"Apples\", \"Bananas\", \"Cherries\"),\n                            prices = c(\"1.20\", \"0.80\", \"2.50\"))\npricing_table \n\n   product prices\n1   Apples   1.20\n2  Bananas   0.80\n3 Cherries   2.50\n\n\nUse str_c() to create a variable called pricing_sentence using R chunk below. str_c() should produce a single sentence for each item, formatted as “ItemName costs $Price.” For example, the pricing_sentence value for the first row should state “Apples costs $1.20”.\n\n# Place your script below:\npricing_table |&gt;\n  mutate(pricing_sentence = str_c(product, \" costs $\", prices))\n\n   product prices     pricing_sentence\n1   Apples   1.20   Apples costs $1.20\n2  Bananas   0.80  Bananas costs $0.80\n3 Cherries   2.50 Cherries costs $2.50",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-9-1-pt",
+    "href": "SolutionHomework8.html#task-9-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.12 Task 9 (1 pt)",
+    "text": "9.12 Task 9 (1 pt)\nUsing pricing_table (data from task 8), use str_glue() to create a variable called pricing_sentence_v2 using R chunk below. str_glue() should also produce a single sentence for each item, formatted as “ItemName costs $Price before taxes.” For example, the pricing_sentence_v2 value for the first row should state “Apples costs $1.20 before taxes”.\n\n# Place your script below:\npricing_table |&gt;\n  mutate(pricing_sentence = str_glue(\"{product} costs ${prices} before taxes\"))\n\n   product prices                  pricing_sentence\n1   Apples   1.20   Apples costs $1.20 before taxes\n2  Bananas   0.80  Bananas costs $0.80 before taxes\n3 Cherries   2.50 Cherries costs $2.50 before taxes",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-10-data",
+    "href": "SolutionHomework8.html#task-10-data",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.13 Task 10 Data",
+    "text": "9.13 Task 10 Data\nThis data we are loading are news headlines scrapped from ABC7 News Network in New York City between July 18, 2017 and January 16, 2018. Make sure to run the script below before proceeding:\n\nnews_headlines &lt;- read_csv(\"https://raw.githubusercontent.com/jmtfeliciano/teachingdata/refs/heads/main/abc7ny.csv\")\n\nRows: 9745 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (6): datetime, headline, url, teaser, feed_name, feed_url\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nhead(news_headlines)\n\n# A tibble: 6 × 6\n  datetime                 headline              url   teaser feed_name feed_url\n  &lt;chr&gt;                    &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   \n1 July 18, 2017 at 03:41PM 9-year-old boy wants… http… Tyler… abc7ny.c… http://…\n2 July 18, 2017 at 03:55PM 10-year-old boy crit… http… The C… abc7ny.c… http://…\n3 July 18, 2017 at 04:02PM 10-year-old boy crit… http… A 10-… abc7ny.c… http://…\n4 July 18, 2017 at 04:38PM American Airlines me… http… Al Bl… abc7ny.c… http://…\n5 July 18, 2017 at 04:40PM 12-year-old girl pul… http… Daphn… abc7ny.c… http://…\n6 July 18, 2017 at 04:51PM Exclusive: Daughter … http… In an… abc7ny.c… http://…",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-10-1-pt",
+    "href": "SolutionHomework8.html#task-10-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.14 Task 10 (1 pt)",
+    "text": "9.14 Task 10 (1 pt)\nUsing news_headlines and the R chunk below, create a topic indicator variable to detect any crime-related topic or word of your choosing. Then only print a sample of your data that contains the key word of your choosing. Make sure you detect at least one matching row with your keyword (otherwise, pick another keyword).\n\n# Place your script below:\nnews_headlines_v2 &lt;- news_headlines |&gt;\n  mutate(robbery_mentioned = str_detect(headline, regex(\"robbery\", ignore_case = TRUE))) \n\nnews_headlines_v2 |&gt;\n  filter(robbery_mentioned) |&gt;\n  relocate(headline)\n\n# A tibble: 53 × 7\n   headline           datetime url   teaser feed_name feed_url robbery_mentioned\n   &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;    &lt;lgl&gt;            \n 1 OJ Simpson has go… July 18… http… O.J. … abc7ny.c… http://… TRUE             \n 2 Video: Suspects i… July 19… http… Distu… abc7ny.c… http://… TRUE             \n 3 Man fatally stabb… July 20… http… The 3… abc7ny.c… http://… TRUE             \n 4 Police arrest 4th… July 21… http… Polic… abc7ny.c… http://… TRUE             \n 5 3 charged in assa… July 25… http… Polic… abc7ny.c… http://… TRUE             \n 6 Search on for man… July 29… http… Accor… abc7ny.c… http://… TRUE             \n 7 Shootout erupts a… August … http… Polic… abc7ny.c… http://… TRUE             \n 8 Pennsylvania stat… August … http… Penns… abc7ny.c… http://… TRUE             \n 9 Man shot while si… August … http… The 3… abc7ny.c… http://… TRUE             \n10 Police fatally sh… August … http… Polic… abc7ny.c… http://… TRUE             \n# ℹ 43 more rows",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-11-1-pt",
+    "href": "SolutionHomework8.html#task-11-1-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.15 Task 11 (1 pt)",
+    "text": "9.15 Task 11 (1 pt)\nBefore proceeding, make sure to run the following script and read the printed data:\n\nemployees &lt;- data.frame(\n  name = c(\"Tom\", \"Jerry\", \"Anna\", \"Laura\", \"Nick\"),\n  years_experience = c(1, 3, 7, 5, 2)\n)\nemployees\n\n   name years_experience\n1   Tom                1\n2 Jerry                3\n3  Anna                7\n4 Laura                5\n5  Nick                2\n\n\nemployees is a table (data frame) with information about employees’ years of experience. Use case_when() in the R chunk below to create a new column experience_level that classifies each employee according to this breakdown:\n\nLess than 2 years: \"Junior\"\n2 to 5 years: \"Mid-level\"\nMore than 5 years: \"Senior\"\n\n\n# Place your script below:\nemployees |&gt;\n  mutate(experience_level = case_when(\n    years_experience &lt; 2 ~ \"Junior\",\n    between(years_experience, 2, 5) ~ \"Mid-level\",\n    years_experience &gt; 5 ~ \"Senior\"\n  ))\n\n   name years_experience experience_level\n1   Tom                1           Junior\n2 Jerry                3        Mid-level\n3  Anna                7           Senior\n4 Laura                5        Mid-level\n5  Nick                2        Mid-level",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework8.html#task-12-0.5-pt",
+    "href": "SolutionHomework8.html#task-12-0.5-pt",
+    "title": "9  Homework 8: Text Data",
+    "section": "9.16 Task 12 (0.5 pt)",
+    "text": "9.16 Task 12 (0.5 pt)\nBefore proceeding, make sure to run the following script and read the printed data:\n\nmovie_years &lt;- data.frame(movie = c(\"Inception\", \"The Matrix\", \"Titanic\"),\n                          release_year = c(\"2010\", \"1999\", \"1997\"))\nmovie_years\n\n       movie release_year\n1  Inception         2010\n2 The Matrix         1999\n3    Titanic         1997\n\n\nUsing str_c() or str_glue() within the R chunk below with the movie_years table (data frame), create a variable/column called movie_year where each entry includes the movie title then the release year in parentheses (e.g., “Inception (2010)”).\n\n# Place your script below:\n\nmovie_years |&gt;\n  mutate(movie_year = str_glue(\"{movie} ({release_year})\"))\n\n       movie release_year        movie_year\n1  Inception         2010  Inception (2010)\n2 The Matrix         1999 The Matrix (1999)\n3    Titanic         1997    Titanic (1997)",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Homework 8: Text Data</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html",
+    "href": "SolutionHomework7.html",
+    "title": "8  Homework 7: Joins",
+    "section": "",
+    "text": "8.1 Purpose\nThe purpose of this homework is to give you several opportunities to practice performing data joins using R. Once completed, submit both your quarto document (.qmd) and the rendered HTML file.\nFailure to submit a properly rendered HTML file will result in a grade of 0 for this homework.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#resources-to-consult",
+    "href": "SolutionHomework7.html#resources-to-consult",
+    "title": "8  Homework 7: Joins",
+    "section": "8.2 Resources to consult",
+    "text": "8.2 Resources to consult\n\nLecture Materials\n\nPresentation Version: https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture7\nUnpolished long (searchable) version: https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture7LongDraft.html\n\nIn Class Exercise Materials: https://jmtfeliciano.github.io/DATA412Fall2024/Exercise7FilledIn.html\n\nNote: You may need to copy and paste the links above into your web browser.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#preliminaries",
+    "href": "SolutionHomework7.html#preliminaries",
+    "title": "8  Homework 7: Joins",
+    "section": "8.3 Preliminaries",
+    "text": "8.3 Preliminaries\nLoad the following script to load the tidyverse package\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-1-3-data",
+    "href": "SolutionHomework7.html#task-1-3-data",
+    "title": "8  Homework 7: Joins",
+    "section": "8.4 Task 1-3 Data",
+    "text": "8.4 Task 1-3 Data\nBefore proceeding, run the two R chunks below and pay attention to the outputs and how each printed table (data frames) looks like:\n\n# Code that creates then prints df1\ndf1 &lt;- data.frame(\n  ID = c(1, 2, 3),\n  Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n  Age = c(24, 30, 22)\n)\n\ndf1\n\n  ID    Name Age\n1  1   Alice  24\n2  2     Bob  30\n3  3 Charlie  22\n\n\n\n# Code that creates then prints df1\ndf2 &lt;- data.frame(\n  ID = c(2, 3, 4),\n  City = c(\"New York\", \"Los Angeles\", \"Chicago\"),\n  Salary = c(60000, 70000, 80000)\n)\ndf2\n\n  ID        City Salary\n1  2    New York  60000\n2  3 Los Angeles  70000\n3  4     Chicago  80000",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-1-0.5-pt",
+    "href": "SolutionHomework7.html#task-1-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.5 Task 1 (0.5 pt)",
+    "text": "8.5 Task 1 (0.5 pt)\nUsing df1 and df2 from Task 1-3 data, perform a left_join() on ID and print the resulting table (data frame) below. Make sure df1 appears first before df2 inside left_join().\n\n# Place your script below:\nleft_join(df1, df2, join_by(ID))\n\n  ID    Name Age        City Salary\n1  1   Alice  24        &lt;NA&gt;     NA\n2  2     Bob  30    New York  60000\n3  3 Charlie  22 Los Angeles  70000",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-2-0.5-pt",
+    "href": "SolutionHomework7.html#task-2-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.6 Task 2 (0.5 pt)",
+    "text": "8.6 Task 2 (0.5 pt)\nUsing df1 and df2 from Task 1-3 data, perform a inner_join() on ID and print the resulting table (data frame) below:\n\n# Place your script below:\ninner_join(df1, df2, join_by(ID))\n\n  ID    Name Age        City Salary\n1  2     Bob  30    New York  60000\n2  3 Charlie  22 Los Angeles  70000",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-3-1-pt",
+    "href": "SolutionHomework7.html#task-3-1-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.7 Task 3 (1 pt)",
+    "text": "8.7 Task 3 (1 pt)\nIn 1-5 sentences, describe in your own words the difference in output between the left and inner joined data between df1 and df2 below. Essentially, answer the following: what is left_join() doing compared to inner_join()?\nYour response: left_join() appends data from the 2nd data frame (if there is a match) to the 1st data frame and if there are no matches, new column fields are left blank (NAs). inner_join() only keeps rows where there is a match between the two data frames, thereby excluding non-matching rows.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-4-data",
+    "href": "SolutionHomework7.html#task-4-data",
+    "title": "8  Homework 7: Joins",
+    "section": "8.8 Task 4 Data",
+    "text": "8.8 Task 4 Data\nBefore proceeding, run the two R chunks below and pay attention to the outputs and how each printed table (data frames) looks like:\n\n# Code that creates then prints departments\ndepartments &lt;- data.frame(\n  DeptID = c(101, 102, 103),\n  DeptName = c(\"HR\", \"Finance\", \"IT\"),\n  Location = c(\"Building A\", \"Building B\", \"Building C\")\n)\ndepartments\n\n  DeptID DeptName   Location\n1    101       HR Building A\n2    102  Finance Building B\n3    103       IT Building C\n\n\n\n# Code that creates then prints employees\nemployees &lt;- data.frame(\n  EmpID = c(1, 2, 3),\n  DeptID = c(101, 104, 103),\n  EmpName = c(\"John\", \"Jane\", \"Tom\")\n)\nemployees\n\n  EmpID DeptID EmpName\n1     1    101    John\n2     2    104    Jane\n3     3    103     Tom",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-4-0.5-pt",
+    "href": "SolutionHomework7.html#task-4-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.9 Task 4 (0.5 pt)",
+    "text": "8.9 Task 4 (0.5 pt)\nUsing the Task 4 data sets, perform a left_join() on DeptID. Make sure departments appears first before employees inside left_join(). Print the resulting table (data frame) below.\n\n# Place your script below:\nleft_join(departments, employees, join_by(DeptID))\n\n  DeptID DeptName   Location EmpID EmpName\n1    101       HR Building A     1    John\n2    102  Finance Building B    NA    &lt;NA&gt;\n3    103       IT Building C     3     Tom",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-5-0.5-pt",
+    "href": "SolutionHomework7.html#task-5-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.10 Task 5 (0.5 pt)",
+    "text": "8.10 Task 5 (0.5 pt)\nDescribe in detail why some columns or variables in the table (data frame) you generated under Task 4 have missing data (NA).\nYour response:\n\nSome fields in the resulting data frame may have missing data (NA) because not all DeptID values in the departments data frame have matching rows in the employees data frame.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-6-0.5-pt",
+    "href": "SolutionHomework7.html#task-6-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.11 Task 6 (0.5 pt)",
+    "text": "8.11 Task 6 (0.5 pt)\nUsing the Task 4 data sets, perform a left_join() on DeptID. This time, make sure employees appears first before departments inside left_join(). Print the resulting table (data frame) below.\n\n# Place your script below:\nleft_join(employees, departments, join_by(DeptID))\n\n  EmpID DeptID EmpName DeptName   Location\n1     1    101    John       HR Building A\n2     2    104    Jane     &lt;NA&gt;       &lt;NA&gt;\n3     3    103     Tom       IT Building C",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-7-1-pt",
+    "href": "SolutionHomework7.html#task-7-1-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.12 Task 7 (1 pt)",
+    "text": "8.12 Task 7 (1 pt)\nExplain in detail why the table outputs for Task 4 and Task 6 are different or the same. In this case, does the order matter at all for left_join()?\nYour response: The order matters. The difference arises because the order of the data frames determines which data frame’s rows are fully preserved in the output (i.e., rows from the first data frame fed into left_join), then columns/variables from the 2nd data frame is then added to the first data frame. Unmatched data are then assigned NAs with respect to the additional variables or columns added from the 2nd data frame. Another framing: in Task 4, we assign an employee to each department, while in Task 6, we assign a department to each employee.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-8-0.5-pt",
+    "href": "SolutionHomework7.html#task-8-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.13 Task 8 (0.5 pt)",
+    "text": "8.13 Task 8 (0.5 pt)\nThis time, perform a inner_join() on DeptID. Make sure departments appears first before employees inside left_join(). Print the resulting table (data frame) below.\n\n# Place your script below:\ninner_join(departments, employees, join_by(DeptID))\n\n  DeptID DeptName   Location EmpID EmpName\n1    101       HR Building A     1    John\n2    103       IT Building C     3     Tom",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-9-0.5-pt",
+    "href": "SolutionHomework7.html#task-9-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.14 Task 9 (0.5 pt)",
+    "text": "8.14 Task 9 (0.5 pt)\nThis time, perform a inner_join() on DeptID. This time, make sure employees appears first before departments inside left_join(). Print the resulting table (data frame) below.\n\n# Place your script below:\ninner_join(employees, departments, join_by(DeptID))\n\n  EmpID DeptID EmpName DeptName   Location\n1     1    101    John       HR Building A\n2     3    103     Tom       IT Building C",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-10-1-pt",
+    "href": "SolutionHomework7.html#task-10-1-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.15 Task 10 (1 pt)",
+    "text": "8.15 Task 10 (1 pt)\nExplain in detail why the table outputs for Task 8 and Task 9 are different or the same. In this case, does the order matter at all for inner_join()?\nYour response: Order of data frame doesn’t matter for inner_join for the most part (only minor differences are observed, that is, the order of the variable which is not consequential). Both output produces effectively the same insight.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-11-0.5-pt",
+    "href": "SolutionHomework7.html#task-11-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.16 Task 11 (0.5 pt)",
+    "text": "8.16 Task 11 (0.5 pt)\nBefore proceeding, run the two R chunks below and pay attention to the outputs and how each printed table (data frames) looks like:\n\nstudents &lt;- data.frame(\n  StudentID = c(1, 2, 3),\n  Name = c(\"Jake\", \"Amy\", \"Terry\"),\n  Major = c(\"Math\", \"Biology\", \"Chemistry\")\n)\nstudents\n\n  StudentID  Name     Major\n1         1  Jake      Math\n2         2   Amy   Biology\n3         3 Terry Chemistry\n\n\n\nattendance &lt;- data.frame(\n  StudentID = c(1, 2, 4),\n  DaysPresent = c(180, 175, 160),\n  Semester = c(\"Fall\", \"Spring\", \"Fall\")\n)\nattendance\n\n  StudentID DaysPresent Semester\n1         1         180     Fall\n2         2         175   Spring\n3         4         160     Fall\n\n\nUsing the R chunk below, perform a left_join() on StudentID to enrich the students data using the attendance data.\n\n# Place your script below:\nleft_join(students, attendance, join_by(StudentID))\n\n  StudentID  Name     Major DaysPresent Semester\n1         1  Jake      Math         180     Fall\n2         2   Amy   Biology         175   Spring\n3         3 Terry Chemistry          NA     &lt;NA&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-12-15-data",
+    "href": "SolutionHomework7.html#task-12-15-data",
+    "title": "8  Homework 7: Joins",
+    "section": "8.17 Task 12-15 Data",
+    "text": "8.17 Task 12-15 Data\nBefore proceeding, run the two R chunks below and pay attention to the outputs and how each printed table (data frame) looks like:\n\ntransactions &lt;- data.frame(\n  TransactionID = c(1, 2, 3, 4),\n  ProductID = c(1, 2, 3, 1),\n  Amount = c(100, 150, 200, 50)\n)\ntransactions\n\n  TransactionID ProductID Amount\n1             1         1    100\n2             2         2    150\n3             3         3    200\n4             4         1     50\n\n\n\nproducts &lt;- data.frame(\n  ProductID = c(1, 2, 4),\n  ProductName = c(\"Table\", \"Chair\", \"Desk\"),\n  Price = c(500, 250, 300)\n)\nproducts\n\n  ProductID ProductName Price\n1         1       Table   500\n2         2       Chair   250\n3         4        Desk   300",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-12-0.5-pt",
+    "href": "SolutionHomework7.html#task-12-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.18 Task 12 (0.5 pt)",
+    "text": "8.18 Task 12 (0.5 pt)\nUse semi_join() but make sure transactions appears first before products inside semi_join(). Print the resulting table (data frame) below.\n\n# Place your script below:\nsemi_join(transactions, products)\n\nJoining with `by = join_by(ProductID)`\n\n\n  TransactionID ProductID Amount\n1             1         1    100\n2             2         2    150\n3             4         1     50",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-13-1-pt",
+    "href": "SolutionHomework7.html#task-13-1-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.19 Task 13 (1 pt)",
+    "text": "8.19 Task 13 (1 pt)\nIn detail, what does the join you performed in Task 12 achieve? Explain the join and output in detail. What type of join did you perform (i.e., filtering, mutating)?\nYour response: Performed a filtering join via semi_join() as semi_join() doesn’t add additional variables. In semi_join(), rows from the first data frame are only kept if and only if their join key(s) exists or have a match in the 2nd data frame.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-14-0.5-pt",
+    "href": "SolutionHomework7.html#task-14-0.5-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.20 Task 14 (0.5 pt)",
+    "text": "8.20 Task 14 (0.5 pt)\nUse anti_join() but make sure transactions appears first before products. Print the resulting table (data frame) below.\n\n# Place your script below:\nanti_join(transactions, products)\n\nJoining with `by = join_by(ProductID)`\n\n\n  TransactionID ProductID Amount\n1             3         3    200",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework7.html#task-15-1-pt",
+    "href": "SolutionHomework7.html#task-15-1-pt",
+    "title": "8  Homework 7: Joins",
+    "section": "8.21 Task 15 (1 pt)",
+    "text": "8.21 Task 15 (1 pt)\nIn detail, what does the join you performed in Task 14 achieve? Explain the join and output in detail. What type of join did you perform (i.e., filtering, mutating)?\nYour response: Performed a filtering join via anti_join() as anti_join() doesn’t add additional variables. In anti_join(), rows from the first data frame are only kept if and only if their join key(s) does not exist or does not have a match in the 2nd data frame.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Homework 7: Joins</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html",
+    "href": "SolutionHomework6.html",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "",
+    "text": "7.1 What you need to do\nYou will be assigned tasks throughout this Quarto Document where you will need to fill in R code appropriately based on what was taught and discussed across Lecture 6 slides and the Exercise 6 Quarto document. Please consult these Lecture 6 materials as needed:\nNote: You may need to copy and paste the links above into your internet browser.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#what-you-need-to-do",
+    "href": "SolutionHomework6.html#what-you-need-to-do",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "",
+    "text": "Lecture 6 slides: https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture6#1\nExercise 6 exercise: https://jmtfeliciano.github.io/DATA412Fall2024/Exercise6FilledIn.html",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#preliminaries",
+    "href": "SolutionHomework6.html#preliminaries",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.2 Preliminaries",
+    "text": "7.2 Preliminaries\nMake sure to run this script before doing any of the tasks below:\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-1-0.5-pt",
+    "href": "SolutionHomework6.html#task-1-0.5-pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.3 Task 1 (0.5 pt)",
+    "text": "7.3 Task 1 (0.5 pt)\nLoad cms_patient_care, a built-in Tidyverse data set, into the R env’t. As always, print sample data by using head() or glimpse() below:\n\n# Place your R code below:\ndata('cms_patient_care')\n\nhead(cms_patient_care)\n\n# A tibble: 6 × 5\n  ccn    facility_name   measure_abbr      score type       \n  &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;      \n1 011500 BAPTIST HOSPICE beliefs_addressed 202   denominator\n2 011500 BAPTIST HOSPICE beliefs_addressed 100   observed   \n3 011500 BAPTIST HOSPICE composite_process 202   denominator\n4 011500 BAPTIST HOSPICE composite_process  88.1 observed   \n5 011500 BAPTIST HOSPICE dyspena_treatment 110   denominator\n6 011500 BAPTIST HOSPICE dyspena_treatment  99.1 observed",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-2-2-pts",
+    "href": "SolutionHomework6.html#task-2-2-pts",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.4 Task 2 (2 pts)",
+    "text": "7.4 Task 2 (2 pts)\nNote: The wide format you need to generate below should look partially like the table below:\n\n\n\n\n\n\n\n\n\n\nccn\nfacility_name\nmeasure_abbr\ndenominator\nobserved\n\n\n\n\n011500\nBAPTIST HOSPICE\nbeliefs_addressed\n202\n100\n\n\n011500\nBAPTIST HOSPICE\ncomposite_process\n202\n88.1\n\n\n…\n…\n…\n…\n…\n\n\n\nUse pivot_wider() below to transform the cms_patient_care data into wide format via the R code chunk provided below. Also save the data into your R environment (name it however you want) then print a sample of that data using head() or glimpse() within the same R code chunk.\n\n# Place your R code below:\ntask2_data &lt;- cms_patient_care |&gt;\n  pivot_wider(\n    names_from = type,\n    values_from = score)\n\nhead(task2_data)\n\n# A tibble: 6 × 5\n  ccn    facility_name   measure_abbr      denominator observed\n  &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;                   &lt;dbl&gt;    &lt;dbl&gt;\n1 011500 BAPTIST HOSPICE beliefs_addressed         202    100  \n2 011500 BAPTIST HOSPICE composite_process         202     88.1\n3 011500 BAPTIST HOSPICE dyspena_treatment         110     99.1\n4 011500 BAPTIST HOSPICE dyspnea_screening         202    100  \n5 011500 BAPTIST HOSPICE opioid_bowel               61    100  \n6 011500 BAPTIST HOSPICE pain_assessment           107    100",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-3-0.5-pt",
+    "href": "SolutionHomework6.html#task-3-0.5-pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.5 Task 3 (0.5 pt)",
+    "text": "7.5 Task 3 (0.5 pt)\nLoad cms_patient_experience, a built-in Tidyverse data set, into the R env’t. Using cms_patient_experience, create cms_patient_experience_v2 after removing measure_title as one of the columns. As always, print a sample of cms_patient_experience_v2 by using head() or glimpse() below:\n\n# Place your R code below:\ndata(\"cms_patient_experience\")\n\ncms_patient_experience_v2 &lt;- cms_patient_experience |&gt;\n  select(-measure_title)\n\nhead(cms_patient_experience_v2)\n\n# A tibble: 6 × 4\n  org_pac_id org_nm                     measure_cd   prf_rate\n  &lt;chr&gt;      &lt;chr&gt;                      &lt;chr&gt;           &lt;dbl&gt;\n1 0446157747 USC CARE MEDICAL GROUP INC CAHPS_GRP_1        63\n2 0446157747 USC CARE MEDICAL GROUP INC CAHPS_GRP_2        87\n3 0446157747 USC CARE MEDICAL GROUP INC CAHPS_GRP_3        86\n4 0446157747 USC CARE MEDICAL GROUP INC CAHPS_GRP_5        57\n5 0446157747 USC CARE MEDICAL GROUP INC CAHPS_GRP_8        85\n6 0446157747 USC CARE MEDICAL GROUP INC CAHPS_GRP_12       24",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-4-2-pt",
+    "href": "SolutionHomework6.html#task-4-2-pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.6 Task 4 (2 pt)",
+    "text": "7.6 Task 4 (2 pt)\nNote: The wide format you need to generate below should look partially like the table below:\n\nUse pivot_wider() to transform the cms_patient_experience_v2 data into wide format via the R code chunk provided below. Also save this data into your R environment (name it however you want) then print a sample of that data using head() or glimpse() within the same R code chunk.\n\n\n\n\n\n\n\n\n\n\norg_pac_id\norg_nm\nCAHPS_GRP_1\nCAHPS_GRP_2\n…\nCAHPS_GRP_12\n\n\n\n\n0446157747\nUSC CARE MEDICAL GROUP INC\n63\n87\n…\n24\n\n\n0446162697\nASSOCIATION OF UNIVERSITY PHYSICIA…\n59\n85\n…\n22\n\n\n…\n…\n…\n…\n…\n…\n\n\n\n\n# Place your R code below:\ntask4_data &lt;- cms_patient_experience_v2 |&gt;\n  pivot_wider(\n    names_from = measure_cd,\n    values_from = prf_rate\n  )\n\nhead(task4_data)\n\n# A tibble: 6 × 8\n  org_pac_id org_nm  CAHPS_GRP_1 CAHPS_GRP_2 CAHPS_GRP_3 CAHPS_GRP_5 CAHPS_GRP_8\n  &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;\n1 0446157747 USC CA…          63          87          86          57          85\n2 0446162697 ASSOCI…          59          85          83          63          88\n3 0547164295 BEAVER…          49          NA          75          44          73\n4 0749333730 CAPE P…          67          84          85          65          82\n5 0840104360 ALLIAN…          66          87          87          64          87\n6 0840109864 REX HO…          73          87          84          67          91\n# ℹ 1 more variable: CAHPS_GRP_12 &lt;dbl&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-5-0.5-pt",
+    "href": "SolutionHomework6.html#task-5-0.5-pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.7 Task 5 (0.5 pt)",
+    "text": "7.7 Task 5 (0.5 pt)\nLoad us_rent_income, a built-in Tidyverse data set, into the R env’t. Then create us_rent_income_v2 after removing the moe column. As always, print a sample of the final data by using head() or glimpse() below:\n\n# Place your R code below:\ndata(\"us_rent_income\")\n\nus_rent_income_v2 &lt;- us_rent_income |&gt;\n  select(-moe)\n\nhead(us_rent_income_v2)\n\n# A tibble: 6 × 4\n  GEOID NAME    variable estimate\n  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;\n1 01    Alabama income      24476\n2 01    Alabama rent          747\n3 02    Alaska  income      32940\n4 02    Alaska  rent         1200\n5 04    Arizona income      27517\n6 04    Arizona rent          972",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-6-2-pt",
+    "href": "SolutionHomework6.html#task-6-2-pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.8 Task 6 (2 pt)",
+    "text": "7.8 Task 6 (2 pt)\nNote: The wide format you need to generate below should look partially like the table below:\n\n\n\nGEOID\nNAME\nmedian_income\nmedian_rent\n\n\n\n\n01\nAlabama\n24476\n747\n\n\n02\nAlaska\n3294\n1200\n\n\n…\n…\n…\n…\n\n\n\nUse pivot_wider() to transform the us_rent_income_v2 data into wide format via the R code chunk provided below. Also save this data as us_rent_income_v3 into your R environment and make sure to rename income into median_income and rent into median_rent. Print a sample of that data using head() or glimpse() within the same R code chunk which should match partial output above.\n\n# Place your R code below:\nus_rent_income_v3 &lt;- us_rent_income_v2 |&gt;\n  pivot_wider(\n    values_from = estimate,\n    names_from = variable) |&gt;\n  rename(median_income = income,\n         median_rent = rent)\n\nhead(us_rent_income_v3)\n\n# A tibble: 6 × 4\n  GEOID NAME       median_income median_rent\n  &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;       &lt;dbl&gt;\n1 01    Alabama            24476         747\n2 02    Alaska             32940        1200\n3 04    Arizona            27517         972\n4 05    Arkansas           23789         709\n5 06    California         29454        1358\n6 08    Colorado           32401        1125",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-7-0.5-pt",
+    "href": "SolutionHomework6.html#task-7-0.5-pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.9 Task 7 (0.5 pt)",
+    "text": "7.9 Task 7 (0.5 pt)\nLoad billboard, a built-in Tidyverse data set, into the R env’t. As always, print sample data by using head() or glimpse() below:\n\n# Place your R code below:\ndata(\"billboard\")\n\nhead(billboard)\n\n# A tibble: 6 × 79\n  artist      track date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8\n  &lt;chr&gt;       &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 2 Pac       Baby… 2000-02-26      87    82    72    77    87    94    99    NA\n2 2Ge+her     The … 2000-09-02      91    87    92    NA    NA    NA    NA    NA\n3 3 Doors Do… Kryp… 2000-04-08      81    70    68    67    66    57    54    53\n4 3 Doors Do… Loser 2000-10-21      76    76    72    69    67    65    55    59\n5 504 Boyz    Wobb… 2000-04-15      57    34    25    17    17    31    36    49\n6 98^0        Give… 2000-08-19      51    39    34    26    26    19     2     2\n# ℹ 68 more variables: wk9 &lt;dbl&gt;, wk10 &lt;dbl&gt;, wk11 &lt;dbl&gt;, wk12 &lt;dbl&gt;,\n#   wk13 &lt;dbl&gt;, wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;,\n#   wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;, wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;,\n#   wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;, wk29 &lt;dbl&gt;, wk30 &lt;dbl&gt;,\n#   wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;,\n#   wk37 &lt;dbl&gt;, wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;,\n#   wk43 &lt;dbl&gt;, wk44 &lt;dbl&gt;, wk45 &lt;dbl&gt;, wk46 &lt;dbl&gt;, wk47 &lt;dbl&gt;, wk48 &lt;dbl&gt;, …",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-8-2-pt",
+    "href": "SolutionHomework6.html#task-8-2-pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.10 Task 8 (2 pt)",
+    "text": "7.10 Task 8 (2 pt)\nNote: The long format you need to generate below should look partially like the table below:\n\n\n\nartist\ntrack\ndate.entered\nweek\nrank\n\n\n\n\n2 Pac\nBaby Don’t Cry …\n2000-02-26\nwk1\n87\n\n\n2 Pac\nBaby Don’t Cry …\n2000-02-26\nwk2\n82\n\n\n…\n…\n…\n…\n…\n\n\n2 Pac\nBaby Don’t Cry …\n2000-02-26\nwk76\nNA\n\n\n…\n…\n…\n…\n…\n\n\n\nUse pivot_longer() to transform the billboard data into long format via the R code chunk provided below. Also save the data into your R environment (name it however you want) then print a sample of that data using head() or glimpse() within the same R code chunk. Hints: (1) weeks go from week 1 to week 76, and (2) Pay close attention to the header from the sample data above as hints on what to use for names_to and values_to.\n\n# Place your R code below:\ntask8_data &lt;- billboard |&gt;\n  pivot_longer(\n    cols = wk1:wk76,\n    names_to = \"week\",\n    values_to = \"rank\")\n\nhead(task8_data)\n\n# A tibble: 6 × 5\n  artist track                   date.entered week   rank\n  &lt;chr&gt;  &lt;chr&gt;                   &lt;date&gt;       &lt;chr&gt; &lt;dbl&gt;\n1 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk1      87\n2 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk2      82\n3 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk3      72\n4 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk4      77\n5 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk5      87\n6 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk6      94",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework6.html#task-9-1pt",
+    "href": "SolutionHomework6.html#task-9-1pt",
+    "title": "7  Homework 6: Data Reshaping",
+    "section": "7.11 Task 9 (1pt)",
+    "text": "7.11 Task 9 (1pt)\nOnce you complete Tasks 1-8, render an HTML file from this Quarto file. Please consult the lecture 2 slides as needed on how to render an HTML file from your Quarto document.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Homework 6: Data Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html",
+    "href": "SolutionHomework5.html",
+    "title": "6  Homework 5: File Reading",
+    "section": "",
+    "text": "6.1 What you need to do\nYou will be assigned tasks throughout this Quarto Document where you will need to fill in R code appropriately based on what was taught and discussed across Lecture 5 slides and the Exercise 5 Quarto document. Please consult the Lecture 5 materials as needed.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#files-you-need-to-work-with",
+    "href": "SolutionHomework5.html#files-you-need-to-work-with",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.2 Files you need to work with",
+    "text": "6.2 Files you need to work with\nYou will be reading three files for this homework. Please download those files from our course Canvas site into your computer. You will find these files in two ways: (1) by clicking Homework 5 under Assignments and downloading the linked files from the description or (2) by going to Files &gt; Homework 5 data sets.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#preliminaries",
+    "href": "SolutionHomework5.html#preliminaries",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.3 Preliminaries",
+    "text": "6.3 Preliminaries\nMake sure to run this script before doing any of the tasks below:\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-1",
+    "href": "SolutionHomework5.html#task-1",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.4 Task 1",
+    "text": "6.4 Task 1\nWithin the following R chunk, read the RuralDevelopmentInvestments.csv data into your R environment and use head() to print the data you made. Name this data however you want but make sure it follows the best practice for naming variables in R (see lecture on assignment operators and naming conventions):\n\n# Place your R code below:\ntask1_data &lt;- read_csv(\"data/RuralDevelopmentInvestments.csv\")\n\nRows: 4169 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nhead(task1_data)\n\n# A tibble: 6 × 6\n  fiscal_year state_name program_area  total_investment_dol…¹ number_investments\n        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                          &lt;dbl&gt;              &lt;dbl&gt;\n1        2012 Alabama    Business Pro…               16027910                 24\n2        2012 Alabama    Community Fa…                2808761                 18\n3        2012 Alabama    Electric Pro…               46990000                  2\n4        2012 Alabama    Multifamily …               25069905                303\n5        2012 Alabama    Single Famil…              486125173               4186\n6        2012 Alabama    Telecommunic…                 405147                  1\n# ℹ abbreviated name: ¹​total_investment_dollars\n# ℹ 1 more variable: svi_investments &lt;dbl&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#background-information-on-task-1-data",
+    "href": "SolutionHomework5.html#background-information-on-task-1-data",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.5 Background information on Task 1 Data",
+    "text": "6.5 Background information on Task 1 Data\nThe RuralDevelopmentInvestments.csv is an extract from USDA Rural Development’s dashboard found on https://www.rd.usda.gov/rural-data-gateway/rural-investments\nfiscal_year is the fiscal year, ranges from 2012-2024 (Note: 2024 is only partial data)\nstate_name includes the state name or territory name\nprogram_area is the USDA program area that made the investment\ntotal_investment_dollars is the total USDA investment made by Rural Development (one of USDA’s agencies)\nnumber_investments is the total investment counts made by Rural Development (one of USDA’s agencies)\nsvi_investments is the total USDA investment that went towards communities that are considered socially vulnerable\nMake sure to understand the data before attempting any additional tasks.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-2",
+    "href": "SolutionHomework5.html#task-2",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.6 Task 2",
+    "text": "6.6 Task 2\nUsing the data you made in Task 1, create/save a data subset into the R environment where (1) investments towards socially vulnerable communities were zero and (2) the program area is neither Electric Programs nor Telecommunications Programs. Name this data however within your R env’t. Additionally, print sample data by using head() or glimpse():\n\n# Your solution below:\ntask2_data &lt;- task1_data |&gt;\n  filter(svi_investments == 0) |&gt;\n  filter(!program_area %in% c(\"Electric Programs\", \"Telecommunications Programs\"))\n\nhead(task2_data)\n\n# A tibble: 6 × 6\n  fiscal_year state_name  program_area total_investment_dol…¹ number_investments\n        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                         &lt;dbl&gt;              &lt;dbl&gt;\n1        2012 Delaware    Water and E…               13692917                  7\n2        2012 District o… Business Pr…                 921727                  3\n3        2012 District o… Community F…                 400000                  2\n4        2012 District o… Water and E…                5750000                  1\n5        2012 Indiana     Community F…               90206200                 23\n6        2012 Iowa        Water and E…               17630378                 26\n# ℹ abbreviated name: ¹​total_investment_dollars\n# ℹ 1 more variable: svi_investments &lt;dbl&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-3",
+    "href": "SolutionHomework5.html#task-3",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.7 Task 3",
+    "text": "6.7 Task 3\nUsing data you generated under Task 2, write a csv file and name it ZeroInvestmentSVI.csv below:\n\n# Your solution below:\nwrite_csv(task2_data, \"ZeroInvestmentSVI.csv\")\n\nNote: You will need to submit a copy of your ZeroInvestmentSVI.csv along with other Homework 5 deliverable you are required to turn in.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-4",
+    "href": "SolutionHomework5.html#task-4",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.8 Task 4",
+    "text": "6.8 Task 4\nTable you will need to fill in to get credit (additional prompt and hints below this table):\n\n\n\n\n\n\n\n\nStates with the highest investment counts\nOverall Investment Counts\nOverall Investment Total ($)\n\n\n\n\nNorth Carolina\n87718\n19625458505\n\n\nMichigan\n85854\n11861916179\n\n\nMissouri\n83355\n13379011326\n\n\nTennessee\n83354\n13819292794\n\n\nTexas\n78299\n15995187413\n\n\n\nUsing data you created in Task 1, fill in the empty table above. You will not get credit unless you write an R code that prints this insight below (Homework Hint: dplyr verbs for summarizing and sorting/arranging). Note: if the R chunk below partially obscures the output you need to copy from, please rerun the code via the R console for an unobstructed view of the output\n\n# Your solution below:\ntask1_data |&gt;\n  group_by(state_name) |&gt;\n  summarise(investment_counts = sum(number_investments),\n            total_investment_dollars = sum(total_investment_dollars)) |&gt;\n  arrange(desc(investment_counts))\n\n# A tibble: 52 × 3\n   state_name     investment_counts total_investment_dollars\n   &lt;chr&gt;                      &lt;dbl&gt;                    &lt;dbl&gt;\n 1 North Carolina             87718              19625458505\n 2 Michigan                   85854              11861916179\n 3 Missouri                   83355              13379011326\n 4 Tennessee                  83354              13819292794\n 5 Texas                      78299              15995187413\n 6 Indiana                    76055              10344087246\n 7 Louisiana                  70335              13359196375\n 8 Ohio                       65364               9817010415\n 9 Pennsylvania               63630              10431877304\n10 Florida                    62335              13333056773\n# ℹ 42 more rows",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-5",
+    "href": "SolutionHomework5.html#task-5",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.9 Task 5",
+    "text": "6.9 Task 5\nQuestion: What is the total overall invested dollars for the State of California in Fiscal Years 2012-2015?\nUse the R chunk below to generate the required insight. Note: You will not get credit unless you write an R code that prints this insight below\n\n# Your solution below:\ntask1_data |&gt; \n  filter(state_name == \"California\" & fiscal_year &gt;= 2012 & fiscal_year &lt;= 2015) |&gt;\n  summarise(invested_california = sum(total_investment_dollars, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  invested_california\n                &lt;dbl&gt;\n1          4256481326\n\n\nYour answer or response for the Task 5 question (in words) below:\nThe total overall invested dollars for the State of California in Fiscal Years 2012-2015 is $4,256,481,326",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-6",
+    "href": "SolutionHomework5.html#task-6",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.10 Task 6",
+    "text": "6.10 Task 6\nWithin the following R chunk, read the cancer_mortality.xlsx data into your R environment and use head() to print the data you made. Name this data however you want but make sure it follows the best practice for naming variables in R (see previous lecture slides on assignment operators and naming conventions):\n\n# Your solution below:\nlibrary(readxl)\ntask6_data &lt;- read_xlsx(\"data/cancer_mortality.xlsx\")\nhead(task6_data)\n\n# A tibble: 6 × 4\n  County                  CountyFIPS RuralUrbanStatus DeathRate\n  &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;\n1 Autauga County, Alabama       1001 Urban                 152.\n2 Baldwin County, Alabama       1003 Urban                 146.\n3 Barbour County, Alabama       1005 Rural                 181.\n4 Bibb County, Alabama          1007 Urban                 170.\n5 Blount County, Alabama        1009 Urban                 170.\n6 Bullock County, Alabama       1011 Rural                 138.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#background-information-on-task-5-data",
+    "href": "SolutionHomework5.html#background-information-on-task-5-data",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.11 Background information on Task 5 Data",
+    "text": "6.11 Background information on Task 5 Data\nThe cancer_mortality.xlsx file is a subset, and both an abbreviated and manipulated version of data found in https://statecancerprofiles.cancer.gov/map/map.withimage.php\nBasic information about the variables you loaded is as follows:\nCounty contains the county name along with its state name\nCountyFIPS containsthe county FIPS/GEOID code for the county\nRuralUrbanStatus identifies the rural or urban status of the county\nDeathRate is the overall death (mortality) rate for all cancers types within that county (deaths per 100,000 population)",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-6-1",
+    "href": "SolutionHomework5.html#task-6-1",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.12 Task 6",
+    "text": "6.12 Task 6\nUsing data you generated in Task 5, create a data subset where the county status is rural only. Make sure the data is sorted with the overall death rate in descending order (highest to lowest). Afterwards, create or write an rds file and name it RuralDeathRates.rds below:\n\n# Your solution below:\nrural_data &lt;- task6_data |&gt;\n  filter(RuralUrbanStatus == \"Rural\") |&gt;\n  arrange(desc(DeathRate))\n\nhead(rural_data)\n\n# A tibble: 6 × 4\n  County                        CountyFIPS RuralUrbanStatus DeathRate\n  &lt;chr&gt;                              &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;\n1 Union County, Florida              12125 Rural                 388.\n2 Kingman County, Kansas             20095 Rural                 378.\n3 Thurston County, Nebraska          31173 Rural                 304.\n4 Galax City, Virginia               51640 Rural                 286.\n5 Todd County, South Dakota          46121 Rural                 286.\n6 Issaquena County, Mississippi      28055 Rural                 275.\n\nwrite_rds(rural_data, \"RuralDeathRates.rds\")\n\nNote: You will need to submit a copy of your RuralDeathRates.rds file along with other Homework 5 deliverable you are required to turn in.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-7",
+    "href": "SolutionHomework5.html#task-7",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.13 Task 7",
+    "text": "6.13 Task 7\nWithin the following R chunk, read the flights.rds data into your R environment and use head() or glimpse() to print the data you made. Name this data however you want but make sure it follows the best practice for naming variables in R (see previous lecture slides on assignment operators and naming conventions):\n\n# Your solution below:\ntask7_data &lt;- read_rds(\"data/flights.rds\")\nhead(task7_data)\n\n# A tibble: 6 × 19\n   year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n1  2013     1    10     1649           1655        -6     1958           2029\n2  2013     5    16     1257           1305        -8     1436           1455\n3  2013    11    11     1821           1825        -4     2108           2149\n4  2013     4    24      918            925        -7     1238           1235\n5  2013    11    20     1724           1729        -5     1923           1941\n6  2013     9    11      814            815        -1     1041           1105\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#background-information-on-task-7-data",
+    "href": "SolutionHomework5.html#background-information-on-task-7-data",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.14 Background information on Task 7 Data",
+    "text": "6.14 Background information on Task 7 Data\nThe data from Task 7 is a smaller subset of the flights data we previously worked with in lecture.\nPlease consult this documentation for more information about the variables included:\nhttps://nycflights13.tidyverse.org/reference/flights.html",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-8",
+    "href": "SolutionHomework5.html#task-8",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.15 Task 8",
+    "text": "6.15 Task 8\nUsing data you generated in Task 7, create a data subset into your R environment where origin is not EWR and dest is one of the following: BWI, DCA, IAD. Then write a csv file and name it NYCDMVFlight.csv using the following R chunk:\n\n# Your solution below:\ntask8_data &lt;- task7_data |&gt;\n  filter(origin != \"EWR\" & dest %in% c('BWI', 'DCA', 'IAD'))\n\n# Alternatively:\n# task8_data &lt;- task7_data |&gt;\n#  filter(origin != \"EWR\") |&gt;\n#  filter(dest %in% c('BWI', 'DCA', 'IAD'))\n\nhead(task8_data)\n\n# A tibble: 6 × 19\n   year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n1  2013     1    20     1552           1600        -8     1707           1717\n2  2013     9    28     1051            959        52     1148           1115\n3  2013    12    28     1949           1945         4     2049           2118\n4  2013     8    18     1851           1900        -9     2004           2030\n5  2013     6    27       NA           2100        NA       NA           2212\n6  2013     3    14     1453           1500        -7     1556           1619\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\nwrite_csv(task8_data, \"NYCDMVFlight.csv\")\n\nNote: You will need to submit a copy of your NYCDMVFlight.csv file along with other Homework 5 deliverable you are required to turn in.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#task-9",
+    "href": "SolutionHomework5.html#task-9",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.16 Task 9",
+    "text": "6.16 Task 9\nOnce you complete Tasks 1-8, render an HTML file from this Quarto file. Please consult the lecture 2 slides as needed on how to render an HTML file from your Quarto document.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework5.html#final-comment",
+    "href": "SolutionHomework5.html#final-comment",
+    "title": "6  Homework 5: File Reading",
+    "section": "6.17 Final Comment",
+    "text": "6.17 Final Comment\nUnder Homework 5 in Canvas, please submit both your finalized .qmd, rendered HTML file, and data files you were asked to generate above.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Homework 5: File Reading</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html",
+    "href": "SolutionHomework4.html",
+    "title": "5  Homework 4: dplyr",
+    "section": "",
+    "text": "5.1 What you need to do\nYou will be assigned tasks throughout this Quarto Document where you will need to fill in R code appropriately based on what was taught in Exercise3.qmd and Exercise4.qmd",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#preliminaries",
+    "href": "SolutionHomework4.html#preliminaries",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.2 Preliminaries",
+    "text": "5.2 Preliminaries\nThis R code chunk will load the tidyverse packages and create a data frame or data set called rural_development_investments.\nMake sure to run this script before doing any of the tasks below:\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nrural_development_investments &lt;- read_csv(\"https://raw.githubusercontent.com/jmtfeliciano/teachingdata/refs/heads/main/RuralDevelopmentInvestments.csv\")\n\nRows: 4169 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): state_name, program_area\ndbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nhead(rural_development_investments, 10) \n\n# A tibble: 10 × 6\n   fiscal_year state_name program_area total_investment_dol…¹ number_investments\n         &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                         &lt;dbl&gt;              &lt;dbl&gt;\n 1        2012 Alabama    Business Pr…               16027910                 24\n 2        2012 Alabama    Community F…                2808761                 18\n 3        2012 Alabama    Electric Pr…               46990000                  2\n 4        2012 Alabama    Multifamily…               25069905                303\n 5        2012 Alabama    Single Fami…              486125173               4186\n 6        2012 Alabama    Telecommuni…                 405147                  1\n 7        2012 Alabama    Water and E…               27815106                 23\n 8        2012 Alaska     Business Pr…               13622360                 20\n 9        2012 Alaska     Community F…                3475921                 11\n10        2012 Alaska     Electric Pr…                1443779                  2\n# ℹ abbreviated name: ¹​total_investment_dollars\n# ℹ 1 more variable: svi_investments &lt;dbl&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#background-information-on-rural_development_investments",
+    "href": "SolutionHomework4.html#background-information-on-rural_development_investments",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.3 Background information on rural_development_investments",
+    "text": "5.3 Background information on rural_development_investments\nThis data is an extract from USDA Rural Development’s dashboard found on https://www.rd.usda.gov/rural-data-gateway/rural-investments\nfiscal_year is the fiscal year, ranges from 2012-2024 (Note: 2024 is only partial data)\nstate_name includes the state name or territory name\nprogram_area is the USDA program area that made the investment\ntotal_investment_dollars is the total USDA investment made by Rural Development (one of USDA’s agencies)\nnumber_investments is the total investment counts made by Rural Development (one of USDA’s agencies)\nsvi_investments is the total USDA investment that went towards communities that are considered socially vulnerable\nMake sure to study the data before attempting the tasks below:",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-1",
+    "href": "SolutionHomework4.html#task-1",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.4 Task 1",
+    "text": "5.4 Task 1\nUse the distinct() verb with the rural_development_investments we loaded earlier to show the the distinct values of program_area in the R code chunk below:\n\n# Your solution below:\nrural_development_investments |&gt; \n  distinct(program_area) \n\n# A tibble: 7 × 1\n  program_area               \n  &lt;chr&gt;                      \n1 Business Programs          \n2 Community Facilities       \n3 Electric Programs          \n4 Multifamily Housing        \n5 Single Family Housing      \n6 Telecommunications Programs\n7 Water and Environmental",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-2",
+    "href": "SolutionHomework4.html#task-2",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.5 Task 2",
+    "text": "5.5 Task 2\nUsing the printed data you generated from Task 1a, summarize in one-two sentences how many program areas are there within USDA Rural Development based on the data provided? What are those program areas called? Note: If you Task 1 script doesn’t fully print all the contexts above, copy and paste your R code into your console. Your console should print all the program area values without omission.\nYour response:\nUSDA Rural Development program areas are as follows: Business Programs, Community Facilities, Electric Programs, Multifamily Housing, Single Family Housing, Telecommunications Programs, and Water and Environmental.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-3",
+    "href": "SolutionHomework4.html#task-3",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.6 Task 3",
+    "text": "5.6 Task 3\nYou must use the filter() verb with the rural_development_investments we loaded earlier to show the one data row where the fiscal year is 2014, program area is Multifamily Housing, and State is Alaska (context: in the real world, you will often use the filter() statement to answer really specific question from your bosses and data stakeholders)\n\n# Your solution below:\nrural_development_investments |&gt;\n  filter(fiscal_year == 2014 & program_area == \"Multifamily Housing\" & state_name == \"Alaska\")\n\n# A tibble: 1 × 6\n  fiscal_year state_name program_area  total_investment_dol…¹ number_investments\n        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                          &lt;dbl&gt;              &lt;dbl&gt;\n1        2014 Alaska     Multifamily …                6994332                 37\n# ℹ abbreviated name: ¹​total_investment_dollars\n# ℹ 1 more variable: svi_investments &lt;dbl&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-4",
+    "href": "SolutionHomework4.html#task-4",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.7 Task 4",
+    "text": "5.7 Task 4\nUsing printed data from Task 3, summarize in one-two sentences how much USDA RD investments were invested in Alaska for Multifamily Housing? Make sure to mention total investment dollars, number of investment counts, and investments that went to socially vulnerable communities.\nYour response: In Fiscal Year 2014, USDA Rural Development made 37 investments totaling $6,994,332 across Alaska. $2,923,200 of that total were invested in socially vulnerable communities.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-5",
+    "href": "SolutionHomework4.html#task-5",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.8 Task 5",
+    "text": "5.8 Task 5\nUse select() in the R code chunk below to create a data subset that only contains fiscal_year, state_name, program_area, and svi_investments. Save this data into your R environment as svi_data_only. At the end of the code chunk, print a sample of svi_data_only by running head(svi_data_only):\n\n# Your solution below:\nsvi_data_only &lt;- rural_development_investments |&gt;\n  select(fiscal_year, state_name, program_area, svi_investments)\n\nhead(svi_data_only)\n\n# A tibble: 6 × 4\n  fiscal_year state_name program_area                svi_investments\n        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                                 &lt;dbl&gt;\n1        2012 Alabama    Business Programs                   2964452\n2        2012 Alabama    Community Facilities                2029509\n3        2012 Alabama    Electric Programs                         0\n4        2012 Alabama    Multifamily Housing                11269262\n5        2012 Alabama    Single Family Housing              50943077\n6        2012 Alabama    Telecommunications Programs               0",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-6",
+    "href": "SolutionHomework4.html#task-6",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.9 Task 6",
+    "text": "5.9 Task 6\nUsing group_by() and summarize() with sum(), calculate the sum of total_investment_dollars by program_area. Name this sum column as overall_investment_dollars\n\n# Your solution below:\nrural_development_investments |&gt;\n  group_by(program_area) |&gt;\n  summarise(overall_investment_dollars = sum(total_investment_dollars))\n\n# A tibble: 7 × 2\n  program_area                overall_investment_dollars\n  &lt;chr&gt;                                            &lt;dbl&gt;\n1 Business Programs                          25391278247\n2 Community Facilities                       19348441107\n3 Electric Programs                          54994809813\n4 Multifamily Housing                        20645720732\n5 Single Family Housing                     229466812888\n6 Telecommunications Programs                 7396158394\n7 Water and Environmental                    20373035658",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-7",
+    "href": "SolutionHomework4.html#task-7",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.10 Task 7",
+    "text": "5.10 Task 7\nAs mentioned in the Background information subsection, Fiscal Year 2024 data is incomplete. Suppose a data request asked you to calculate overall_investment_dollars (you calculated in Task 6) but this time, you need to exclude data where the fiscal year is 2024. In other words, copy your Task 6 script into the R chunk below then modify the script to ensure that fiscal year is less than 2024 by leveraging filter() on top of or before the group by statement.\n\n# Your solution below:\nrural_development_investments |&gt;\n  filter(fiscal_year &lt;= 2023) |&gt;\n  group_by(program_area) |&gt;\n  summarise(overall_investment_dollars = sum(total_investment_dollars))\n\n# A tibble: 7 × 2\n  program_area                overall_investment_dollars\n  &lt;chr&gt;                                            &lt;dbl&gt;\n1 Business Programs                          23548313521\n2 Community Facilities                       19142262004\n3 Electric Programs                          54111037913\n4 Multifamily Housing                        18924148518\n5 Single Family Housing                     222686748258\n6 Telecommunications Programs                 7274974097\n7 Water and Environmental                    20200687156\n\n# filter(fiscal_year != 2024) is okay too",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-8",
+    "href": "SolutionHomework4.html#task-8",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.11 Task 8",
+    "text": "5.11 Task 8\nUsing group_by() and summarize() with sum(), calculate the sum of total_investment_dollars by fiscal year.\n\n# Your solution below:\nrural_development_investments |&gt;\n  group_by(fiscal_year) |&gt;\n  summarise(rural_development_investments = sum(total_investment_dollars, na.rm = TRUE))\n\n# A tibble: 13 × 2\n   fiscal_year rural_development_investments\n         &lt;dbl&gt;                         &lt;dbl&gt;\n 1        2012                   28674733569\n 2        2013                   31681033166\n 3        2014                   27112681474\n 4        2015                   28289472757\n 5        2016                   27723314565\n 6        2017                   32299493760\n 7        2018                   29646672682\n 8        2019                   27171426133\n 9        2020                   38491704161\n10        2021                   37951873909\n11        2022                   30381939667\n12        2023                   26463825624\n13        2024                   11728085372",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-9",
+    "href": "SolutionHomework4.html#task-9",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.12 Task 9",
+    "text": "5.12 Task 9\nUsing group_by(fiscal_year) and summarize() with sum(), calculate these two sums inside one summarize() verb: the first sum will be called overall_investment_dollars and it will be the sum of total_investment_dollars and the second sum will be called overall_svi_dollars and it will be the sum of svi_investments\nMake sure to save this data into your R environment as yearly_investments. Then print yearly_investments using head(yearly_investments) below:\n\n# Your solution below:\nyearly_investments &lt;- rural_development_investments |&gt;\n  group_by(fiscal_year) |&gt;\n  summarise(overall_investment_dollars = sum(total_investment_dollars, na.rm = T),\n            overall_svi_dollars = sum(svi_investments, na.rm = T))\n\nhead(yearly_investments)\n\n# A tibble: 6 × 3\n  fiscal_year overall_investment_dollars overall_svi_dollars\n        &lt;dbl&gt;                      &lt;dbl&gt;               &lt;dbl&gt;\n1        2012                28674733569          4024691786\n2        2013                31681033166          4298367140\n3        2014                27112681474          4141734617\n4        2015                28289472757          4552846755\n5        2016                27723314565          4717648562\n6        2017                32299493760          5401152989",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-10",
+    "href": "SolutionHomework4.html#task-10",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.13 Task 10",
+    "text": "5.13 Task 10\nUsing yearly_investments you created in Task 9, leverage a mutate() statement to create a new variable called percent_svi.\nCalculate percent_svi using this math: 100*overall_svi_dollars/overall_investment_dollars\n\n# Your solution below:\nyearly_investments |&gt;\n  mutate(percent_svi = 100*overall_svi_dollars/overall_investment_dollars)\n\n# A tibble: 13 × 4\n   fiscal_year overall_investment_dollars overall_svi_dollars percent_svi\n         &lt;dbl&gt;                      &lt;dbl&gt;               &lt;dbl&gt;       &lt;dbl&gt;\n 1        2012                28674733569          4024691786        14.0\n 2        2013                31681033166          4298367140        13.6\n 3        2014                27112681474          4141734617        15.3\n 4        2015                28289472757          4552846755        16.1\n 5        2016                27723314565          4717648562        17.0\n 6        2017                32299493760          5401152989        16.7\n 7        2018                29646672682          5698886271        19.2\n 8        2019                27171426133          4481810481        16.5\n 9        2020                38491704161          5820908152        15.1\n10        2021                37951873909          6821993275        18.0\n11        2022                30381939667          5691899070        18.7\n12        2023                26463825624          4667847540        17.6\n13        2024                11728085372          2923040821        24.9",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-11",
+    "href": "SolutionHomework4.html#task-11",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.14 Task 11",
+    "text": "5.14 Task 11\nUsing summarize() without a group_by() statement, calculate the overall investment dollars for the entire data set. Call this summary variable overall_investment_dollars\n\n# Your solution below:\nrural_development_investments |&gt;\n  summarise(overall_investment_dollars = sum(total_investment_dollars, na.rm = T))\n\n# A tibble: 1 × 1\n  overall_investment_dollars\n                       &lt;dbl&gt;\n1               377616256839",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework4.html#task-12",
+    "href": "SolutionHomework4.html#task-12",
+    "title": "5  Homework 4: dplyr",
+    "section": "5.15 Task 12",
+    "text": "5.15 Task 12\nUsing group_by() and summarize() with median(), calculate the median total_investment_dollars by program_area. Name this median column as median_investment_dollars below\n\n# Your solution below:\nrural_development_investments |&gt;\n  group_by(program_area) |&gt;\n  summarise(median_investment_dollars = median(total_investment_dollars, na.rm = T))\n\n# A tibble: 7 × 2\n  program_area                median_investment_dollars\n  &lt;chr&gt;                                           &lt;dbl&gt;\n1 Business Programs                            21994053\n2 Community Facilities                         12654269\n3 Electric Programs                            71500000\n4 Multifamily Housing                          23193188\n5 Single Family Housing                       272162913\n6 Telecommunications Programs                   2928981\n7 Water and Environmental                      24577458",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 4: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html",
+    "href": "SolutionHomework2.html",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "",
+    "text": "3.1 What you need to do for homework 2\nYou will be assigned tasks throughout this Quarto Document where you will need to fill in R code appropriately based on what was taught in Lecture 2 slides and Exercise2.qmd",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-1",
+    "href": "SolutionHomework2.html#task-1",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.2 Task 1",
+    "text": "3.2 Task 1\nLoad the tidyverse package within this R chunk:\n\n# Place your code here (and/or below within the same chunk as needed)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nWarning: As you will append into the R code chunks I’ve left throughout this Quarto Document, make sure to not accidentally delete the {r} header in each code chunk.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-2",
+    "href": "SolutionHomework2.html#task-2",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.3 Task 2",
+    "text": "3.3 Task 2\nLoad diamonds, a built-in data set from tidyverse, into your R environment within this R chunk:\n\n# Place your code here (and/or below within the same chunk as needed)\ndata(\"diamonds\")",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-3",
+    "href": "SolutionHomework2.html#task-3",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.4 Task 3",
+    "text": "3.4 Task 3\nVisualize a small sample of your data below by printing them within this document. Use head() as shown in Exercise2.qmd or use one of the alternatives (e.g., tail(), glimpse()) below:\n\n# Place your code here (and/or below within the same chunk as needed)\nhead(diamonds)\n\n# A tibble: 6 × 10\n  carat cut       color clarity depth table price     x     y     z\n  &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43\n2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31\n3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31\n4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63\n5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75\n6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48\n\n\nNote: If you want to quickly read the documentation for this data set, you may visit https://ggplot2.tidyverse.org/reference/diamonds.html or run ?diamonds in your Console pane which should open and print the documentation directly into your Help pane.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-4",
+    "href": "SolutionHomework2.html#task-4",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.5 Task 4",
+    "text": "3.5 Task 4\nUsing the diamonds data you loaded into your R environment, create a scatter plot using one of the ggplot2 methods taught in class. More specifically, create a scatter plot with the carat variable (physical weight measurement of diamonds) on the x-axis and price on the y-axis. Include and run your script below:\n\n# Place your code here (and/or below within the same chunk as needed)\nggplot(\n  data = diamonds,\n  mapping = aes(x = carat, y = price)\n) +\n  geom_point()",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-5",
+    "href": "SolutionHomework2.html#task-5",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.6 Task 5",
+    "text": "3.6 Task 5\nPay closer visual attention to the scatter plot you created under Task 4. Provide an interpretation of your scatter plot. You may want to consider the following questions: what is the relationship between the two variables? Did it surprise you based on your real world knowledge or experience? Type in your interpretation below (preferably within 1-2 sentences but longer if you want to):\nHigher carat -&gt; Generally higher price",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-6",
+    "href": "SolutionHomework2.html#task-6",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.7 Task 6",
+    "text": "3.7 Task 6\nWithin this single code chunk: (1) load mpg, a built-in data set from tidyverse, into your R environment; and (2) print a small sample of your mpg data below.\n\n# Place your code here (and/or below within the same chunk as needed)\ndata(\"mpg\")\nhead(mpg)\n\n# A tibble: 6 × 11\n  manufacturer model displ  year   cyl trans      drv     cty   hwy fl    class \n  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; \n1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p     compa…\n2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p     compa…\n3 audi         a4      2    2008     4 manual(m6) f        20    31 p     compa…\n4 audi         a4      2    2008     4 auto(av)   f        21    30 p     compa…\n5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p     compa…\n6 audi         a4      2.8  1999     6 manual(m5) f        18    26 p     compa…\n\n\nNote: If you want to quickly read the documentation for this data set, you may visit https://ggplot2.tidyverse.org/reference/mpg.html or run ?mpg in your Console pane which should open and print the documentation directly into your Help pane.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-7",
+    "href": "SolutionHomework2.html#task-7",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.8 Task 7",
+    "text": "3.8 Task 7\nUsing the mpg data you loaded into your R environment, create a box plot using one of the ggplot2 techniques taught in lecture. More specifically, create a box plot to visualize the relationship between class (vehicle class such as minivan and compact) and cty (city mileage of the vehicle in miles).\n\n# Place your code here (and/or below within the same chunk as needed)\nggplot(\n  data = mpg,\n  mapping = aes(x =class, y = cty)\n) +\n  geom_boxplot()",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-8",
+    "href": "SolutionHomework2.html#task-8",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.9 Task 8",
+    "text": "3.9 Task 8\nIn reference to the visualization you created in Task 7: Which vehicle class has the highest median city mileage? If needed, please see lecture 2 slides on how to read the median from box plots. Provide your answer below:\nCompact class has the highest median city mileage (roughly 20 as the median).",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-9",
+    "href": "SolutionHomework2.html#task-9",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.10 Task 9",
+    "text": "3.10 Task 9\nIn reference to the visualization you created in Task 7: Provide another basic insight from reading your box plot. Type in your interpretation below (preferably within 1-2 sentences but longer if you have more to say):\nMany options here (e.g., pickup and SUV classes have the lowest median mileage)",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-10",
+    "href": "SolutionHomework2.html#task-10",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.11 Task 10",
+    "text": "3.11 Task 10\nFor this task, you need to pick one of these two built-in data sets within tidyverse for your analysis:\n\nstarwars\n\nDocumentation: https://dplyr.tidyverse.org/reference/starwars.html\n\nmsleep\n\nDocumentation: https://ggplot2.tidyverse.org/reference/msleep.html\n\n\nAfter picking the data set, you need to create and run R code that will do the following:\n\nLoad the data into your R environment.\nPrint (and understand) sample data.\nUsing the data you picked, create any visualization you want to create (at least one is required). Please stick to one of the data visualization types you were taught in Exercise2.qmd\n\nInclude your solution into the subsequent code chunk below. Note: you may include all the required code into the single code chunk below, or you may also create and use additional R code chunks. It is up to you!\nImportant Note: It is possible that the data viz you create for this task may look odd (e.g., everything is so small due to way too many categorical variables). That is fine. As long as your underlying code is correct and makes sense, you will get full credit. Feel free to play around and create additional data viz as practice below too! At least one is required.\n\n# Place your code here (and/or below within the same chunk as needed)\ndata(msleep)\nhead(msleep)\n\n# A tibble: 6 × 11\n  name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake\n  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;\n1 Cheetah Acin… carni Carn… lc                  12.1      NA        NA      11.9\n2 Owl mo… Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA       7  \n3 Mounta… Aplo… herbi Rode… nt                  14.4       2.4      NA       9.6\n4 Greate… Blar… omni  Sori… lc                  14.9       2.3       0.133   9.1\n5 Cow     Bos   herbi Arti… domesticated         4         0.7       0.667  20  \n6 Three-… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767   9.6\n# ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;\n\n# Many combinations you can pick from. But here's one I did:\nggplot(data = msleep, \n       mapping = aes(x = vore, y = sleep_total)) +\n  geom_boxplot()",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#task-11",
+    "href": "SolutionHomework2.html#task-11",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.12 Task 11",
+    "text": "3.12 Task 11\nOnce you complete Tasks 1-10, render an HTML file from this Quarto file. Please consult the lecture 2 slides as needed on how to render an HTML file from your Quarto document.\nRemember: assuming all your R code are error free, the HTML file will be generated within the same folder where this Homework2.qmd document resides.\nPlease submit both your finalized .qmd and HTML files under Assignment 2 in Canvas.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework2.html#section",
+    "href": "SolutionHomework2.html#section",
+    "title": "3  Homework 2: ggplot2 and Quarto practice",
+    "section": "3.13 ",
+    "text": "3.13",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 2: ggplot2 and Quarto practice</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html",
+    "href": "SolutionHomework3.html",
+    "title": "4  Homework 3: dplyr",
+    "section": "",
+    "text": "4.1 What you need to do\nYou will be assigned tasks throughout this Quarto Document where you will need to fill in R code appropriately based on what was taught in Lecture 3 slides and Exercise3.qmd",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-1",
+    "href": "SolutionHomework3.html#task-1",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.2 Task 1",
+    "text": "4.2 Task 1\nWithin the R code chunk below, write an R script to (1) load the tidyverse package, (2) load the built-in dataset called midwest within your R environment.\n\n# Include your code below:\nlibrary(tidyverse)  \n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\ndata(\"midwest\")",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-2",
+    "href": "SolutionHomework3.html#task-2",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.3 Task 2",
+    "text": "4.3 Task 2\nWithin your R Console, run one of the following scripts: help(midwest) or ?midwest\nAfter the documentation opens up in your Help pane, answer the following questions below:\n\n4.3.1 2.a. What is the data about?\nYour response (1-2 sentences): “Demographic information of midwest counties from 2000 US census”\n\n\n4.3.2 2.b. Which specific variable represents (1) county names, (2) percentage of children below poverty line and (3) percentage of white Americans?\nYour response (1-3 sentences): county, percchildbelowpovert, percwhite",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-3",
+    "href": "SolutionHomework3.html#task-3",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.4 Task 3",
+    "text": "4.4 Task 3\nWithin the R code chunk below, write an R script to print sample data from midwest using head() or glimpse(). Make sure to visually inspect the printed sample data to help you understand the contents of the data. Consult the documentation from the Help pane as needed as well.\n\n# Include your code below:\nhead(midwest)\n\n# A tibble: 6 × 28\n    PID county   state  area poptotal popdensity popwhite popblack popamerindian\n  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n1   561 ADAMS    IL    0.052    66090      1271.    63917     1702            98\n2   562 ALEXAND… IL    0.014    10626       759      7054     3496            19\n3   563 BOND     IL    0.022    14991       681.    14477      429            35\n4   564 BOONE    IL    0.017    30806      1812.    29344      127            46\n5   565 BROWN    IL    0.018     5836       324.     5264      547            14\n6   566 BUREAU   IL    0.05     35688       714.    35157       50            65\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-4",
+    "href": "SolutionHomework3.html#task-4",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.5 Task 4",
+    "text": "4.5 Task 4\nUsing the R code chunk below, print a data subset of midwest where inmetro is equals to 1\n\n# Include your code below:\nmidwest |&gt;\n  filter(inmetro == 1)\n\n# A tibble: 150 × 28\n     PID county  state  area poptotal popdensity popwhite popblack popamerindian\n   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n 1   564 BOONE   IL    0.017    30806      1812.    29344      127            46\n 2   570 CHAMPA… IL    0.058   173025      2983.   146506    16559           331\n 3   574 CLINTON IL    0.029    33944      1170.    32688     1021            48\n 4   576 COOK    IL    0.058  5105067     88018.  3204947  1317147         10289\n 5   579 DE KALB IL    0.038    77932      2051.    72968     2069           123\n 6   582 DU PAGE IL    0.02    781666     39083.   714905    15462           962\n 7   592 GRUNDY  IL    0.026    32337      1244.    31864       21            45\n 8   597 HENRY   IL    0.051    51159      1003.    49969      657            63\n 9   602 JERSEY  IL    0.023    20539       893     20346       96            43\n10   605 KANE    IL    0.029   317471     10947.   269675    19006           620\n# ℹ 140 more rows\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-5",
+    "href": "SolutionHomework3.html#task-5",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.6 Task 5",
+    "text": "4.6 Task 5\nUsing the R code chunk below, print a data subset of midwest where state is equals to IL\n\n# Include your code below:\nmidwest |&gt;\n  filter(state == \"IL\")\n\n# A tibble: 102 × 28\n     PID county  state  area poptotal popdensity popwhite popblack popamerindian\n   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n 1   561 ADAMS   IL    0.052    66090      1271.    63917     1702            98\n 2   562 ALEXAN… IL    0.014    10626       759      7054     3496            19\n 3   563 BOND    IL    0.022    14991       681.    14477      429            35\n 4   564 BOONE   IL    0.017    30806      1812.    29344      127            46\n 5   565 BROWN   IL    0.018     5836       324.     5264      547            14\n 6   566 BUREAU  IL    0.05     35688       714.    35157       50            65\n 7   567 CALHOUN IL    0.017     5322       313.     5298        1             8\n 8   568 CARROLL IL    0.027    16805       622.    16519      111            30\n 9   569 CASS    IL    0.024    13437       560.    13384       16             8\n10   570 CHAMPA… IL    0.058   173025      2983.   146506    16559           331\n# ℹ 92 more rows\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-6",
+    "href": "SolutionHomework3.html#task-6",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.7 Task 6",
+    "text": "4.7 Task 6\nUsing the R code chunk below, print a data subset of midwest where state is equals to IL and inmetro is equals to 1 (Hint: see filter() verb - multiple filtering variables section of Exercise3)\n\n# Include your code below:\nmidwest |&gt;\n  filter(state == \"IL\") |&gt;\n  filter(inmetro == 1)\n\n# A tibble: 28 × 28\n     PID county  state  area poptotal popdensity popwhite popblack popamerindian\n   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n 1   564 BOONE   IL    0.017    30806      1812.    29344      127            46\n 2   570 CHAMPA… IL    0.058   173025      2983.   146506    16559           331\n 3   574 CLINTON IL    0.029    33944      1170.    32688     1021            48\n 4   576 COOK    IL    0.058  5105067     88018.  3204947  1317147         10289\n 5   579 DE KALB IL    0.038    77932      2051.    72968     2069           123\n 6   582 DU PAGE IL    0.02    781666     39083.   714905    15462           962\n 7   592 GRUNDY  IL    0.026    32337      1244.    31864       21            45\n 8   597 HENRY   IL    0.051    51159      1003.    49969      657            63\n 9   602 JERSEY  IL    0.023    20539       893     20346       96            43\n10   605 KANE    IL    0.029   317471     10947.   269675    19006           620\n# ℹ 18 more rows\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;\n\n# alternative 1: filter(state == \"IL\" & inmetro == 1) \n# alternative 2: filter(state == \"IL\", inmetro == 1)",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-7",
+    "href": "SolutionHomework3.html#task-7",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.8 Task 7",
+    "text": "4.8 Task 7\nUsing the R code chunk below, print a data subset of midwest where state is equals to IL or IN (Hint: %in% from Exercise3.qmd)\n\n# Include your code below:\nmidwest |&gt;\n  filter(state %in% c(\"IL\", \"IN\"))\n\n# A tibble: 194 × 28\n     PID county  state  area poptotal popdensity popwhite popblack popamerindian\n   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n 1   561 ADAMS   IL    0.052    66090      1271.    63917     1702            98\n 2   562 ALEXAN… IL    0.014    10626       759      7054     3496            19\n 3   563 BOND    IL    0.022    14991       681.    14477      429            35\n 4   564 BOONE   IL    0.017    30806      1812.    29344      127            46\n 5   565 BROWN   IL    0.018     5836       324.     5264      547            14\n 6   566 BUREAU  IL    0.05     35688       714.    35157       50            65\n 7   567 CALHOUN IL    0.017     5322       313.     5298        1             8\n 8   568 CARROLL IL    0.027    16805       622.    16519      111            30\n 9   569 CASS    IL    0.024    13437       560.    13384       16             8\n10   570 CHAMPA… IL    0.058   173025      2983.   146506    16559           331\n# ℹ 184 more rows\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-8",
+    "href": "SolutionHomework3.html#task-8",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.9 Task 8",
+    "text": "4.9 Task 8\nUsing the R code chunk below, print a data subset of midwest where the percentage of white Americans (see Task 2b) is less than 50\n\n# Include your code below:\nmidwest |&gt;\n  filter(percwhite &lt; 50)\n\n# A tibble: 1 × 28\n    PID county   state  area poptotal popdensity popwhite popblack popamerindian\n  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n1  3020 MENOMIN… WI    0.021     3890       185.      416        0          3469\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-9",
+    "href": "SolutionHomework3.html#task-9",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.10 Task 9",
+    "text": "4.10 Task 9\nUsing the R code chunk below, print a data subset of midwest after filtering for data where the county name (see Task 2b) is equal to ADAMS\n\n# Include your code below:\nmidwest |&gt;\n  filter(county == \"ADAMS\")\n\n# A tibble: 4 × 28\n    PID county state  area poptotal popdensity popwhite popblack popamerindian\n  &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n1   561 ADAMS  IL    0.052    66090      1271.    63917     1702            98\n2   663 ADAMS  IN    0.021    31095      1481.    30530       36            42\n3  2009 ADAMS  OH    0.035    25371       725.    25212       47            67\n4  2981 ADAMS  WI    0.041    15682       382.    15001      375           125\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-10",
+    "href": "SolutionHomework3.html#task-10",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.11 Task 10",
+    "text": "4.11 Task 10\nWithin the R code chunk below: (1) save a data subset of midwest after filtering for data where the percentage of children below poverty line (see Task 2b) is over 25 into your R environment as high_children_poverty and (2) print a sample of high_children_poverty using head()\n\n# Include your code below:\nhigh_children_poverty &lt;- midwest |&gt;\n  filter(percchildbelowpovert &gt; 25)\nhead(high_children_poverty)\n\n# A tibble: 6 × 28\n    PID county   state  area poptotal popdensity popwhite popblack popamerindian\n  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n1   562 ALEXAND… IL    0.014    10626       759      7054     3496            19\n2   588 FRANKLIN IL    0.025    40319      1613.    40068       36           106\n3   590 GALLATIN IL    0.019     6909       364.     6842       42            10\n4   595 HARDIN   IL    0.009     5189       577.     5062       85            16\n5   599 JACKSON  IL    0.036    61067      1696.    51991     6342           109\n6   611 LAWRENCE IL    0.022    15972       726     15759      151            31\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-11",
+    "href": "SolutionHomework3.html#task-11",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.12 Task 11",
+    "text": "4.12 Task 11\nWithin the R code chunk below, print a sorted high_children_poverty using arrange() with poptotal in ascending order.\n\n# Include your code below:\nhigh_children_poverty |&gt;\n  arrange(poptotal)\n\n# A tibble: 45 × 28\n     PID county  state  area poptotal popdensity popwhite popblack popamerindian\n   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n 1  3020 MENOMI… WI    0.021     3890       185.      416        0          3469\n 2   636 POPE    IL    0.022     4373       199.     4072      266            15\n 3   595 HARDIN  IL    0.009     5189       577.     5062       85            16\n 4   590 GALLAT… IL    0.019     6909       364.     6842       42            10\n 5   637 PULASKI IL    0.011     7523       684.     5032     2466             8\n 6  1239 LAKE    MI    0.035     8583       245.     7337     1146            81\n 7  3001 FOREST  WI    0.06      8776       146.     7842      127           780\n 8  1256 MONTMO… MI    0.033     8936       271.     8861        1            48\n 9  1197 ALCONA  MI    0.041    10145       247.    10026       27            56\n10   562 ALEXAN… IL    0.014    10626       759      7054     3496            19\n# ℹ 35 more rows\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework3.html#task-12",
+    "href": "SolutionHomework3.html#task-12",
+    "title": "4  Homework 3: dplyr",
+    "section": "4.13 Task 12",
+    "text": "4.13 Task 12\nWithin the R code chunk below, print a sorted high_children_poverty using arrange() with percchildbelowpovert in descending order.\n\n# Include your code below:\nhigh_children_poverty |&gt;\n  arrange(desc(percchildbelowpovert))\n\n# A tibble: 45 × 28\n     PID county  state  area poptotal popdensity popwhite popblack popamerindian\n   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;         &lt;int&gt;\n 1  3020 MENOMI… WI    0.021     3890       185.      416        0          3469\n 2   562 ALEXAN… IL    0.014    10626       759      7054     3496            19\n 3   637 PULASKI IL    0.011     7523       684.     5032     2466             8\n 4  1239 LAKE    MI    0.035     8583       245.     7337     1146            81\n 5  2081 SCIOTO  OH    0.035    80327      2295.    77253     2458           409\n 6  2074 PIKE    OH    0.026    24249       933.    23807      327            72\n 7   636 POPE    IL    0.022     4373       199.     4072      266            15\n 8  1214 CLARE   MI    0.034    24952       734.    24665       40           160\n 9   595 HARDIN  IL    0.009     5189       577.     5062       85            16\n10  2009 ADAMS   OH    0.035    25371       725.    25212       47            67\n# ℹ 35 more rows\n# ℹ 19 more variables: popasian &lt;int&gt;, popother &lt;int&gt;, percwhite &lt;dbl&gt;,\n#   percblack &lt;dbl&gt;, percamerindan &lt;dbl&gt;, percasian &lt;dbl&gt;, percother &lt;dbl&gt;,\n#   popadults &lt;int&gt;, perchsd &lt;dbl&gt;, percollege &lt;dbl&gt;, percprof &lt;dbl&gt;,\n#   poppovertyknown &lt;int&gt;, percpovertyknown &lt;dbl&gt;, percbelowpoverty &lt;dbl&gt;,\n#   percchildbelowpovert &lt;dbl&gt;, percadultpoverty &lt;dbl&gt;,\n#   percelderlypoverty &lt;dbl&gt;, inmetro &lt;int&gt;, category &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 3: dplyr</span>"
+    ]
+  }
+]

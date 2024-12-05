@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical Programming in R (Fall 2025) - 9&nbsp; Purpose</title>
+<title>Statistical Programming in R (Fall 2025) - 9&nbsp; Homework 8: Text Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework8.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Purpose</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework8.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 8: Text Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -222,13 +222,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SolutionHomework7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Purpose</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 7: Joins</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SolutionHomework8.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Purpose</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 8: Text Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -249,30 +249,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#resources-to-consult" id="toc-resources-to-consult" class="nav-link active" data-scroll-target="#resources-to-consult"><span class="header-section-number">9.1</span> Resources to consult</a></li>
-  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">9.2</span> Preliminaries</a></li>
-  <li><a href="#task-1-1-pt" id="toc-task-1-1-pt" class="nav-link" data-scroll-target="#task-1-1-pt"><span class="header-section-number">9.3</span> Task 1 (1 pt)</a></li>
-  <li><a href="#task-2-1-pt" id="toc-task-2-1-pt" class="nav-link" data-scroll-target="#task-2-1-pt"><span class="header-section-number">9.4</span> Task 2 (1 pt)</a></li>
-  <li><a href="#task-3-0.5-pt" id="toc-task-3-0.5-pt" class="nav-link" data-scroll-target="#task-3-0.5-pt"><span class="header-section-number">9.5</span> Task 3 (0.5 pt)</a></li>
-  <li><a href="#task-4-1-pt" id="toc-task-4-1-pt" class="nav-link" data-scroll-target="#task-4-1-pt"><span class="header-section-number">9.6</span> Task 4 (1 pt)</a></li>
-  <li><a href="#task-5-0.5-pt" id="toc-task-5-0.5-pt" class="nav-link" data-scroll-target="#task-5-0.5-pt"><span class="header-section-number">9.7</span> Task 5 (0.5 pt)</a></li>
-  <li><a href="#task-6-0.5-pt" id="toc-task-6-0.5-pt" class="nav-link" data-scroll-target="#task-6-0.5-pt"><span class="header-section-number">9.8</span> Task 6 (0.5 pt)</a></li>
-  <li><a href="#task-7-1-pt" id="toc-task-7-1-pt" class="nav-link" data-scroll-target="#task-7-1-pt"><span class="header-section-number">9.9</span> Task 7 (1 pt)</a></li>
-  <li><a href="#task-8-1-pt" id="toc-task-8-1-pt" class="nav-link" data-scroll-target="#task-8-1-pt"><span class="header-section-number">9.10</span> Task 8 (1 pt)</a></li>
-  <li><a href="#task-9-1-pt" id="toc-task-9-1-pt" class="nav-link" data-scroll-target="#task-9-1-pt"><span class="header-section-number">9.11</span> Task 9 (1 pt)</a></li>
-  <li><a href="#task-10-data" id="toc-task-10-data" class="nav-link" data-scroll-target="#task-10-data"><span class="header-section-number">9.12</span> Task 10 Data</a></li>
-  <li><a href="#task-10-1-pt" id="toc-task-10-1-pt" class="nav-link" data-scroll-target="#task-10-1-pt"><span class="header-section-number">9.13</span> Task 10 (1 pt)</a></li>
-  <li><a href="#task-11-1-pt" id="toc-task-11-1-pt" class="nav-link" data-scroll-target="#task-11-1-pt"><span class="header-section-number">9.14</span> Task 11 (1 pt)</a></li>
-  <li><a href="#task-12-0.5-pt" id="toc-task-12-0.5-pt" class="nav-link" data-scroll-target="#task-12-0.5-pt"><span class="header-section-number">9.15</span> Task 12 (0.5 pt)</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">9.1</span> Purpose</a></li>
+  <li><a href="#resources-to-consult" id="toc-resources-to-consult" class="nav-link" data-scroll-target="#resources-to-consult"><span class="header-section-number">9.2</span> Resources to consult</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">9.3</span> Preliminaries</a></li>
+  <li><a href="#task-1-1-pt" id="toc-task-1-1-pt" class="nav-link" data-scroll-target="#task-1-1-pt"><span class="header-section-number">9.4</span> Task 1 (1 pt)</a></li>
+  <li><a href="#task-2-1-pt" id="toc-task-2-1-pt" class="nav-link" data-scroll-target="#task-2-1-pt"><span class="header-section-number">9.5</span> Task 2 (1 pt)</a></li>
+  <li><a href="#task-3-0.5-pt" id="toc-task-3-0.5-pt" class="nav-link" data-scroll-target="#task-3-0.5-pt"><span class="header-section-number">9.6</span> Task 3 (0.5 pt)</a></li>
+  <li><a href="#task-4-1-pt" id="toc-task-4-1-pt" class="nav-link" data-scroll-target="#task-4-1-pt"><span class="header-section-number">9.7</span> Task 4 (1 pt)</a></li>
+  <li><a href="#task-5-0.5-pt" id="toc-task-5-0.5-pt" class="nav-link" data-scroll-target="#task-5-0.5-pt"><span class="header-section-number">9.8</span> Task 5 (0.5 pt)</a></li>
+  <li><a href="#task-6-0.5-pt" id="toc-task-6-0.5-pt" class="nav-link" data-scroll-target="#task-6-0.5-pt"><span class="header-section-number">9.9</span> Task 6 (0.5 pt)</a></li>
+  <li><a href="#task-7-1-pt" id="toc-task-7-1-pt" class="nav-link" data-scroll-target="#task-7-1-pt"><span class="header-section-number">9.10</span> Task 7 (1 pt)</a></li>
+  <li><a href="#task-8-1-pt" id="toc-task-8-1-pt" class="nav-link" data-scroll-target="#task-8-1-pt"><span class="header-section-number">9.11</span> Task 8 (1 pt)</a></li>
+  <li><a href="#task-9-1-pt" id="toc-task-9-1-pt" class="nav-link" data-scroll-target="#task-9-1-pt"><span class="header-section-number">9.12</span> Task 9 (1 pt)</a></li>
+  <li><a href="#task-10-data" id="toc-task-10-data" class="nav-link" data-scroll-target="#task-10-data"><span class="header-section-number">9.13</span> Task 10 Data</a></li>
+  <li><a href="#task-10-1-pt" id="toc-task-10-1-pt" class="nav-link" data-scroll-target="#task-10-1-pt"><span class="header-section-number">9.14</span> Task 10 (1 pt)</a></li>
+  <li><a href="#task-11-1-pt" id="toc-task-11-1-pt" class="nav-link" data-scroll-target="#task-11-1-pt"><span class="header-section-number">9.15</span> Task 11 (1 pt)</a></li>
+  <li><a href="#task-12-0.5-pt" id="toc-task-12-0.5-pt" class="nav-link" data-scroll-target="#task-12-0.5-pt"><span class="header-section-number">9.16</span> Task 12 (0.5 pt)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework8.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Purpose</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework8.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 8: Text Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Purpose</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 8: Text Data</span></h1>
 </div>
 
 
@@ -289,10 +290,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="purpose" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="purpose"><span class="header-section-number">9.1</span> Purpose</h2>
 <p>The purpose of this homework is to give you several opportunities to practice functions and tools taught in Lecture 8 using R. Once completed, submit both your quarto document (.qmd) and the rendered HTML file.</p>
 <p>Failure to submit a properly rendered HTML file will result in a grade of 0 for this homework.</p>
-<section id="resources-to-consult" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="resources-to-consult"><span class="header-section-number">9.1</span> Resources to consult</h2>
+</section>
+<section id="resources-to-consult" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="resources-to-consult"><span class="header-section-number">9.2</span> Resources to consult</h2>
 <ol type="1">
 <li>Lecture Materials
 <ol type="1">
@@ -303,8 +307,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p><strong>Note:</strong> You may need to copy and paste the links above into your web browser.</p>
 </section>
-<section id="preliminaries" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">9.2</span> Preliminaries</h2>
+<section id="preliminaries" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">9.3</span> Preliminaries</h2>
 <p>Load the following script to load the tidyverse package</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -322,8 +326,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="task-1-1-pt" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="task-1-1-pt"><span class="header-section-number">9.3</span> Task 1 (1 pt)</h2>
+<section id="task-1-1-pt" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="task-1-1-pt"><span class="header-section-number">9.4</span> Task 1 (1 pt)</h2>
 <p>Using the R chunk below, load the following seven files you were asked to download (under Homework 8 in Canvas) into your R env’t. Name them appropriately based on best practices.</p>
 <p>(1) HW8BusinessPrograms.csv</p>
 <p>(2) HW8CommunityFacilities.csv</p>
@@ -413,8 +417,8 @@ dbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...
 </div>
 </div>
 </section>
-<section id="task-2-1-pt" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="task-2-1-pt"><span class="header-section-number">9.4</span> Task 2 (1 pt)</h2>
+<section id="task-2-1-pt" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="task-2-1-pt"><span class="header-section-number">9.5</span> Task 2 (1 pt)</h2>
 <p>Using the R chunk below, bind the seven tables you created in Task 1 into a single table (data frame) in your R environment. Make sure to print a sample of the data below too.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your script below:</span></span>
@@ -435,8 +439,8 @@ dbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...
 </div>
 </div>
 </section>
-<section id="task-3-0.5-pt" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="task-3-0.5-pt"><span class="header-section-number">9.5</span> Task 3 (0.5 pt)</h2>
+<section id="task-3-0.5-pt" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="task-3-0.5-pt"><span class="header-section-number">9.6</span> Task 3 (0.5 pt)</h2>
 <p>Using the R chunk below and the data you created in Task 2, print the number of data rows within the data set for each program area:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your script below:</span></span>
@@ -457,8 +461,8 @@ dbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...
 </div>
 </div>
 </section>
-<section id="task-4-1-pt" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="task-4-1-pt"><span class="header-section-number">9.6</span> Task 4 (1 pt)</h2>
+<section id="task-4-1-pt" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="task-4-1-pt"><span class="header-section-number">9.7</span> Task 4 (1 pt)</h2>
 <p>Using <code>case_when()</code> and the data you created in Task 2, create a new column or variable called rural_agency using the R chunk below. Save the resulting table (data frame) into your R environment (name it however you want but make sure it follows best practice). Make sure to print a sample of the data below too.</p>
 <p>For your <code>case_when()</code>: rural_agency should be equals to “Rural Housing Service” if program area is either single or multifamily housing. rural_agency should be equals to “Rural Utilities Service” if program area is water and environmental, telecommunications, or electric. rural_agency should be equals to “Rural Business-Cooperative Service” if program area is Business programs.</p>
 <div class="cell">
@@ -474,8 +478,8 @@ dbl (4): fiscal_year, total_investment_dollars, number_investments, svi_inve...
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="task-5-0.5-pt" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="task-5-0.5-pt"><span class="header-section-number">9.7</span> Task 5 (0.5 pt)</h2>
+<section id="task-5-0.5-pt" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="task-5-0.5-pt"><span class="header-section-number">9.8</span> Task 5 (0.5 pt)</h2>
 <p>The code below creates two tables (employees_2023, employees_2024) in your R environment.</p>
 <p>Make sure you run the code below before moving forward. Read the two tables accordingly as well.</p>
 <div class="cell">
@@ -533,8 +537,8 @@ $ Salary     &lt;dbl&gt; 52000, 61000</code></pre>
 </div>
 </div>
 </section>
-<section id="task-6-0.5-pt" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="task-6-0.5-pt"><span class="header-section-number">9.8</span> Task 6 (0.5 pt)</h2>
+<section id="task-6-0.5-pt" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="task-6-0.5-pt"><span class="header-section-number">9.9</span> Task 6 (0.5 pt)</h2>
 <p>The code below creates two tables (group_a, group_b) in your R environment.</p>
 <p>Make sure you run the code below before moving forward. Read the two tables accordingly as well.</p>
 <div class="cell">
@@ -586,8 +590,8 @@ $ Salary     &lt;dbl&gt; 52000, 61000</code></pre>
 </div>
 </div>
 </section>
-<section id="task-7-1-pt" class="level2" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="task-7-1-pt"><span class="header-section-number">9.9</span> Task 7 (1 pt)</h2>
+<section id="task-7-1-pt" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="task-7-1-pt"><span class="header-section-number">9.10</span> Task 7 (1 pt)</h2>
 <p>The code blow creates a table (data frame) called address_df. Run the code below before proceeding forward and make sure to pay attention to the printed data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>address_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">street =</span> <span class="fu">c</span>(<span class="st">"123 Main St"</span>, <span class="st">"456 Oak Ave"</span>, <span class="st">"789 Pine Rd"</span>),</span>
@@ -614,8 +618,8 @@ $ Salary     &lt;dbl&gt; 52000, 61000</code></pre>
 </div>
 </div>
 </section>
-<section id="task-8-1-pt" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="task-8-1-pt"><span class="header-section-number">9.10</span> Task 8 (1 pt)</h2>
+<section id="task-8-1-pt" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="task-8-1-pt"><span class="header-section-number">9.11</span> Task 8 (1 pt)</h2>
 <p>The code blow creates a table (data frame) called pricing_table. Run the code below before proceeding forward and make sure to pay attention to the printed data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pricing_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">product =</span> <span class="fu">c</span>(<span class="st">"Apples"</span>, <span class="st">"Bananas"</span>, <span class="st">"Cherries"</span>),</span>
@@ -641,8 +645,8 @@ $ Salary     &lt;dbl&gt; 52000, 61000</code></pre>
 </div>
 </div>
 </section>
-<section id="task-9-1-pt" class="level2" data-number="9.11">
-<h2 data-number="9.11" class="anchored" data-anchor-id="task-9-1-pt"><span class="header-section-number">9.11</span> Task 9 (1 pt)</h2>
+<section id="task-9-1-pt" class="level2" data-number="9.12">
+<h2 data-number="9.12" class="anchored" data-anchor-id="task-9-1-pt"><span class="header-section-number">9.12</span> Task 9 (1 pt)</h2>
 <p>Using pricing_table (data from task 8), use <code>str_glue()</code> to create a variable called <strong>pricing_sentence_v2</strong> using R chunk below. <code>str_glue()</code> should also produce a single sentence for each item, formatted as “ItemName costs $Price before taxes.” For example, the pricing_sentence_v2 value for the first row should state “Apples costs $1.20 before taxes”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your script below:</span></span>
@@ -656,8 +660,8 @@ $ Salary     &lt;dbl&gt; 52000, 61000</code></pre>
 </div>
 </div>
 </section>
-<section id="task-10-data" class="level2" data-number="9.12">
-<h2 data-number="9.12" class="anchored" data-anchor-id="task-10-data"><span class="header-section-number">9.12</span> Task 10 Data</h2>
+<section id="task-10-data" class="level2" data-number="9.13">
+<h2 data-number="9.13" class="anchored" data-anchor-id="task-10-data"><span class="header-section-number">9.13</span> Task 10 Data</h2>
 <p>This data we are loading are news headlines scrapped from ABC7 News Network in New York City between July 18, 2017 and January 16, 2018. Make sure to run the script below before proceeding:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>news_headlines <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jmtfeliciano/teachingdata/refs/heads/main/abc7ny.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -684,8 +688,8 @@ chr (6): datetime, headline, url, teaser, feed_name, feed_url
 </div>
 </div>
 </section>
-<section id="task-10-1-pt" class="level2" data-number="9.13">
-<h2 data-number="9.13" class="anchored" data-anchor-id="task-10-1-pt"><span class="header-section-number">9.13</span> Task 10 (1 pt)</h2>
+<section id="task-10-1-pt" class="level2" data-number="9.14">
+<h2 data-number="9.14" class="anchored" data-anchor-id="task-10-1-pt"><span class="header-section-number">9.14</span> Task 10 (1 pt)</h2>
 <p>Using news_headlines and the R chunk below, create a topic indicator variable to detect any crime-related topic or word of your choosing. Then only print a sample of your data that contains the key word of your choosing. Make sure you detect at least one matching row with your keyword (otherwise, pick another keyword).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your script below:</span></span>
@@ -713,8 +717,8 @@ chr (6): datetime, headline, url, teaser, feed_name, feed_url
 </div>
 </div>
 </section>
-<section id="task-11-1-pt" class="level2" data-number="9.14">
-<h2 data-number="9.14" class="anchored" data-anchor-id="task-11-1-pt"><span class="header-section-number">9.14</span> Task 11 (1 pt)</h2>
+<section id="task-11-1-pt" class="level2" data-number="9.15">
+<h2 data-number="9.15" class="anchored" data-anchor-id="task-11-1-pt"><span class="header-section-number">9.15</span> Task 11 (1 pt)</h2>
 <p>Before proceeding, make sure to run the following script and read the printed data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>employees <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -755,8 +759,8 @@ chr (6): datetime, headline, url, teaser, feed_name, feed_url
 </div>
 </div>
 </section>
-<section id="task-12-0.5-pt" class="level2" data-number="9.15">
-<h2 data-number="9.15" class="anchored" data-anchor-id="task-12-0.5-pt"><span class="header-section-number">9.15</span> Task 12 (0.5 pt)</h2>
+<section id="task-12-0.5-pt" class="level2" data-number="9.16">
+<h2 data-number="9.16" class="anchored" data-anchor-id="task-12-0.5-pt"><span class="header-section-number">9.16</span> Task 12 (0.5 pt)</h2>
 <p>Before proceeding, make sure to run the following script and read the printed data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>movie_years <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"Inception"</span>, <span class="st">"The Matrix"</span>, <span class="st">"Titanic"</span>),</span>
@@ -1198,8 +1202,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./SolutionHomework7.html" class="pagination-link" aria-label="Purpose">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Purpose</span></span>
+      <a href="./SolutionHomework7.html" class="pagination-link" aria-label="Homework 7: Joins">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 7: Joins</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
