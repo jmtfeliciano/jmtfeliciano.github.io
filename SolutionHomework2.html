@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Josemari Feliciano">
-<meta name="dcterms.date" content="2024-12-01">
 
-<title>Statistical Programming in R (Fall 2025)</title>
+<title>Statistical Programming in R (Fall 2025) - 3&nbsp; Homework 2: ggplot2 and Quarto practice</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./SolutionHomework3.html" rel="next">
+<link href="./summary.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Disclaimer</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Homework 2: ggplot2 and Quarto practice</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -109,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Disclaimer</span></a>
   </div>
 </li>
@@ -158,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./SolutionHomework2.html" class="sidebar-item-text sidebar-link">
+  <a href="./SolutionHomework2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Homework 2: ggplot2 and Quarto practice</span></span></a>
   </div>
 </li>
@@ -216,36 +249,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link active" data-scroll-target="#disclaimer">Disclaimer</a></li>
+  <li><a href="#what-you-need-to-do-for-homework-2" id="toc-what-you-need-to-do-for-homework-2" class="nav-link active" data-scroll-target="#what-you-need-to-do-for-homework-2"><span class="header-section-number">3.1</span> What you need to do for homework 2</a></li>
+  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">3.2</span> Task 1</a></li>
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">3.3</span> Task 2</a></li>
+  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3"><span class="header-section-number">3.4</span> Task 3</a></li>
+  <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4"><span class="header-section-number">3.5</span> Task 4</a></li>
+  <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5"><span class="header-section-number">3.6</span> Task 5</a></li>
+  <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6"><span class="header-section-number">3.7</span> Task 6</a></li>
+  <li><a href="#task-7" id="toc-task-7" class="nav-link" data-scroll-target="#task-7"><span class="header-section-number">3.8</span> Task 7</a></li>
+  <li><a href="#task-8" id="toc-task-8" class="nav-link" data-scroll-target="#task-8"><span class="header-section-number">3.9</span> Task 8</a></li>
+  <li><a href="#task-9" id="toc-task-9" class="nav-link" data-scroll-target="#task-9"><span class="header-section-number">3.10</span> Task 9</a></li>
+  <li><a href="#task-10" id="toc-task-10" class="nav-link" data-scroll-target="#task-10"><span class="header-section-number">3.11</span> Task 10</a></li>
+  <li><a href="#task-11" id="toc-task-11" class="nav-link" data-scroll-target="#task-11"><span class="header-section-number">3.12</span> <strong>Task 11</strong></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">3.13</span> </a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Homework 2: ggplot2 and Quarto practice</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Statistical Programming in R (Fall 2025)</h1>
-<p class="subtitle lead">American University</p>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Homework 2: ggplot2 and Quarto practice</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Josemari Feliciano </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 1, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -255,10 +287,202 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="disclaimer" class="level1 unnumbered">
-<h1 class="unnumbered">Disclaimer</h1>
-<p>This is just a draft of potential course materials for Fall 2025.</p>
-<p>For Fall 2024 students, please note that this is just a draft version. Links shared via Canvas are the authoritative source of course materials.</p>
+<p>The goal of homework 2 is to give you hands-on practice with both (1) the ggplot2 package, which is one of the core tidyverse packages that R loads when you run library(tidyverse) in R and (2) Quarto document including rendering HTML files.</p>
+<p>As stated in Lecture 2, it takes a while to really get used to the syntax of ggplot2.</p>
+<p>The goal of this class is not to make you an expert in ggplot2 via memorization. However, you are expected to have a general understanding of ggplot2 scripts shared in class via Exercise2.qmd and modify them accordingly to produce your desired visual output.</p>
+<p>For example, in Lecture 2 and Exercise2.qmd, you were taught that to create a scatter plot using the <strong>penguins</strong> data set using <em>two numeric variables</em> where we plotted <strong>flipper_length_mm</strong> on the x-axis and <strong>body_mass_g</strong> on the y-axis, you needed to run the following R script:</p>
+<p>ggplot(data = <strong>penguins</strong>,</p>
+<p>mapping = aes(x = <strong>flipper_length_mm,</strong> y = <strong>body_mass_g</strong>) ) +</p>
+<p>geom_point()</p>
+<p>Now, suppose you want to create another scatter plot using another data set. In this made up scenario, suppose you want to plot data from the <strong><em>giraffe</em></strong> data set with <strong><em>neck_length</em></strong> on the x-axis and <strong><em>weight_lbs</em></strong> on the y-axis, therefore, you need to be able to modify the previous code above and deduce that the script you need to run is the following:</p>
+<p>ggplot(data = <strong><em>giraffe</em></strong>,</p>
+<p>mapping = aes(x = <strong><em>neck_length</em>,</strong> y = <strong><em>weight_lbs</em></strong>) ) +</p>
+<p>geom_point()</p>
+<section id="what-you-need-to-do-for-homework-2" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="what-you-need-to-do-for-homework-2"><span class="header-section-number">3.1</span> What you need to do for homework 2</h2>
+<p>You will be assigned tasks throughout this Quarto Document where you will need to fill in R code appropriately based on what was taught in Lecture 2 slides and Exercise2.qmd</p>
+</section>
+<section id="task-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="task-1"><span class="header-section-number">3.2</span> Task 1</h2>
+<p>Load the tidyverse package within this R chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code here (and/or below within the same chunk as needed)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<p><strong>Warning:</strong> As you will append into the R code chunks I’ve left throughout this Quarto Document, make sure to not accidentally delete the {r} header in each code chunk.</p>
+</section>
+<section id="task-2" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="task-2"><span class="header-section-number">3.3</span> Task 2</h2>
+<p>Load <strong>diamonds</strong>, a built-in data set from tidyverse, into your R environment within this R chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code here (and/or below within the same chunk as needed)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"diamonds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-3" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="task-3"><span class="header-section-number">3.4</span> Task 3</h2>
+<p>Visualize a small sample of your data below by printing them within this document. Use head() as shown in Exercise2.qmd or use one of the alternatives (e.g., tail(), glimpse()) below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code here (and/or below within the same chunk as needed)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  carat cut       color clarity depth table price     x     y     z
+  &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
+</div>
+</div>
+<p><strong>Note:</strong> If you want to quickly read the documentation for this data set, you may visit <a href="https://ggplot2.tidyverse.org/reference/diamonds.html" class="uri">https://ggplot2.tidyverse.org/reference/diamonds.html</a> or run <strong>?diamonds</strong> in your Console pane which should open and print the documentation directly into your Help pane.</p>
+</section>
+<section id="task-4" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="task-4"><span class="header-section-number">3.5</span> Task 4</h2>
+<p>Using the <strong>diamonds</strong> data you loaded into your R environment, create a scatter plot using one of the ggplot2 methods taught in class. More specifically, create a scatter plot with the <strong><em>carat</em></strong> variable (physical weight measurement of diamonds) on the x-axis and <strong><em>price</em></strong> on the y-axis. Include and run your script below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code here (and/or below within the same chunk as needed)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> diamonds,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SolutionHomework2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="task-5" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="task-5"><span class="header-section-number">3.6</span> Task 5</h2>
+<p>Pay closer visual attention to the scatter plot you created under Task 4. Provide an interpretation of your scatter plot. You may want to consider the following questions: what is the relationship between the two variables? Did it surprise you based on your real world knowledge or experience? Type in your interpretation below (preferably within 1-2 sentences but longer if you want to):</p>
+<p>Higher carat -&gt; Generally higher price</p>
+</section>
+<section id="task-6" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="task-6"><span class="header-section-number">3.7</span> Task 6</h2>
+<p><strong>Within this single code chunk:</strong> (1) load <strong>mpg</strong>, a built-in data set from tidyverse, into your R environment; and (2) print a small sample of your <strong>mpg</strong> data below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code here (and/or below within the same chunk as needed)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mpg"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+  manufacturer model displ  year   cyl trans      drv     cty   hwy fl    class 
+  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; 
+1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p     compa…
+2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p     compa…
+3 audi         a4      2    2008     4 manual(m6) f        20    31 p     compa…
+4 audi         a4      2    2008     4 auto(av)   f        21    30 p     compa…
+5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p     compa…
+6 audi         a4      2.8  1999     6 manual(m5) f        18    26 p     compa…</code></pre>
+</div>
+</div>
+<p><strong>Note:</strong> If you want to quickly read the documentation for this data set, you may visit <a href="https://ggplot2.tidyverse.org/reference/mpg.html" class="uri">https://ggplot2.tidyverse.org/reference/mpg.html</a> or run <strong>?mpg</strong> in your Console pane which should open and print the documentation directly into your Help pane.</p>
+</section>
+<section id="task-7" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="task-7"><span class="header-section-number">3.8</span> Task 7</h2>
+<p>Using the <strong>mpg</strong> data you loaded into your R environment, create a box plot using one of the ggplot2 techniques taught in lecture. More specifically, create a box plot to visualize the relationship between <strong><em>class</em></strong> (vehicle class such as minivan and compact) and <strong><em>cty</em></strong> (city mileage of the vehicle in miles).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code here (and/or below within the same chunk as needed)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mpg,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span>class, <span class="at">y =</span> cty)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SolutionHomework2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="task-8" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="task-8"><span class="header-section-number">3.9</span> Task 8</h2>
+<p>In reference to the visualization you created in Task 7: Which vehicle class has the highest median city mileage? If needed, please see lecture 2 slides on how to read the median from box plots. Provide your answer below:</p>
+<p>Compact class has the highest median city mileage (roughly 20 as the median).</p>
+</section>
+<section id="task-9" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="task-9"><span class="header-section-number">3.10</span> Task 9</h2>
+<p>In reference to the visualization you created in Task 7: Provide another basic insight from reading your box plot. Type in your interpretation below (preferably within 1-2 sentences but longer if you have more to say):</p>
+<p>Many options here (e.g., pickup and SUV classes have the lowest median mileage)</p>
+</section>
+<section id="task-10" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="task-10"><span class="header-section-number">3.11</span> Task 10</h2>
+<p>For this task, you need to pick one of these two built-in data sets within tidyverse for your analysis:</p>
+<ul>
+<li><p>starwars</p>
+<ul>
+<li>Documentation: <a href="https://dplyr.tidyverse.org/reference/starwars.html" class="uri">https://dplyr.tidyverse.org/reference/starwars.html</a></li>
+</ul></li>
+<li><p>msleep</p>
+<ul>
+<li>Documentation: <a href="https://ggplot2.tidyverse.org/reference/msleep.html" class="uri">https://ggplot2.tidyverse.org/reference/msleep.html</a></li>
+</ul></li>
+</ul>
+<p>After picking the data set, you need to create and run R code that will do the following:</p>
+<ul>
+<li><p>Load the data into your R environment.</p></li>
+<li><p>Print (and understand) sample data.</p></li>
+<li><p>Using the data you picked, create any visualization you want to create (at least one is required). Please stick to one of the data visualization types you were taught in Exercise2.qmd</p></li>
+</ul>
+<p>Include your solution into the subsequent code chunk below. Note: you may include all the required code into the single code chunk below, or you may also create and use additional R code chunks. It is up to you!</p>
+<p><strong>Important Note:</strong> It is possible that the data viz you create for this task may look odd (e.g., everything is so small due to way too many categorical variables). That is fine. As long as your underlying code is correct and makes sense, you will get full credit. Feel free to play around and create additional data viz as practice below too! At least one is required.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code here (and/or below within the same chunk as needed)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(msleep)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+  name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 Cheetah Acin… carni Carn… lc                  12.1      NA        NA      11.9
+2 Owl mo… Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA       7  
+3 Mounta… Aplo… herbi Rode… nt                  14.4       2.4      NA       9.6
+4 Greate… Blar… omni  Sori… lc                  14.9       2.3       0.133   9.1
+5 Cow     Bos   herbi Arti… domesticated         4         0.7       0.667  20  
+6 Three-… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767   9.6
+# ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Many combinations you can pick from. But here's one I did:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> vore, <span class="at">y =</span> sleep_total)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SolutionHomework2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="task-11" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="task-11"><span class="header-section-number">3.12</span> <strong>Task 11</strong></h2>
+<p>Once you complete Tasks 1-10, render an HTML file from this Quarto file. Please consult the lecture 2 slides as needed on how to render an HTML file from your Quarto document.</p>
+<p><strong>Remember:</strong> assuming all your R code are error free, the HTML file will be generated within the same folder where this Homework2.qmd document resides.</p>
+<p>Please submit both your finalized .qmd and HTML files under Assignment 2 in Canvas.</p>
+</section>
+<section id="section" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="section"><span class="header-section-number">3.13</span> </h2>
 
 
 </section>
@@ -675,10 +899,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./summary.html" class="pagination-link" aria-label="Summary">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="Preliminaries">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preliminaries</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./SolutionHomework3.html" class="pagination-link" aria-label="Homework 3: dplyr">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Homework 3: dplyr</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

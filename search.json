@@ -1,0 +1,156 @@
+[
+  {
+    "objectID": "SolutionHomework9.html",
+    "href": "SolutionHomework9.html",
+    "title": "10  Purpose",
+    "section": "",
+    "text": "10.1 Resources to consult\nNote: You may need to copy and paste the links above into your web browser.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#resources-to-consult",
+    "href": "SolutionHomework9.html#resources-to-consult",
+    "title": "10  Purpose",
+    "section": "",
+    "text": "Lecture Materials\n\nPresentation Version: https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture9\nUnpolished long (searchable) version: https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture9LongDraft\n\nIn Class Exercise Materials: https://jmtfeliciano.github.io/DATA412Fall2024/Exercise9FilledIn.html",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#preliminaries",
+    "href": "SolutionHomework9.html#preliminaries",
+    "title": "10  Purpose",
+    "section": "10.2 Preliminaries",
+    "text": "10.2 Preliminaries\nLoad the following script to load the tidyverse package\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#loading-survey_data-0-pt",
+    "href": "SolutionHomework9.html#loading-survey_data-0-pt",
+    "title": "10  Purpose",
+    "section": "10.3 Loading survey_data (0 pt)",
+    "text": "10.3 Loading survey_data (0 pt)\nFor this homework, make sure to load customer_satisfaction_survey_data.csv into your R environment. Name this R object or table as survey_data into your R env’t\n\n# Place your code chunk below:\nsurvey_data &lt;- read_csv(\"data/customer_satisfaction_survey_data.csv\")\n\nRows: 100 Columns: 9\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (7): gender, purchase_frequency, product_satisfaction, service_satisfact...\ndbl (2): respondent_id, age\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#survey_data-descriptors",
+    "href": "SolutionHomework9.html#survey_data-descriptors",
+    "title": "10  Purpose",
+    "section": "10.4 survey_data Descriptors",
+    "text": "10.4 survey_data Descriptors\nThe data you loaded is a survey data collected to assess customer satisfaction. The data set includes the following nine variables:\n\nrespondent_id: A unique ID for each respondent.\nage\ngender: Respondents can select their gender from predefined categories.\npurchase_frequency: Frequency of purchases.\nproduct_satisfaction, service_satisfaction, delivery_satisfaction: Three seperate columns with likert scale questions with responses ranging from “Very Dissatisfied” to “Very Satisfied” to indicate their satisfactions with the product, service, and delivery.\nrecommend_to_others: Likelihood of recommending to others using a scale from “Definitely Not” to “Definitely Yes.”\ncomments: Contains unique text comments if the respondent left feedback, with some values being NA for rows where customer didn’t leave optional comments.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-1-1-pt",
+    "href": "SolutionHomework9.html#task-1-1-pt",
+    "title": "10  Purpose",
+    "section": "10.5 Task 1 (1 pt)",
+    "text": "10.5 Task 1 (1 pt)\nYou may use the R chunk below to assist you in answering the question for Task 2:\n\n# Place your code below\n# median/max/min age:\nsurvey_data |&gt;\n  summarise(median_age = median(age, na.rm= TRUE),\n            max_age = max(age, na.rm= TRUE),\n            min_age = min(age, na.rm= TRUE))\n\n# A tibble: 1 × 3\n  median_age max_age min_age\n       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1         37      65      18\n\n# for min/max, you could have also used \n#survey_data |&gt;\n#  slice(which.max(age))\n#\n#survey_data |&gt;\n#  slice(which.min(age))\n\n\nQuestion: What is the median age of the survey respondents? What is the lowest and highest age reported in the data set? Use the R chunk below (Hint: use min() and max() inside summarize())\nYour answers to the questions above: Median is 37, min age is 18, max age is 65.",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-2-1-pt",
+    "href": "SolutionHomework9.html#task-2-1-pt",
+    "title": "10  Purpose",
+    "section": "10.6 Task 2 (1 pt)",
+    "text": "10.6 Task 2 (1 pt)\nproduct_satisfaction fromsurvey_data is a variable with five unique values from “Very Dissatisfied” to “Very Satisfied”. Using the R chunk below, determine the five unique values of product_satisfaction. Using that information, create a vector of levels with the proper ordering for the unique values of product_satisfaction (think about what is the correct ordering) then convert product_satisfaction into factor type with the correct ordering for product_satisfaction. Save the resulting data frame into your R environment as survey_data_v2.\n\n# Place your code below\n\n# unique values of product_satisfaction\nsurvey_data |&gt;\n  distinct(product_satisfaction)\n\n# A tibble: 5 × 1\n  product_satisfaction\n  &lt;chr&gt;               \n1 Very Dissatisfied   \n2 Dissatisfied        \n3 Neutral             \n4 Very Satisfied      \n5 Satisfied           \n\n# from worst to best\nlevel_vector &lt;- c(\"Very Dissatisfied\", \"Dissatisfied\", \"Neutral\", \"Satisfied\" ,\"Very Satisfied\")\n\nsurvey_data_v2 &lt;- survey_data |&gt;\n  mutate(product_satisfaction = factor(product_satisfaction, \n                                       levels = level_vector))\n\n# extra just to confirm fct type\nsurvey_data_v2 |&gt;\n  distinct(product_satisfaction)\n\n# A tibble: 5 × 1\n  product_satisfaction\n  &lt;fct&gt;               \n1 Very Dissatisfied   \n2 Dissatisfied        \n3 Neutral             \n4 Very Satisfied      \n5 Satisfied",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-3-1-pt",
+    "href": "SolutionHomework9.html#task-3-1-pt",
+    "title": "10  Purpose",
+    "section": "10.7 Task 3 (1 pt)",
+    "text": "10.7 Task 3 (1 pt)\nUsing survey_data_v2’s product_satisfaction and the R chunk provided below, create a bar chart that shows the counts for product_satisfaction (hint: geom_bar)\n\n# Place your code below\nggplot(survey_data_v2, aes(product_satisfaction)) +\n  geom_bar() +\n  theme_minimal() # last one is extra you don't need--to make it pretty",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-4-1-pt",
+    "href": "SolutionHomework9.html#task-4-1-pt",
+    "title": "10  Purpose",
+    "section": "10.8 Task 4 (1 pt)",
+    "text": "10.8 Task 4 (1 pt)\nFollow what you did in Task 2 but use survey_data_v2 instead of survey_data as your starting data. This time, however, convert service_satisfaction and delivery_satisfaction into factor type with the proper ordering at the same time. Hint: there will be two factor statements inside mutate(). Save the resulting table (data frame) into your R environment as survey_data_v3.\n\n# Place your code below\n\n# unique values of service_satisfaction \nsurvey_data |&gt;\n  distinct(service_satisfaction)\n\n# A tibble: 5 × 1\n  service_satisfaction\n  &lt;chr&gt;               \n1 Neutral             \n2 Very Dissatisfied   \n3 Dissatisfied        \n4 Satisfied           \n5 Very Satisfied      \n\n# unique values of delivery_satisfaction\nsurvey_data |&gt;\n  distinct(delivery_satisfaction)\n\n# A tibble: 5 × 1\n  delivery_satisfaction\n  &lt;chr&gt;                \n1 Dissatisfied         \n2 Very Dissatisfied    \n3 Satisfied            \n4 Very Satisfied       \n5 Neutral              \n\nlevel_vector &lt;- c(\"Very Dissatisfied\", \"Dissatisfied\", \"Neutral\", \"Satisfied\" ,\"Very Satisfied\")\n\nsurvey_data_v3 &lt;- survey_data_v2 |&gt;\n  mutate(service_satisfaction = factor(service_satisfaction, \n                                       levels = level_vector),\n         delivery_satisfaction = factor(delivery_satisfaction, \n                                        levels = level_vector))\n\n# just to visualize data\nhead(survey_data_v3)\n\n# A tibble: 6 × 9\n  respondent_id   age gender            purchase_frequency product_satisfaction\n          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;              &lt;fct&gt;               \n1             1    39 Female            Rarely             Very Dissatisfied   \n2             2    24 Female            Frequently         Dissatisfied        \n3             3    61 Male              Always             Neutral             \n4             4    41 Prefer not to say Occasionally       Dissatisfied        \n5             5    21 Female            Rarely             Very Satisfied      \n6             6    33 Male              Always             Very Satisfied      \n# ℹ 4 more variables: service_satisfaction &lt;fct&gt;, delivery_satisfaction &lt;fct&gt;,\n#   recommend_to_others &lt;chr&gt;, comments &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-5-2-pt",
+    "href": "SolutionHomework9.html#task-5-2-pt",
+    "title": "10  Purpose",
+    "section": "10.9 Task 5 (2 pt)",
+    "text": "10.9 Task 5 (2 pt)\nUsing survey_data_v3 and the R chunk provided below, follow what you did in Task 3. This time, you will create two separate plots for service_satisfaction and delivery_satisfaction that reflects the proper ordering.\n\n# Place your code below\nggplot(survey_data_v3, aes(service_satisfaction)) +\n  geom_bar() +\n  theme_minimal()\n\n\n\n\n\n\n\nggplot(survey_data_v3, aes(delivery_satisfaction)) +\n  geom_bar() +\n  theme_minimal()",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-6-1-pt",
+    "href": "SolutionHomework9.html#task-6-1-pt",
+    "title": "10  Purpose",
+    "section": "10.10 Task 6 (1 pt)",
+    "text": "10.10 Task 6 (1 pt)\nUse fct_recode() with survey_data’s service_satisfaction to recode the following:\n\n“Very Dissatisfied” → “Dissatisfied or Very Dissatisfied”\n“Dissatisfied” → “Dissatisfied or Very Dissatisfied”\n“Neutral” → “Neither Satisfied nor Dissatisfied”\n“Satisfied” → “Satisfied or Very Satisfied”\n“Very Satisfied” → “Satisfied or Very Satisfied”\n\nSave the resulting data into your R env’t as survey_data_recoded. Print a sample of survey_data_recoded via head() below:\n\n# Place your code below\nsurvey_data_recoded &lt;- survey_data |&gt;\n  mutate(service_satisfaction = factor(service_satisfaction)) |&gt;\n  mutate(service_satisfaction = fct_recode(service_satisfaction, \n                                           \"Dissatisfied or Very Dissatisfied\" = \"Very Dissatisfied\", \n                                           \"Dissatisfied or Very Dissatisfied\" = \"Dissatisfied\", \n                                           \"Neither Satisfied nor Dissatisfied\" = \"Neutral\", \n                                           \"Satisfied or Very Satisfied\" = \"Satisfied\",\n                                           \"Satisfied or Very Satisfied\" = \"Very Satisfied\"))\n\nhead(survey_data_recoded)\n\n# A tibble: 6 × 9\n  respondent_id   age gender            purchase_frequency product_satisfaction\n          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;              &lt;chr&gt;               \n1             1    39 Female            Rarely             Very Dissatisfied   \n2             2    24 Female            Frequently         Dissatisfied        \n3             3    61 Male              Always             Neutral             \n4             4    41 Prefer not to say Occasionally       Dissatisfied        \n5             5    21 Female            Rarely             Very Satisfied      \n6             6    33 Male              Always             Very Satisfied      \n# ℹ 4 more variables: service_satisfaction &lt;fct&gt;, delivery_satisfaction &lt;chr&gt;,\n#   recommend_to_others &lt;chr&gt;, comments &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-7-1-pt",
+    "href": "SolutionHomework9.html#task-7-1-pt",
+    "title": "10  Purpose",
+    "section": "10.11 Task 7 (1 pt)",
+    "text": "10.11 Task 7 (1 pt)\nUse fct_recode() with survey_data’s product_satisfaction to recode the following:\n\n“Very Dissatisfied” → “Strongly Dissatisfied”\n“Very Satisfied” → “Strongly Satisfied”\n\nSave the resulting data into your R env’t as survey_data_recoded_v2. Print a sample of survey_data_recoded_v2 via head() below:\n\n# Place your code below\nsurvey_data_recoded_2 &lt;- survey_data |&gt;\n  mutate(product_satisfaction = factor(product_satisfaction)) |&gt;\n  mutate(product_satisfaction = fct_recode(product_satisfaction,\n                                           \"Strongly Dissatisfied\" =  \"Very Dissatisfied\",\n                                           \"Strongly Satisfied\" = \"Very Satisfied\"))\n\nhead(survey_data_recoded_2)\n\n# A tibble: 6 × 9\n  respondent_id   age gender            purchase_frequency product_satisfaction \n          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;              &lt;fct&gt;                \n1             1    39 Female            Rarely             Strongly Dissatisfied\n2             2    24 Female            Frequently         Dissatisfied         \n3             3    61 Male              Always             Neutral              \n4             4    41 Prefer not to say Occasionally       Dissatisfied         \n5             5    21 Female            Rarely             Strongly Satisfied   \n6             6    33 Male              Always             Strongly Satisfied   \n# ℹ 4 more variables: service_satisfaction &lt;chr&gt;, delivery_satisfaction &lt;chr&gt;,\n#   recommend_to_others &lt;chr&gt;, comments &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-8-1-pt",
+    "href": "SolutionHomework9.html#task-8-1-pt",
+    "title": "10  Purpose",
+    "section": "10.12 Task 8 (1 pt)",
+    "text": "10.12 Task 8 (1 pt)\npurchase_frequency fromsurvey_data_v3 is a variable with four unique values. Using the R chunk below, determine the four unique values of purchase_frequency from survey_data_v3. Using that information, create a vector of levels with the proper ordering for the unique values of purchase_frequency then convert purchase_frequency into factor type with the correct ordering for purchase_frequency. Save the resulting data frame into your R environment (name it however you want). Make sure to print this table (data frame) below:\n\n# Place your code below\n# unique values of purchase_frequency\nsurvey_data_v3 |&gt;\n  distinct(purchase_frequency)\n\n# A tibble: 4 × 1\n  purchase_frequency\n  &lt;chr&gt;             \n1 Rarely            \n2 Frequently        \n3 Always            \n4 Occasionally      \n\nlevel_vector &lt;- c(\"Rarely\", \"Occasionally\", \"Frequently\", \"Always\")\n\ntask8_data &lt;- survey_data_v3 |&gt;\n  mutate(purchase_frequency = factor(purchase_frequency, levels = level_vector))\n\nhead(task8_data)\n\n# A tibble: 6 × 9\n  respondent_id   age gender            purchase_frequency product_satisfaction\n          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             &lt;fct&gt;              &lt;fct&gt;               \n1             1    39 Female            Rarely             Very Dissatisfied   \n2             2    24 Female            Frequently         Dissatisfied        \n3             3    61 Male              Always             Neutral             \n4             4    41 Prefer not to say Occasionally       Dissatisfied        \n5             5    21 Female            Rarely             Very Satisfied      \n6             6    33 Male              Always             Very Satisfied      \n# ℹ 4 more variables: service_satisfaction &lt;fct&gt;, delivery_satisfaction &lt;fct&gt;,\n#   recommend_to_others &lt;chr&gt;, comments &lt;chr&gt;",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  },
+  {
+    "objectID": "SolutionHomework9.html#task-9-1-pt",
+    "href": "SolutionHomework9.html#task-9-1-pt",
+    "title": "10  Purpose",
+    "section": "10.13 Task 9 (1 pt)",
+    "text": "10.13 Task 9 (1 pt)\nThe code below generates the sports_data table (data frame) that contains records for 15 students and their favorite sports. Run the code below and pay attention to the table generated:\n\nsports_data &lt;- tibble(\n  student_id = 1:15,\n  favorite_sport = factor(c(\n    \"Soccer\", \"Basketball\", \"Soccer\", \"Tennis\", \"Basketball\", \"Tennis\", \n    \"Cricket\", \"Soccer\", \"Hockey\", \"Basketball\", \"Cricket\", \"Soccer\", \n    \"Hockey\", \"Hockey\", \"Baseball\"\n  ))\n)\nsports_data\n\n# A tibble: 15 × 2\n   student_id favorite_sport\n        &lt;int&gt; &lt;fct&gt;         \n 1          1 Soccer        \n 2          2 Basketball    \n 3          3 Soccer        \n 4          4 Tennis        \n 5          5 Basketball    \n 6          6 Tennis        \n 7          7 Cricket       \n 8          8 Soccer        \n 9          9 Hockey        \n10         10 Basketball    \n11         11 Cricket       \n12         12 Soccer        \n13         13 Hockey        \n14         14 Hockey        \n15         15 Baseball      \n\n\nUsing the R chunk below, use fct_lump_min() to lump all sports that occur less than 3 times into the “Other” category. Save the resulting table as sports_data_v2 in the R environment. And print this new data using head().\n\n# Place your code below\nsports_data_v2 &lt;- sports_data |&gt;\n  mutate(favorite_sport  = fct_lump_min(favorite_sport, 3))\n\nhead(sports_data_v2)\n\n# A tibble: 6 × 2\n  student_id favorite_sport\n       &lt;int&gt; &lt;fct&gt;         \n1          1 Soccer        \n2          2 Basketball    \n3          3 Soccer        \n4          4 Other         \n5          5 Basketball    \n6          6 Other",
+    "crumbs": [
+      "Homework Solutions",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Purpose</span>"
+    ]
+  }
+]
