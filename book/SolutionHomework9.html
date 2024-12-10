@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical Programming in R (Fall 2025) - 10&nbsp; Purpose</title>
+<title>Statistical Programming in R (Fall 2025) - 10&nbsp; Homework 9: Factors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework9.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Purpose</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework9.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Homework 9: Factors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -234,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./SolutionHomework9.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Purpose</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Homework 9: Factors</span></span></a>
   </div>
 </li>
       </ul>
@@ -255,28 +255,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#resources-to-consult" id="toc-resources-to-consult" class="nav-link active" data-scroll-target="#resources-to-consult"><span class="header-section-number">10.1</span> Resources to consult</a></li>
-  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">10.2</span> Preliminaries</a></li>
-  <li><a href="#loading-survey_data-0-pt" id="toc-loading-survey_data-0-pt" class="nav-link" data-scroll-target="#loading-survey_data-0-pt"><span class="header-section-number">10.3</span> Loading survey_data (0 pt)</a></li>
-  <li><a href="#survey_data-descriptors" id="toc-survey_data-descriptors" class="nav-link" data-scroll-target="#survey_data-descriptors"><span class="header-section-number">10.4</span> survey_data Descriptors</a></li>
-  <li><a href="#task-1-1-pt" id="toc-task-1-1-pt" class="nav-link" data-scroll-target="#task-1-1-pt"><span class="header-section-number">10.5</span> Task 1 (1 pt)</a></li>
-  <li><a href="#task-2-1-pt" id="toc-task-2-1-pt" class="nav-link" data-scroll-target="#task-2-1-pt"><span class="header-section-number">10.6</span> Task 2 (1 pt)</a></li>
-  <li><a href="#task-3-1-pt" id="toc-task-3-1-pt" class="nav-link" data-scroll-target="#task-3-1-pt"><span class="header-section-number">10.7</span> Task 3 (1 pt)</a></li>
-  <li><a href="#task-4-1-pt" id="toc-task-4-1-pt" class="nav-link" data-scroll-target="#task-4-1-pt"><span class="header-section-number">10.8</span> Task 4 (1 pt)</a></li>
-  <li><a href="#task-5-2-pt" id="toc-task-5-2-pt" class="nav-link" data-scroll-target="#task-5-2-pt"><span class="header-section-number">10.9</span> Task 5 (2 pt)</a></li>
-  <li><a href="#task-6-1-pt" id="toc-task-6-1-pt" class="nav-link" data-scroll-target="#task-6-1-pt"><span class="header-section-number">10.10</span> Task 6 (1 pt)</a></li>
-  <li><a href="#task-7-1-pt" id="toc-task-7-1-pt" class="nav-link" data-scroll-target="#task-7-1-pt"><span class="header-section-number">10.11</span> Task 7 (1 pt)</a></li>
-  <li><a href="#task-8-1-pt" id="toc-task-8-1-pt" class="nav-link" data-scroll-target="#task-8-1-pt"><span class="header-section-number">10.12</span> Task 8 (1 pt)</a></li>
-  <li><a href="#task-9-1-pt" id="toc-task-9-1-pt" class="nav-link" data-scroll-target="#task-9-1-pt"><span class="header-section-number">10.13</span> Task 9 (1 pt)</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">10.1</span> Purpose</a></li>
+  <li><a href="#resources-to-consult" id="toc-resources-to-consult" class="nav-link" data-scroll-target="#resources-to-consult"><span class="header-section-number">10.2</span> Resources to consult</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">10.3</span> Preliminaries</a></li>
+  <li><a href="#loading-survey_data-0-pt" id="toc-loading-survey_data-0-pt" class="nav-link" data-scroll-target="#loading-survey_data-0-pt"><span class="header-section-number">10.4</span> Loading survey_data (0 pt)</a></li>
+  <li><a href="#survey_data-descriptors" id="toc-survey_data-descriptors" class="nav-link" data-scroll-target="#survey_data-descriptors"><span class="header-section-number">10.5</span> survey_data Descriptors</a></li>
+  <li><a href="#task-1-1-pt" id="toc-task-1-1-pt" class="nav-link" data-scroll-target="#task-1-1-pt"><span class="header-section-number">10.6</span> Task 1 (1 pt)</a></li>
+  <li><a href="#task-2-1-pt" id="toc-task-2-1-pt" class="nav-link" data-scroll-target="#task-2-1-pt"><span class="header-section-number">10.7</span> Task 2 (1 pt)</a></li>
+  <li><a href="#task-3-1-pt" id="toc-task-3-1-pt" class="nav-link" data-scroll-target="#task-3-1-pt"><span class="header-section-number">10.8</span> Task 3 (1 pt)</a></li>
+  <li><a href="#task-4-1-pt" id="toc-task-4-1-pt" class="nav-link" data-scroll-target="#task-4-1-pt"><span class="header-section-number">10.9</span> Task 4 (1 pt)</a></li>
+  <li><a href="#task-5-2-pt" id="toc-task-5-2-pt" class="nav-link" data-scroll-target="#task-5-2-pt"><span class="header-section-number">10.10</span> Task 5 (2 pt)</a></li>
+  <li><a href="#task-6-1-pt" id="toc-task-6-1-pt" class="nav-link" data-scroll-target="#task-6-1-pt"><span class="header-section-number">10.11</span> Task 6 (1 pt)</a></li>
+  <li><a href="#task-7-1-pt" id="toc-task-7-1-pt" class="nav-link" data-scroll-target="#task-7-1-pt"><span class="header-section-number">10.12</span> Task 7 (1 pt)</a></li>
+  <li><a href="#task-8-1-pt" id="toc-task-8-1-pt" class="nav-link" data-scroll-target="#task-8-1-pt"><span class="header-section-number">10.13</span> Task 8 (1 pt)</a></li>
+  <li><a href="#task-9-1-pt" id="toc-task-9-1-pt" class="nav-link" data-scroll-target="#task-9-1-pt"><span class="header-section-number">10.14</span> Task 9 (1 pt)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework9.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Purpose</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./SolutionHomework2.html">Homework Solutions</a></li><li class="breadcrumb-item"><a href="./SolutionHomework9.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Homework 9: Factors</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Purpose</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Homework 9: Factors</span></h1>
 </div>
 
 
@@ -293,10 +294,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="purpose" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="purpose"><span class="header-section-number">10.1</span> Purpose</h2>
 <p>The purpose of this homework is to give you several opportunities to practice functions and tools you learned in Lecture 9. Once completed, submit both your quarto document (.qmd) and the rendered HTML file.</p>
 <p>Failure to submit a properly rendered HTML file will result in a grade of 0 for this homework.</p>
-<section id="resources-to-consult" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="resources-to-consult"><span class="header-section-number">10.1</span> Resources to consult</h2>
+</section>
+<section id="resources-to-consult" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="resources-to-consult"><span class="header-section-number">10.2</span> Resources to consult</h2>
 <ol type="1">
 <li>Lecture Materials
 <ol type="1">
@@ -307,8 +311,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p><strong>Note:</strong> You may need to copy and paste the links above into your web browser.</p>
 </section>
-<section id="preliminaries" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">10.2</span> Preliminaries</h2>
+<section id="preliminaries" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">10.3</span> Preliminaries</h2>
 <p>Load the following script to load the tidyverse package</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -326,8 +330,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="loading-survey_data-0-pt" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="loading-survey_data-0-pt"><span class="header-section-number">10.3</span> Loading survey_data (0 pt)</h2>
+<section id="loading-survey_data-0-pt" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="loading-survey_data-0-pt"><span class="header-section-number">10.4</span> Loading survey_data (0 pt)</h2>
 <p>For this homework, make sure to load customer_satisfaction_survey_data.csv into your R environment. Name this R object or table as survey_data into your R env’t</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code chunk below:</span></span>
@@ -344,8 +348,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="survey_data-descriptors" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="survey_data-descriptors"><span class="header-section-number">10.4</span> survey_data Descriptors</h2>
+<section id="survey_data-descriptors" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="survey_data-descriptors"><span class="header-section-number">10.5</span> survey_data Descriptors</h2>
 <p>The data you loaded is a survey data collected to assess customer satisfaction. The data set includes the following nine variables:</p>
 <ol type="1">
 <li><p><strong>respondent_id</strong>: A unique ID for each respondent.</p></li>
@@ -357,8 +361,8 @@ dbl (2): respondent_id, age
 <li><p><strong>comments</strong>: Contains unique text comments if the respondent left feedback, with some values being <code>NA</code> for rows where customer didn’t leave optional comments.</p></li>
 </ol>
 </section>
-<section id="task-1-1-pt" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="task-1-1-pt"><span class="header-section-number">10.5</span> Task 1 (1 pt)</h2>
+<section id="task-1-1-pt" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="task-1-1-pt"><span class="header-section-number">10.6</span> Task 1 (1 pt)</h2>
 <p>You may use the R chunk below to assist you in answering the question for Task 2:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
@@ -385,8 +389,8 @@ dbl (2): respondent_id, age
 <p><strong>Your answers to the questions above:</strong> Median is 37, min age is 18, max age is 65.</p>
 </blockquote>
 </section>
-<section id="task-2-1-pt" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="task-2-1-pt"><span class="header-section-number">10.6</span> Task 2 (1 pt)</h2>
+<section id="task-2-1-pt" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="task-2-1-pt"><span class="header-section-number">10.7</span> Task 2 (1 pt)</h2>
 <p><strong>product_satisfaction</strong> fromsurvey_data is a variable with five unique values from “Very Dissatisfied” to “Very Satisfied”. Using the R chunk below, determine the five unique values of product_satisfaction. Using that information, create a vector of levels with the proper ordering for the unique values of product_satisfaction (think about what is the correct ordering) then convert product_satisfaction into factor type with the correct ordering for product_satisfaction. Save the resulting data frame into your R environment as survey_data_v2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
@@ -426,8 +430,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="task-3-1-pt" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="task-3-1-pt"><span class="header-section-number">10.7</span> Task 3 (1 pt)</h2>
+<section id="task-3-1-pt" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="task-3-1-pt"><span class="header-section-number">10.8</span> Task 3 (1 pt)</h2>
 <p>Using survey_data_v2’s <strong>product_satisfaction</strong> and the R chunk provided below, create a bar chart that shows the counts for product_satisfaction (hint: geom_bar)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
@@ -443,8 +447,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="task-4-1-pt" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="task-4-1-pt"><span class="header-section-number">10.8</span> Task 4 (1 pt)</h2>
+<section id="task-4-1-pt" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="task-4-1-pt"><span class="header-section-number">10.9</span> Task 4 (1 pt)</h2>
 <p>Follow what you did in Task 2 but use survey_data_v2 instead of survey_data as your starting data. This time, however, convert service_satisfaction and delivery_satisfaction into factor type with the proper ordering at the same time. Hint: there will be two factor statements inside mutate(). Save the resulting table (data frame) into your R environment as survey_data_v3.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
@@ -500,8 +504,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="task-5-2-pt" class="level2" data-number="10.9">
-<h2 data-number="10.9" class="anchored" data-anchor-id="task-5-2-pt"><span class="header-section-number">10.9</span> Task 5 (2 pt)</h2>
+<section id="task-5-2-pt" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="task-5-2-pt"><span class="header-section-number">10.10</span> Task 5 (2 pt)</h2>
 <p>Using survey_data_v3 and the R chunk provided below, follow what you did in Task 3. This time, you will create two separate plots for service_satisfaction and delivery_satisfaction that reflects the proper ordering.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
@@ -527,8 +531,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="task-6-1-pt" class="level2" data-number="10.10">
-<h2 data-number="10.10" class="anchored" data-anchor-id="task-6-1-pt"><span class="header-section-number">10.10</span> Task 6 (1 pt)</h2>
+<section id="task-6-1-pt" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="task-6-1-pt"><span class="header-section-number">10.11</span> Task 6 (1 pt)</h2>
 <p>Use fct_recode() with survey_data’s <strong>service_satisfaction</strong> to recode the following:</p>
 <ul>
 <li><p>“Very Dissatisfied” → “Dissatisfied or Very Dissatisfied”</p></li>
@@ -565,8 +569,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="task-7-1-pt" class="level2" data-number="10.11">
-<h2 data-number="10.11" class="anchored" data-anchor-id="task-7-1-pt"><span class="header-section-number">10.11</span> Task 7 (1 pt)</h2>
+<section id="task-7-1-pt" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="task-7-1-pt"><span class="header-section-number">10.12</span> Task 7 (1 pt)</h2>
 <p>Use fct_recode() with survey_data’s <strong>product_satisfaction</strong> to recode the following:</p>
 <ul>
 <li><p>“Very Dissatisfied” → “Strongly Dissatisfied”</p></li>
@@ -597,8 +601,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="task-8-1-pt" class="level2" data-number="10.12">
-<h2 data-number="10.12" class="anchored" data-anchor-id="task-8-1-pt"><span class="header-section-number">10.12</span> Task 8 (1 pt)</h2>
+<section id="task-8-1-pt" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="task-8-1-pt"><span class="header-section-number">10.13</span> Task 8 (1 pt)</h2>
 <p><strong>purchase_frequency</strong> fromsurvey_data_v3 is a variable with four unique values. Using the R chunk below, determine the four unique values of <strong>purchase_frequency</strong> from survey_data_v3. Using that information, create a vector of levels with the proper ordering for the unique values of <strong>purchase_frequency</strong> then convert <strong>purchase_frequency</strong> into factor type with the correct ordering for <strong>purchase_frequency</strong>. Save the resulting data frame into your R environment (name it however you want). Make sure to print this table (data frame) below:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
@@ -635,8 +639,8 @@ dbl (2): respondent_id, age
 </div>
 </div>
 </section>
-<section id="task-9-1-pt" class="level2" data-number="10.13">
-<h2 data-number="10.13" class="anchored" data-anchor-id="task-9-1-pt"><span class="header-section-number">10.13</span> Task 9 (1 pt)</h2>
+<section id="task-9-1-pt" class="level2" data-number="10.14">
+<h2 data-number="10.14" class="anchored" data-anchor-id="task-9-1-pt"><span class="header-section-number">10.14</span> Task 9 (1 pt)</h2>
 <p>The code below generates the sports_data table (data frame) that contains records for 15 students and their favorite sports. Run the code below and pay attention to the table generated:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sports_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
