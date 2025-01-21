@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Science Applications: Lecture 2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Josemari Feliciano" />
+    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Data Science Applications: Lecture 2
+]
+.subtitle[
+## Using Quarto and ggplot2
+]
+.author[
+### Josemari Feliciano
+]
+.institute[
+### DATA 312 - American University
+]
+.date[
+### Spring 2025 - January 21
+]
+
+---
+
+# Recap from Lecture 1
+
+1. Installed R and RStudio.
+
+2. Installed tidyverse packages (focus of this class).&lt;sup&gt;1&lt;/sup&gt;
+
+3. Learned how to run basic R scripts (e.g., arithmetic operator, loading the tidyverse packages)
+
+4. Learned how to create a basic R script file (New File &gt; R Script).
+
+.footnote[
+[1] As stated in your book, the focus will be on what your book calls 'rectangular data' (i.e., data frames, tibble). More on this later.
+]
+---
+class: center, middle
+
+## Homework #1
+
+### Posted last Thursday. 
+#### Due January 24th at 11:59pm 
+
+---
+# Today's Agenda
+
+1. Data classification
+
+2. Introduction to Quarto
+
+3. Introduction to the ggplot2 package (part of tidyverse packages)
+
+---
+# Data classification
+
+Since we are dealing with data, it might be useful to build up some terminology.
+
+When data scientists, analysts, or researchers study a concept, they need to gather data about it. 
+
+This data can take many forms, such as height, weight, hair color, and opinions. When collecting data for research, it is important to know the form of your data so that you can interpret and analyze it well.
+
+General two forms: 
+
+- Categorical Data
+
+- Numerical Data
+
+---
+# Data classification: Categorical Data
+
+Categorical variables represent types of data which may be divided into groups. General examples of categorical variables are race, sex, age group, and educational level. 
+
+Two sub types: 
+
+- Nominal: No inherent order or rank (e.g., hair color, race, ethnicity).
+
+- Ordinal: You can categorize and rank your data in an order. For example, someone's language abilities (i.e., beginner, intermediate, fluent) and Likert-scale questions in surveys (e.g., very dissatisfied to very satisfied)
+
+---
+# Data classification: Numerical Data
+
+Numerical data is a data type expressed in numbers, rather than natural language description. Sometimes called quantitative data, numerical data is always collected in number form.
+
+__Important to know:__ The __median__ of any numerical data is the value separating the higher half from the lower half of a data sample.
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/median.png" alt="Figure 1. Two sample data (one with odd number of samples, the other with even number) showing their respective median values. In the second example, median is the average of the two 'middle' numbers." width="40%" /&gt;
+&lt;p class="caption"&gt;Figure 1. Two sample data (one with odd number of samples, the other with even number) showing their respective median values. In the second example, median is the average of the two 'middle' numbers.&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+# Box plots for numerical data
+
+A box plot (aka box and whisker plot) uses boxes and lines to depict the distributions of one or more groups of numeric data.
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/boxplot.png" alt="Figure 2. An example of a box plot." width="60%" /&gt;
+&lt;p class="caption"&gt;Figure 2. An example of a box plot.&lt;/p&gt;
+&lt;/div&gt;
+
+__Again, this is not a statistics course.__ But know how to read the median (line between the rectangle) and general interpretation of Q1 (approximately -0.7) and Q3 (approximately 0.7) . For example, you can find 25% of your data below Q1. You can find the second 25% of your data between Q1 and the median. You can find the third 25% of your data between the median and Q3. And lastly, you can get the top 25% of your values above Q3.  
+
+
+---
+## Last lecture:
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/sampleRscriptv2.png" alt="Figure 1. Data312Exercise1.R file discussed last lecture to show what an R script file looks like." width="60%" /&gt;
+&lt;p class="caption"&gt;Figure 1. Data312Exercise1.R file discussed last lecture to show what an R script file looks like.&lt;/p&gt;
+&lt;/div&gt;
+
+As I mentioned last lecture, although I taught you how to create, use, and run basic scripts within a basic R script file (e.g., Data312Exercise1.R), the focus of this course will be on the creation of __Quarto documents.__ To those of you with Python data science background, this is similar to a Jupyter notebook. To those of you with some R background, this is similiar to RMarkdown that you may have used in previous courses.
+
+---
+class: center, middle
+
+### We will have a live demo where we will work together creating your first Quarto document and the corresponding HTML file it generates. 
+
+### But before that, I want to higlight a few things before our live demo.
+
+
+---
+## How to create a quarto document (1/2)
+
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/quartocreate.png" alt="Figure 2. How to create a Quarto Document in macOS. Creating one using R in other operating systems should be similar by clicking or hovering: File &amp;gt; New File &amp;gt; Quarto Document." width="60%" /&gt;
+&lt;p class="caption"&gt;Figure 2. How to create a Quarto Document in macOS. Creating one using R in other operating systems should be similar by clicking or hovering: File &gt; New File &gt; Quarto Document.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+## How to create a quarto document (2/2)
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/quartocreate2.png" alt="Figure 3. How to create a Quarto Document in macOS. Creating one using R in other operating systems should be similar by clicking or hovering: Document &amp;gt; HTML &amp;gt; Create. Fill out the Title and Author fields appropriately." width="40%" /&gt;
+&lt;p class="caption"&gt;Figure 3. How to create a Quarto Document in macOS. Creating one using R in other operating systems should be similar by clicking or hovering: Document &gt; HTML &gt; Create. Fill out the Title and Author fields appropriately.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+## Quarto Documents: Save your files right away
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/unsavedfile.png" alt="Figure 4. The circled untitled text means it is not saved." width="80%" /&gt;
+&lt;p class="caption"&gt;Figure 4. The circled untitled text means it is not saved.&lt;/p&gt;
+&lt;/div&gt;
+
+__Please:__ Make it a habit to immediately save files you create or generate. 
+
+To save your file, click the save icon next to 'Render on Save' (see boxed icon) or simply hover/click over __File__ &gt; __Save As__ akin to the way you saved your R script last lecture. Saved quarto documents will have a __.qmd__ extension.
+
+
+---
+## Generating HTML Output
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/render.png" alt="Figure 5. The boxed icon (Render) is what you need to push to generate an HTML output." width="80%" /&gt;
+&lt;p class="caption"&gt;Figure 5. The boxed icon (Render) is what you need to push to generate an HTML output.&lt;/p&gt;
+&lt;/div&gt;
+To generate a HTML output of your quarto document, click __Render__.
+
+An HTML file will be generated within the same folder where your .qmd file (your Quarto document) was saved. 
+
+Again, you will be asked to submit the output HTML file in a number of your homework assignments.
+
+
+---
+## Quarto document
+
+__Let us do a quick demo on how this works.__ But you may think of a quarto document like any document you're likely familiar with (e.g., Microsoft Word, Google Documents). 
+
+You are able to type in text (e.g., explain what you are doing, describe results of your analysis).
+
+The main difference: 
+
+- You are able to add and run built-in R code. 
+
+- You are able to create an HTML file that shares the results you generate (e.g., data print out your code may generate, data visualizations, etc). 
+
+- You are able to share your results to others without them having to download R or RStudio.
+
+
+---
+## Adding and running R code chunk (where you can run R code)
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/addrscript.png" alt="Figure 6. Clicking the boxed icon will add another R chunk where you can run R script. To run any embedded R script, simply press the circled play icon. " width="80%" /&gt;
+&lt;p class="caption"&gt;Figure 6. Clicking the boxed icon will add another R chunk where you can run R script. To run any embedded R script, simply press the circled play icon. &lt;/p&gt;
+&lt;/div&gt;
+
+
+
+
+---
+## Quick Live Demo: Practice together
+
+I want you to follow what I do on the screen.
+
+Let us create a Quarto document together. Let us type in some text data, create basic R scripts, and run them.
+Afterwards, let us render the document into an HTML file. Then we will open that HTML file. 
+
+
+---
+class: center, middle
+
+## Homework #2
+
+### Will be posted later this week
+#### Due January 31st at 11:59pm 
+
+You will have to fill in a Quarto document I will give you. 
+
+---
+class: center, middle
+
+## Data visualization using the ggplot2 package
+
+---
+## Before moving forward:  
+
+Go to your R console and run the following script to install __palmerpenguins__:
+
+
+``` r
+install.packages("palmerpenguins")
+```
+
+__palmerpenguins__ includes a built-in dataset that your book uses. We will use this built-in dataset in today's class.
+
+---
+class: center, middle
+
+## Download Data312Exercise2.qmd from Canvas and open in R.
+### Let us take a quick break too: I will give you 10 minutes to download the file and open the file in R.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
