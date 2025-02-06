@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Josemari Feliciano">
+
+<title>dplyr Part 2 - hands-on exercise</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Data312Exercise4FilledIn_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Data312Exercise4FilledIn_files/libs/quarto-html/quarto.js"></script>
+<script src="Data312Exercise4FilledIn_files/libs/quarto-html/popper.min.js"></script>
+<script src="Data312Exercise4FilledIn_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Data312Exercise4FilledIn_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Data312Exercise4FilledIn_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Data312Exercise4FilledIn_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Data312Exercise4FilledIn_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Data312Exercise4FilledIn_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Data312Exercise4FilledIn_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">dplyr Part 2 - hands-on exercise</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Josemari Feliciano </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="part-i-dplyr-verbs" class="level1">
+<h1>Part I: dplyr verbs</h1>
+<section id="note" class="level2">
+<h2 class="anchored" data-anchor-id="note">Note:</h2>
+<p>This is a continuation of the dplyr hands-on lab.</p>
+<p>Last week, we went over: <strong>filter(), select(), arrange().</strong></p>
+</section>
+<section id="load-package-and-data-we-will-need" class="level2">
+<h2 class="anchored" data-anchor-id="load-package-and-data-we-will-need">Load package and data we will need</h2>
+<p>Variable documentation for flights if you need it again: <a href="https://nycflights13.tidyverse.org/reference/flights.html" class="uri">https://nycflights13.tidyverse.org/reference/flights.html</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the packages we need</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load the flights built-in dataset from nycflights13 into the R env't</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"flights"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print six rows of flights</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(flights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 19
+   year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+1  2013     1     1      517            515         2      830            819
+2  2013     1     1      533            529         4      850            830
+3  2013     1     1      542            540         2      923            850
+4  2013     1     1      544            545        -1     1004           1022
+5  2013     1     1      554            600        -6      812            837
+6  2013     1     1      554            558        -4      740            728
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="rename-verb-to-change-variable-name" class="level2">
+<h2 class="anchored" data-anchor-id="rename-verb-to-change-variable-name">rename() verb to change variable name</h2>
+<p>rename() is an excellent function or verb to rename your variables. It follows a simple format: rename(new_name = old_name), where new_name represents the new variable name and old_name represents the previous variable name</p>
+<p>Example 1: The example below changes the name of dep_time into departure_time</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">departure_time =</span> dep_time) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day departure_time sched_dep_time dep_delay arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;          &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1  2013     1     1            517            515         2      830
+ 2  2013     1     1            533            529         4      850
+ 3  2013     1     1            542            540         2      923
+ 4  2013     1     1            544            545        -1     1004
+ 5  2013     1     1            554            600        -6      812
+ 6  2013     1     1            554            558        -4      740
+ 7  2013     1     1            555            600        -5      913
+ 8  2013     1     1            557            600        -3      709
+ 9  2013     1     1            557            600        -3      838
+10  2013     1     1            558            600        -2      753
+# ℹ 336,766 more rows
+# ℹ 12 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+#   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Example 2: The example below changes the name of multiple variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">departure_time =</span> dep_time, <span class="at">flight_year =</span> year) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+   flight_year month   day departure_time sched_dep_time dep_delay arr_time
+         &lt;int&gt; &lt;int&gt; &lt;int&gt;          &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1        2013     1     1            517            515         2      830
+ 2        2013     1     1            533            529         4      850
+ 3        2013     1     1            542            540         2      923
+ 4        2013     1     1            544            545        -1     1004
+ 5        2013     1     1            554            600        -6      812
+ 6        2013     1     1            554            558        -4      740
+ 7        2013     1     1            555            600        -5      913
+ 8        2013     1     1            557            600        -3      709
+ 9        2013     1     1            557            600        -3      838
+10        2013     1     1            558            600        -2      753
+# ℹ 336,766 more rows
+# ℹ 12 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+#   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-1-2-mins-practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice-1-2-mins-practice">Practice #1 (2 mins practice)</h2>
+<p>Using the rename() verb, print <strong>flights</strong> after renaming: month into flight_month, day into flight_date, and year into flight_year</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in your solution below:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">flight_month =</span> month, <span class="at">flight_date =</span> day, <span class="at">flight_year =</span> year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+   flight_year flight_month flight_date dep_time sched_dep_time dep_delay
+         &lt;int&gt;        &lt;int&gt;       &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+ 1        2013            1           1      517            515         2
+ 2        2013            1           1      533            529         4
+ 3        2013            1           1      542            540         2
+ 4        2013            1           1      544            545        -1
+ 5        2013            1           1      554            600        -6
+ 6        2013            1           1      554            558        -4
+ 7        2013            1           1      555            600        -5
+ 8        2013            1           1      557            600        -3
+ 9        2013            1           1      557            600        -3
+10        2013            1           1      558            600        -2
+# ℹ 336,766 more rows
+# ℹ 13 more variables: arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,
+#   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Syntax below is equivalent and preferred by data scientists in general</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># flights |&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  rename(flight_month = month, </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#         flight_date = day, </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#         flight_year = year)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="relocate-verb-to-move-variables-to-the-left-most-columns" class="level2">
+<h2 class="anchored" data-anchor-id="relocate-verb-to-move-variables-to-the-left-most-columns">relocate() verb to move variables to the left-most columns</h2>
+<p>relocate() allows you to move variables to the left-most columns of the data frame. Often when you share data, certain columns are more important to data receivers, so you typically move those important columns to the left-most columns. You simply feed the name of the variable(s) you want to highlight as arguments inside relocate()</p>
+<p>Here is an example where you move both <strong>time_hour</strong> and <strong>air_time</strong> to the left-most columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>flights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 336,766 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(time_hour, air_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+   time_hour           air_time  year month   day dep_time sched_dep_time
+   &lt;dttm&gt;                 &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;
+ 1 2013-01-01 05:00:00      227  2013     1     1      517            515
+ 2 2013-01-01 05:00:00      227  2013     1     1      533            529
+ 3 2013-01-01 05:00:00      160  2013     1     1      542            540
+ 4 2013-01-01 05:00:00      183  2013     1     1      544            545
+ 5 2013-01-01 06:00:00      116  2013     1     1      554            600
+ 6 2013-01-01 05:00:00      150  2013     1     1      554            558
+ 7 2013-01-01 06:00:00      158  2013     1     1      555            600
+ 8 2013-01-01 06:00:00       53  2013     1     1      557            600
+ 9 2013-01-01 06:00:00      140  2013     1     1      557            600
+10 2013-01-01 06:00:00      138  2013     1     1      558            600
+# ℹ 336,766 more rows
+# ℹ 12 more variables: dep_delay &lt;dbl&gt;, arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;,
+#   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;,
+#   dest &lt;chr&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="distinct-verb-for-uniqueness-case-1" class="level2">
+<h2 class="anchored" data-anchor-id="distinct-verb-for-uniqueness-case-1">distinct() verb for uniqueness: Case 1</h2>
+<p><strong>Case 1 use of distinct():</strong> Finding Unique Value of one particular variable</p>
+<p>Let us go back to the <strong>flights</strong> data.</p>
+<p>Suppose you want to know the unique values for <strong>dist</strong> (destination airports). Then we can feed <strong>dest</strong> inside distinct() to instruct R to print the unique values for <strong>dest</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 105 × 1
+   dest 
+   &lt;chr&gt;
+ 1 IAH  
+ 2 MIA  
+ 3 BQN  
+ 4 ATL  
+ 5 ORD  
+ 6 FLL  
+ 7 IAD  
+ 8 MCO  
+ 9 PBI  
+10 TPA  
+# ℹ 95 more rows</code></pre>
+</div>
+</div>
+<p>If you are interested in arranging data alphabetically, you may use arrange()</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us fill this in as a class</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(dest) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 105 × 1
+   dest 
+   &lt;chr&gt;
+ 1 ABQ  
+ 2 ACK  
+ 3 ALB  
+ 4 ANC  
+ 5 ATL  
+ 6 AUS  
+ 7 AVL  
+ 8 BDL  
+ 9 BGR  
+10 BHM  
+# ℹ 95 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="distinct-verb-for-uniqueness-case-2" class="level2">
+<h2 class="anchored" data-anchor-id="distinct-verb-for-uniqueness-case-2">distinct() verb for uniqueness: Case 2</h2>
+<p>Here is an example below where we want to print out the unique combinations of multiple variables. In this example, let us see unique combination of: origin and destination airports, and then arranging the date alphabetically:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(origin, dest) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(origin, dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 224 × 2
+   origin dest 
+   &lt;chr&gt;  &lt;chr&gt;
+ 1 EWR    ALB  
+ 2 EWR    ANC  
+ 3 EWR    ATL  
+ 4 EWR    AUS  
+ 5 EWR    AVL  
+ 6 EWR    BDL  
+ 7 EWR    BNA  
+ 8 EWR    BOS  
+ 9 EWR    BQN  
+10 EWR    BTV  
+# ℹ 214 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="count-verb-for-uniqueness" class="level2">
+<h2 class="anchored" data-anchor-id="count-verb-for-uniqueness">count() verb for uniqueness</h2>
+<p>The count verb is similar to distinct() that it helps you print out unique contents of a variable or unique combinations of multiple variables. But the difference is that it will print out the unique contents with their respective counts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 105 × 2
+   dest      n
+   &lt;chr&gt; &lt;int&gt;
+ 1 ABQ     254
+ 2 ACK     265
+ 3 ALB     439
+ 4 ANC       8
+ 5 ATL   17215
+ 6 AUS    2439
+ 7 AVL     275
+ 8 BDL     443
+ 9 BGR     375
+10 BHM     297
+# ℹ 95 more rows</code></pre>
+</div>
+</div>
+<p>This one prints the unique combination of two variables we inputted with their respective counts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(origin, dest) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 224 × 3
+   origin dest      n
+   &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
+ 1 EWR    ALB     439
+ 2 EWR    ANC       8
+ 3 EWR    ATL    5022
+ 4 EWR    AUS     968
+ 5 EWR    AVL     265
+ 6 EWR    BDL     443
+ 7 EWR    BNA    2336
+ 8 EWR    BOS    5327
+ 9 EWR    BQN     297
+10 EWR    BTV     931
+# ℹ 214 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-2-2-mins-practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice-2-2-mins-practice">Practice #2 (2 mins practice)</h2>
+<p>Load <strong>starwars</strong>, a built-in dataset from tidyverse, into you R environment.</p>
+<p>Using either distinct() or count(), also print the unique combinations of <strong>homeworld</strong> and <strong>species</strong> variables from <strong>starwars</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in your solution below:</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"starwars"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(homeworld, species) <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(homeworld, species) <span class="co"># not required, always nice</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 57 × 2
+   homeworld      species  
+   &lt;chr&gt;          &lt;chr&gt;    
+ 1 Alderaan       Human    
+ 2 Aleen Minor    Aleena   
+ 3 Bespin         Human    
+ 4 Bestine IV     &lt;NA&gt;     
+ 5 Cato Neimoidia Neimodian
+ 6 Cerea          Cerean   
+ 7 Champala       Chagrian 
+ 8 Chandrila      Human    
+ 9 Concord Dawn   Human    
+10 Corellia       Human    
+# ℹ 47 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(homeworld, species) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 57 × 3
+   homeworld      species       n
+   &lt;chr&gt;          &lt;chr&gt;     &lt;int&gt;
+ 1 Alderaan       Human         3
+ 2 Aleen Minor    Aleena        1
+ 3 Bespin         Human         1
+ 4 Bestine IV     &lt;NA&gt;          1
+ 5 Cato Neimoidia Neimodian     1
+ 6 Cerea          Cerean        1
+ 7 Champala       Chagrian      1
+ 8 Chandrila      Human         1
+ 9 Concord Dawn   Human         1
+10 Corellia       Human         2
+# ℹ 47 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="summarize-verb---creating-overall-summaries-across-categorical-variables" class="level2">
+<h2 class="anchored" data-anchor-id="summarize-verb---creating-overall-summaries-across-categorical-variables">summarize() verb - Creating overall summaries across categorical variables</h2>
+<p>This verb allows you to create summaries of your data. This allows you to create basic summaries across categorical groupings. <em>I contend that this is the most powerful verb of the dplyr package.</em></p>
+<p>Note:<code>summarise()</code> is equivalent to <code>summarize()</code>.</p>
+<p>General structure of summarize() verb:</p>
+<p>some_data |&gt;</p>
+<p>group_by(<strong>categorical_variable(s)</strong>) |&gt;</p>
+<p>summarize(<strong>you_name_this</strong> = <strong>some_summary_function</strong>(<strong>variable1</strong>))</p>
+<p>Let us focus on <strong>some_summary_function.</strong> Here are summary functions that are commonly used:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>General Tasks</th>
+<th>Common Summary Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Central Tendencies</td>
+<td><code>mean() for average/mean</code>, <code>median() for median</code></td>
+</tr>
+<tr class="even">
+<td>Position</td>
+<td><code>first()</code>, <code>last()</code></td>
+</tr>
+<tr class="odd">
+<td>Range</td>
+<td><code>min()</code>, <code>max()</code></td>
+</tr>
+<tr class="even">
+<td>Count</td>
+<td><code>n()</code>, <code>n_distinct()</code></td>
+</tr>
+<tr class="odd">
+<td>Spread</td>
+<td><code>sd()</code>, <code>IQR()</code></td>
+</tr>
+<tr class="even">
+<td>Sum</td>
+<td>sum()</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Let us run a real world example:</strong> Suppose we want to calculate the <em>average/mean</em> <strong>dep_delay</strong> (departure delay) from the <strong>flights</strong> data<strong>,</strong> broken down by <strong>carrier</strong>. Let us call the variable for the mean dep_delay as <strong>mean_dep_delay</strong> (again, if you name data, make sure to name it something meaningful).</p>
+<p>Quick reminder:</p>
+<p>some_data |&gt;</p>
+<p>group_by(<strong>categorical_variable(s)</strong>) |&gt;</p>
+<p>summarize(<strong>you_name_this</strong> = <strong>some_summary_function</strong>(<strong>variable1</strong>))</p>
+<p>Let us modify the code above to perform our task.</p>
+<p><strong>Quick Note:</strong> For mean(), median(), min(), and max(), it is good practice to feed <strong>na.rm = TRUE</strong> as the second argument. Explanation: If your contains missing data (NA in R), mean() and median() will return NA.</p>
+<p>Suppose we are interested in breaking down the mean (or average) <strong>dep_delay</strong> by air line carrier (<strong>carrier</strong>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us fill this in together</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   carrier mean_dep_delay
+   &lt;chr&gt;            &lt;dbl&gt;
+ 1 9E               16.7 
+ 2 AA                8.59
+ 3 AS                5.80
+ 4 B6               13.0 
+ 5 DL                9.26
+ 6 EV               20.0 
+ 7 F9               20.2 
+ 8 FL               18.7 
+ 9 HA                4.90
+10 MQ               10.6 
+11 OO               12.6 
+12 UA               12.1 
+13 US                3.78
+14 VX               12.9 
+15 WN               17.7 
+16 YV               19.0 </code></pre>
+</div>
+</div>
+<p>You can tell R to create multiple summaries at the same time. Below is an example where you ask R to calculate the mean departure delay, maximum departure delay, the minimum departure delay, and number of data rows by using n():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_dep_delay =</span> <span class="fu">max</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_dep_delay =</span> <span class="fu">min</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">number_data_rows =</span> <span class="fu">n</span>()) <span class="co"># n will print the number of data rows by carrier</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 5
+   carrier mean_dep_delay max_dep_delay min_dep_delay number_data_rows
+   &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
+ 1 9E               16.7            747           -24            18460
+ 2 AA                8.59          1014           -24            32729
+ 3 AS                5.80           225           -21              714
+ 4 B6               13.0            502           -43            54635
+ 5 DL                9.26           960           -33            48110
+ 6 EV               20.0            548           -32            54173
+ 7 F9               20.2            853           -27              685
+ 8 FL               18.7            602           -22             3260
+ 9 HA                4.90          1301           -16              342
+10 MQ               10.6           1137           -26            26397
+11 OO               12.6            154           -14               32
+12 UA               12.1            483           -20            58665
+13 US                3.78           500           -19            20536
+14 VX               12.9            653           -20             5162
+15 WN               17.7            471           -13            12275
+16 YV               19.0            387           -16              601</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-3-4-mins-practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice-3-4-mins-practice">Practice 3 (4 mins practice)</h2>
+</section>
+<section id="practice-3a" class="level2">
+<h2 class="anchored" data-anchor-id="practice-3a">Practice #3a</h2>
+<p>Using the <strong>flights</strong> data, calculate the median departure delay broken down by the <strong>origin</strong> airport:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type in your script below:</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_departure_delay =</span> <span class="fu">median</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  origin median_departure_delay
+  &lt;chr&gt;                   &lt;dbl&gt;
+1 EWR                        -1
+2 JFK                        -1
+3 LGA                        -3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># na.rm = TRUE or na.rm = T</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="practice-3b" class="level2">
+<h2 class="anchored" data-anchor-id="practice-3b">Practice #3b</h2>
+<p>Using the <strong>starwars</strong> data you loaded earlier in Practice #3, calculate the mean <strong>mass</strong> broken down by <strong>species</strong> and <strong>gender</strong> (you will have two variables separated by a comma inside the group_by statement this time):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type in your script below:</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, gender) <span class="sc">|&gt;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 42 × 3
+# Groups:   species [38]
+   species   gender    mean_mass
+   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;
+ 1 Aleena    masculine      15  
+ 2 Besalisk  masculine     102  
+ 3 Cerean    masculine      82  
+ 4 Chagrian  masculine     NaN  
+ 5 Clawdite  feminine       55  
+ 6 Droid     feminine      NaN  
+ 7 Droid     masculine      69.8
+ 8 Dug       masculine      40  
+ 9 Ewok      masculine      20  
+10 Geonosian masculine      80  
+# ℹ 32 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="summarize-verb---without-a-group_by-statement-overall-summary" class="level2">
+<h2 class="anchored" data-anchor-id="summarize-verb---without-a-group_by-statement-overall-summary">summarize() verb - Without a group_by statement (overall summary)</h2>
+<p>summarize() verb without a group by statement (e.g., group_by(categorical_data)) simply creates the overall summary. Here is a modified example we ran early but removes the group by statement:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_dep_delay =</span> <span class="fu">max</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_dep_delay =</span> <span class="fu">min</span>(dep_delay, <span class="at">na.rm =</span> T),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">number_data_rows =</span> <span class="fu">n</span>(), <span class="co"># n gets you the number or data rows</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">number_unique_planes =</span> <span class="fu">n_distinct</span>(tailnum)) <span class="co"># n_distinct(tailnum) gets you the number of distinct tailnum </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  mean_dep_delay max_dep_delay min_dep_delay number_data_rows
+           &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
+1           12.6          1301           -43           336776
+# ℹ 1 more variable: number_unique_planes &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-4-2-min-practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice-4-2-min-practice">Practice #4 (2 min practice)</h2>
+<p>Using the <strong>starwars</strong> data you loaded earlier in Practice #3, calculate the overall mean <strong>mass</strong> and <strong>height</strong> for the entire dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type in your script below:</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_mass mean_height
+      &lt;dbl&gt;       &lt;dbl&gt;
+1      97.3        175.</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate-verb---create-new-variables-using-data-from-preexisting-variables" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-verb---create-new-variables-using-data-from-preexisting-variables">mutate() verb - Create new variables using data from preexisting variables</h2>
+<p>The job of this verb is to add new columns that are calculated from the existing columns.</p>
+<p>For this demonstration, let us load the gadget_sales data into the R environment using data I made and saved in my Github account:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>gadget_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/jmtfeliciano/teachingdata/refs/heads/main/three_month_sales_data.csv"</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>gadget_sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ProductSold OctoberSales NovemberSales DecemberSales
+1  Cell Phone      1940231       1358162       1748128
+2      Laptop      1939196       2094332       3077474
+3     Desktop      1267536       1381614       2766269</code></pre>
+</div>
+</div>
+<p>In general, mutate() will follow the following format:</p>
+<p>mutate(new_variable_name = <em>math using variable names</em>)</p>
+<p>Suppose we want to add <strong>OctoberSales, NovemberSales,</strong> and <strong>DecemberSales</strong> into a column we will call <strong>Q1Sales</strong>, then we need to run the following script:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>gadget_sales <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q1Sales =</span> OctoberSales <span class="sc">+</span> NovemberSales <span class="sc">+</span> DecemberSales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ProductSold OctoberSales NovemberSales DecemberSales Q1Sales
+1  Cell Phone      1940231       1358162       1748128 5046521
+2      Laptop      1939196       2094332       3077474 7111002
+3     Desktop      1267536       1381614       2766269 5415419</code></pre>
+</div>
+</div>
+<p>As a class, let us modify the script above so we may save the data as <strong>gadget_sales_v2</strong> into the R env’t. After creating gadget_sales_v2, use head() to print a sample data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type in your script as a class</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>gadget_sales_v2 <span class="ot">&lt;-</span> gadget_sales <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q1Sales =</span> OctoberSales <span class="sc">+</span> NovemberSales <span class="sc">+</span> DecemberSales)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gadget_sales_v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ProductSold OctoberSales NovemberSales DecemberSales Q1Sales
+1  Cell Phone      1940231       1358162       1748128 5046521
+2      Laptop      1939196       2094332       3077474 7111002
+3     Desktop      1267536       1381614       2766269 5415419</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-5-2-mins-practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice-5-2-mins-practice">Practice #5 (2 mins practice)</h2>
+<p>Using <strong>gadget_sales_v2,</strong> use summarize() with sum() to calculate the overall total <strong>Q1Sales.</strong> Name this sum as <strong>overall_Q1Sales</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type in your script below:</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>gadget_sales_v2 <span class="sc">|&gt;</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">overall_Q1Sales =</span> <span class="fu">sum</span>(Q1Sales, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  overall_Q1Sales
+1        17572942</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-6-2-mins-practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice-6-2-mins-practice">Practice #6 (2 mins practice)</h2>
+<p>First load this script that will load a csv file from github into your R env’t as fy_investments:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>fy_investments <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/jmtfeliciano/teachingdata/refs/heads/main/fiscal_year_investment.csv"</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>fy_investments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year      Q1      Q2      Q3      Q4
+1 2013 1921020 2689428 1344714 1728918
+2 2014 2305224 1536816 3457836 2305224
+3 2015 1728918 2689428 2305224 1344714
+4 2016 2881530 3073632 2497326 1728918</code></pre>
+</div>
+</div>
+<p>Next, create a column called <strong>YearTotal</strong> by adding Q1, Q2, Q3, and Q4 using mutate(). Make sure to save this new data frame into the R environment as <strong>fy_investments_v2.</strong> Afterwards, run <strong>head(fy_investments_v2)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type in your script below:</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>fy_investments_v2 <span class="ot">&lt;-</span> fy_investments <span class="sc">|&gt;</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">YearTotal =</span> Q1 <span class="sc">+</span> Q2 <span class="sc">+</span> Q3 <span class="sc">+</span> Q4)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fy_investments_v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year      Q1      Q2      Q3      Q4 YearTotal
+1 2013 1921020 2689428 1344714 1728918   7684080
+2 2014 2305224 1536816 3457836 2305224   9605100
+3 2015 1728918 2689428 2305224 1344714   8068284
+4 2016 2881530 3073632 2497326 1728918  10181406</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate-verb---dichotomy-of-numerical-variable-into-binary-variable-dummy-variables" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-verb---dichotomy-of-numerical-variable-into-binary-variable-dummy-variables">mutate() verb - dichotomy of numerical variable into binary variable (dummy variables)</h2>
+<p>In data analysis, particularly in public health and medicine, we often breakdown numerical variables into binary variables (0/1, yes/no). We often refer to this as creating <strong>dummy variables</strong> we use for data analysis.</p>
+<p>We know from whenever dep_delay is negative, the flight actually departed early.</p>
+<p>Suppose we want to create a dummy variable called <strong>departed_early</strong> with values “yes” if dep_delay is negative, otherwise, the value is “no”, then below is an example on how you may leverage the ifelse() statement below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">departed_early =</span> <span class="fu">ifelse</span>(dep_delay <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(departed_early) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 20
+   departed_early  year month   day dep_time sched_dep_time dep_delay arr_time
+   &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+ 1 No              2013     1     1      517            515         2      830
+ 2 No              2013     1     1      533            529         4      850
+ 3 No              2013     1     1      542            540         2      923
+ 4 Yes             2013     1     1      544            545        -1     1004
+ 5 Yes             2013     1     1      554            600        -6      812
+ 6 Yes             2013     1     1      554            558        -4      740
+ 7 Yes             2013     1     1      555            600        -5      913
+ 8 Yes             2013     1     1      557            600        -3      709
+ 9 Yes             2013     1     1      557            600        -3      838
+10 Yes             2013     1     1      558            600        -2      753
+# ℹ 336,766 more rows
+# ℹ 12 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+#   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+#   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remember, relocate moves variable you specify to the left most corner;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="practice-7-2-mins-practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice-7-2-mins-practice">Practice #7 (2 mins practice)</h2>
+<p>Using the <strong>flights</strong> data<strong>,</strong> create a dummy variable called <strong>departed_super_late</strong>. Using ifelse(), assign a value of 1 if dep_delay is greater than 60. Otherwise, assign a value of 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type in your script below:</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">departed_super_late =</span> <span class="fu">ifelse</span>(dep_delay <span class="sc">&gt;</span> <span class="dv">60</span>, <span class="dv">1</span>, <span class="dv">0</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 20
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 336,766 more rows
+# ℹ 12 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, departed_super_late &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># added so it is easy to compare visually between departed_super_late and dep_delay</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">departed_super_late =</span> <span class="fu">ifelse</span>(dep_delay <span class="sc">&gt;</span> <span class="dv">60</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(departed_super_late)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 20
+   departed_super_late  year month   day dep_time sched_dep_time dep_delay
+                 &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+ 1                   0  2013     1     1      517            515         2
+ 2                   0  2013     1     1      533            529         4
+ 3                   0  2013     1     1      542            540         2
+ 4                   0  2013     1     1      544            545        -1
+ 5                   0  2013     1     1      554            600        -6
+ 6                   0  2013     1     1      554            558        -4
+ 7                   0  2013     1     1      555            600        -5
+ 8                   0  2013     1     1      557            600        -3
+ 9                   0  2013     1     1      557            600        -3
+10                   0  2013     1     1      558            600        -2
+# ℹ 336,766 more rows
+# ℹ 13 more variables: arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,
+#   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="part-ii-file-reading-and-more-dplyr-practice" class="level1">
+<h1>Part II: File Reading and more dplyr practice</h1>
+<section id="follow-the-recommended-best-practice-set-up-and-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="follow-the-recommended-best-practice-set-up-and-next-steps">Follow the recommended (best practice) set up and next steps</h2>
+<p>For this exercise, try the best practice (recommended) set up in slides 9-11 of <a href="https://jmtfeliciano.github.io/DATA312Spring2025/Data312Spring2025_Lecture4#9" class="uri">https://jmtfeliciano.github.io/DATA312Spring2025/Data312Spring2025_Lecture4#9</a></p>
+<p>Before doing the tasks below, please ensure the following:</p>
+<ol type="1">
+<li>Save this Data312Exercise4.qmd document within a folder with minimal files.</li>
+<li>Within the folder where Data312Exercise4.qmd resides, create a ‘data’ folder.</li>
+<li>Go to canvas and download the following files from Home &gt; Week 4:
+<ol type="1">
+<li>drug_abandonment.csv</li>
+<li>storms.rds</li>
+<li>penguins.xlsx</li>
+<li>students.xlsx</li>
+</ol></li>
+<li>Save the four files inside the ‘data’ folder</li>
+<li>Complete the tasks below</li>
+</ol>
+</section>
+<section id="load-packages-you-will-need" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages-you-will-need">Load packages you will need</h2>
+<p>Load the following packages: (1) tidyverse, (2) readxl.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="practice-8-load-three-of-the-four-files" class="level2">
+<h2 class="anchored" data-anchor-id="practice-8-load-three-of-the-four-files">Practice 8: Load three of the four files</h2>
+<p>Load the following files into your R environment:</p>
+<ol type="1">
+<li>drug_abandonment.csv — Note: please load into your R env’t as abandoned_data</li>
+<li>storms.rds — Note: please load into your R env’t as storms_data</li>
+<li>students.xlsx — Note: please load into your R env’t as students_data</li>
+</ol>
+<p>After you load all three data into your R environment, use head() for each data to print sample data. You may create additional R chunks below if desired.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>abandoned_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/drug_abandonment.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 915 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (6): abandoned, discount, female, num_other_meds, final_copay, pharmacy_...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>storms_data <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/storms.rds"</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>students_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/students.xlsx"</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abandoned_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  abandoned discount female num_other_meds final_copay pharmacy_distance
+      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;
+1         0        0      1              0          68                 7
+2         0        1      0              0          60                 6
+3         0        1      0              0          98                 6
+4         0        0      1              1          22                 3
+5         0        1      0              0          90                26
+6         0        1      1              2          86                 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(storms_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 13
+  name   year month   day  hour   lat  long status       category  wind pressure
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;           &lt;dbl&gt; &lt;int&gt;    &lt;int&gt;
+1 Amy    1975     6    27     0  27.5 -79   tropical de…       NA    25     1013
+2 Amy    1975     6    27     6  28.5 -79   tropical de…       NA    25     1013
+3 Amy    1975     6    27    12  29.5 -79   tropical de…       NA    25     1013
+4 Amy    1975     6    27    18  30.5 -79   tropical de…       NA    25     1013
+5 Amy    1975     6    28     0  31.5 -78.8 tropical de…       NA    25     1012
+6 Amy    1975     6    28     6  32.4 -78.7 tropical de…       NA    25     1012
+# ℹ 2 more variables: tropicalstorm_force_diameter &lt;int&gt;,
+#   hurricane_force_diameter &lt;int&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(students_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  `Student ID` `Full Name`      favourite.food     mealPlan            AGE  
+         &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;              &lt;chr&gt;               &lt;chr&gt;
+1            1 Sunil Huffmann   Strawberry yoghurt Lunch only          4.0  
+2            2 Barclay Lynn     French fries       Lunch only          5.0  
+3            3 Jayendra Lyne    N/A                Breakfast and lunch 7.0  
+4            4 Leon Rossini     Anchovies          Lunch only          &lt;NA&gt; 
+5            5 Chidiegwu Dunkel Pizza              Breakfast and lunch five 
+6            6 Güvenç Attila    Ice cream          Lunch only          6.0  </code></pre>
+</div>
+</div>
+</section>
+<section id="practice-9-abandoned_data" class="level2">
+<h2 class="anchored" data-anchor-id="practice-9-abandoned_data">Practice 9: abandoned_data</h2>
+<p>Create a data subset of <strong>abandoned_data</strong> where the number of other medications the patient has to pick up is 0. Save this data as <strong>no_other_medication</strong> into your R environment. Then, using <strong>no_other_medication,</strong> create a csv file named <strong>unique_medication.csv</strong></p>
+<p>Please see slide 4 of <a href="https://github.com/jmtfeliciano/CountDataModels/blob/master/slides1.pdf" class="uri">https://github.com/jmtfeliciano/CountDataModels/blob/master/slides1.pdf</a> for variable documentation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your code below</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>no_other_medication <span class="ot">&lt;-</span> abandoned_data <span class="sc">|&gt;</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(num_other_meds <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(no_other_medication, <span class="st">"unique_medication.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="practice-10-load-penguins.xlsx-if-extra-time" class="level2">
+<h2 class="anchored" data-anchor-id="practice-10-load-penguins.xlsx-if-extra-time">Practice 10: Load penguins.xlsx (if extra time)</h2>
+<p>Load the Dream Island sheet from penguins.xlsx into your R environment as <strong>dream_island_penguins</strong></p>
+<p>Also use head() to print sample data from this new data you created.</p>
+<p>Then, write a script that counts the numbers of female penguins in 2009. Also report the median flipper length for these 2009 female penguins.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your script(s) below:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="practice-11-analyzing-part-1-erroneous-if-extra-time" class="level2">
+<h2 class="anchored" data-anchor-id="practice-11-analyzing-part-1-erroneous-if-extra-time">Practice 11: Analyzing (part 1, erroneous) (if extra time)</h2>
+<p>Using <strong>dream_island_penguins,</strong> create a box plot where x = year, y = bill_length_mm.</p>
+<p>This will look wrong which we will fix in Task 7. What could be the issue (hint: data types)? <strong>Note:</strong> the year variable contains 2007-2009 data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your script(s) below:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="practice-12-analyzing-part-2-correcting-practice-11-if-extra-time" class="level2">
+<h2 class="anchored" data-anchor-id="practice-12-analyzing-part-2-correcting-practice-11-if-extra-time">Practice 12: Analyzing (part 2, correcting Practice 11) (if extra time)</h2>
+<p>This time, copy your code from Task 6 into the code chunk below. However, this time, use x = as.character(year) instead.</p>
+<p>Context: Since R expects one categorical variable to create a boxplot, you will need to make year, which is a numeric variable, into a string or character type. This concept of forcing year, a numeric variable, into character/string type is known as <strong><em>explicit coercion.</em></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place your script(s) below:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
