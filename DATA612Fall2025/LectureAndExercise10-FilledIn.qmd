@@ -1,0 +1,707 @@
+---
+title: "Introduction to Text Mining"
+format: 
+  html:
+    self-contained: true
+editor: visual
+---
+
+## Preliminaries
+
+Before proceeding, let us run the script below:
+
+```{r}
+library(tidyverse)
+```
+
+We will be working as well with R packages that contains text data we will be analyzing for this class. Here are some basic information about text source packages we will be working with:
+
+-   `janeaustenr` contains data from Jane Austen’s 6 completed books.
+
+-   `gutenbergr` allows you to download text/book data collected in the Gutenberg Project( <https://www.gutenberg.org/>)
+
+So make sure to run the following scripts:
+
+```{r}
+install.packages("janeaustenr")
+install.packages("gutenbergr")
+```
+
+## What is tidy data?
+
+Throughout this semester, we have been working what is called **tidy data**. There are plenty of definitions for what constitutes **tidy data** and frankly, I'll avoid specifying any of them since the definitions are somewhat imperfect.
+
+But here's the point of **tidy data**: some data formats are easier to work with given tools we use.
+
+Let us consider `table2` below:
+
+```{r}
+data("table2")
+head(table2)
+```
+
+Look at the table above. Suppose we are interested in calculating `case_rate` (defined as cases/population). There is no easy way to calculate `case_rate` for the format above but now let us consider `table1` below:
+
+```{r}
+data("table1")
+head(table1)
+```
+
+`table1` is a lot easier to work with and given the format above, we can simply use `mutate()` to compute `case_rate:`
+
+```{r}
+table1 |>
+  mutate(case_rate = cases/population)
+```
+
+## What is tidy text data?
+
+Tidy text format is defined as being **a table with one-token-per-row.**
+
+Therefore, if the unit of analysis we are doing is focused on a single word, then our token is a single word. Therefore, **one-token-per-row** in a single word focus analysis means **one-token-per-row**.
+
+**Your book defines token as:** A token is a meaningful unit of text, most often a word, that we are interested in using for further analysis, and tokenization is the process of splitting text into tokens.
+
+## Example of non-tidy text data
+
+Suppose we want to analyze word counts (so token is a single word) and we are given a non-tidy text data frame or table named `lincoln_memorial_df` for this analysis which includes the inscription from the Lincoln Memorial which you may access from <https://www.nps.gov/linc/learn/historyculture/inscriptions.htm>
+
+Let us run the script below to demonstrate an example of a non-tidy text data frame:
+
+```{r}
+# The point here is not to know how to create data frame from scratch but to emphasize what a non tidy text data looks like, so focus on the output only
+lincoln_memorial_df <- tibble(line = 1:5, 
+                              text = c("In This Temple ...",
+                                       "As In The Hearts Of The People ...",
+                                       "For Whom He Saved The Union ...",
+                                       "For Memory Of Abraham Lincoln ...",
+                                       "Is Enshrined Forever ..."))
+
+lincoln_memorial_df
+```
+
+## Working with the tidytext package
+
+Before working further with text parsing, let us install then load the tidy text page by running the script below:
+
+```{r}
+# run in console if not installed: 
+# install.packages("tidytext")
+library(tidytext)
+```
+
+One of the processes we will be doing with tidytext is called **tokenization** which is defined as the formal process of breaking down text data into individual tokens.
+
+Before proceeding with the tokenization process, let us look at sample data from `lincoln_memorial_df`
+
+```{r}
+head(lincoln_memorial_df)
+```
+
+## unnest_tokens() to create tokens
+
+`tidytext`'s `unnest_token()` is the primary tool or function to create tokens.
+
+You should pipe your table or data frame into:
+
+`unnest_token(output = word,`
+
+`input = [the name of your text variable/column here]).`
+
+The argument `output = word` tells `unnest_tokens()` that you want single-word tokens.
+
+Since `text` is the column or variable name from `lincoln_memorial_df` that we want to tokenize, we need to set `input = text` as demonstrated in the R chunk below.
+
+Before running the script below, think of this question before running the script: besides creating rows for each word, what else did the tokenization process do to our words? After reading the question, run the script below:
+
+```{r}
+lincoln_memorial_df |>
+  unnest_tokens(output = word, input = text)
+```
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+**Question:** Besides creating rows for each word, what else did the tokenization process do to our words? By default, `unnest_token()` will do the following:
+
+**Answer:**
+
+-   Other columns are retained (e.g., in our example, `line` was kept)
+-   Punctuations or symbols (e.g., `...` at the end of the phrase) are stripped.
+-   Converts all text data into lower-case.
+
+## Typical text mining flow chart
+
+![](https://www.tidytextmining.com/images/tmwr_0101.png)
+
+## Analyzing text of Jane Austen’s books
+
+Some descriptive analysis of data from the `janeaustenr` package:
+
+```{r}
+library(janeaustenr)
+
+# properly saves the data as an R object in your R environment
+austen_books <- austen_books() 
+
+# view sample of data
+head(austen_books, 10)
+```
+
+```{r}
+# what books are included and how many lines/rows for each book?
+austen_books |>
+  group_by(book) |>
+  summarize(number_lines = n())
+```
+
+Sometimes, `head()` can be not so informative. So here's a way to randomly view a sample of your data using `sample_n()`, a tool from the tidyverse package:
+
+```{r}
+# Randomly prints 10 rows (this will change everytime you run this)
+austen_books |>
+  sample_n(10)
+```
+
+## **Creating word counts: tokenization**
+
+If we want to create word counts, tokens have to be the individual words. Therefore, our tokenization has to yield individual words as token (again, set `output = word` within `unnest_tokens()`).
+
+Now let us tokenize `austen_books` and save the resulting tidy text data frame as `austen_books_tidy`:
+
+```{r}
+austen_books_tidy <- austen_books |>
+  unnest_tokens(output = word, input = text)
+
+austen_books_tidy |>
+  head(10)
+```
+
+Again, the purpose of tokenization is to create a data format that we can easily process for further tasks.
+
+Now, `austen_books_tidy` is a data type we can easily work with for word counts–this is now in a tidy text data format. It is in a format that works with `summarize()`.
+
+Now, suppose we want to do an analysis for the **top 10 words** present within `austen_books_tidy`. Before running the script below, ask yourselves: do the top 10 words presented yield any meaningful insight? After reading this question, run the script below:
+
+```{r}
+# preliminary code: not final, we can improve this further
+austen_books_tidy |>
+  group_by(word) |>
+  summarize(n = n()) |>
+  arrange(desc(n)) |>
+  head(10)
+```
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+**Question:** Do the top 10 words presented yield any meaningful insight?
+
+**Answer:** No. These common 'filler' words (e.g., “the”, “of”, “to”) are not meaningful. These words are commonly referred to as stop words.
+
+Stop words are formally defined as **commonly used words such as articles, pronouns and prepositions.** We typically remove these words in common and simple text analysis or natural language processing (NLP) tasks.
+
+Within tidytext, there is a built-in dataset called `stop_words` that we can leverage to **REMOVE** stop words. Here's a quick preview of stop_words before we use it:
+
+```{r}
+data("stop_words")
+head(stop_words)
+```
+
+**How do we fix our preliminary code with stop words?**
+
+Again, let us quickly view the incorrect code before fixing it:
+
+```{r}
+# preliminary code: not final, we can improve this further
+austen_books_tidy |>
+  group_by(word) |>
+  summarize(n = n()) |>
+  arrange(desc(n)) |>
+  head(10)
+```
+
+Below implements a simple fix by piping `austen_books_tidy` into `anti_join(stop_words)` before the `group_by()` statement. `anti_join(stop_words)` effectively removes tokens when the words are found in `stop_words` (in other words, stop words are removed)
+
+```{r}
+# corrected to remove stop words
+# added anti_join(stop_words) to remove the stop words using stop_words as a reference guide
+austen_books_tidy |>
+  anti_join(stop_words) |> #
+  group_by(word) |>
+  summarize(n = n()) |>
+  arrange(desc(n)) |>
+  head(20)
+```
+
+## Quick note and detour on anti_join()
+
+If you want a more technical explanation of `anti_join()`, DATA 412/612 (Statistical Programming in R) teaches an entire class on joins alone (see slide 22 of my lecture on joins from a course I taught last semester: <https://jmtfeliciano.github.io/DATA412Fall2024/Data412612Lecture7#22>).
+
+But all you need to know for this class is that you will often have to pipe your tidy text table or data into `anti_join(stop_words)` before further analysis to remove the stop words–that is all you need to really know for this class.
+
+But if you want to visualize a simpler example, let us quickly run the script below:
+
+```{r}
+tableA <- tibble(word = c("A", "B", "C"))
+tableB <- tibble(word = c("B", "D", "Z"))
+
+tableA
+tableB
+```
+
+Since word = B is present in both tableA and tableB, word = B is removed from TableA before being saved as `new_table`:
+
+```{r}
+new_table <- tableA |>
+  anti_join(tableB)
+
+new_table
+```
+
+**Detour complete!** Now let us go back to actual text analysis!
+
+## Plotting top words
+
+Before proceeding, let us actually save the table or data frame we previewed into a proper R object. Let us call it `austen_top10`:
+
+```{r}
+austen_top10 <- austen_books_tidy |>
+  anti_join(stop_words) |>
+  group_by(word) |>
+  summarize(n = n()) |>
+  arrange(desc(n)) |>
+  head(10)
+
+austen_top10
+```
+
+With `austen_top10` created, we can use `ggplot()` with `geom_col()`. Let us consider the two images below with the second one being the better one you should always create.
+
+The first image uses the simple/default code you'd probably write for ggplot:
+
+```{r}
+# first image: unordered
+ggplot(austen_top10, aes(x = n, y = word)) + 
+  geom_col() +
+  theme_minimal() +
+  labs(x = "counts", y = "word")
+```
+
+The second image uses `fct_reorder()` to tell R you want it to order image by some tally. `y = fct_reorder(word, n)` tells R or ggplot that you want `word` to be displayed in the y-axis but you want them ordered based on the value of `n` (which represents count). Note: DATA 412/612 delves deeply into `fct_reorder()` which is from tidyverse's `forcats` package. The resulting image is below:
+
+```{r}
+# second image: ordered
+ggplot(austen_top10, aes(x = n, y = fct_reorder(word, n))) + 
+  geom_col() +
+  theme_minimal() +
+  labs(x = "counts", y = "word")
+```
+
+## **Practice 1 (15 minutes):**
+
+Run the script below then complete the script (see commented subsections on what to do)
+
+```{r}
+# Creates an R object called hgwells_data 
+# hgwells_data contains text data from the works of H.G. Wells' "The Time Machine"
+library(gutenbergr)
+hgwells_data <- gutenberg_download(c(35))
+head(hgwells_data, 10)
+
+# Tokenize hgwells_data and save the data frame into your R environment
+hgwells_data_tidy <- hgwells_data |>
+  unnest_tokens(output = word, input = text)
+
+# Create a table or data frame that only includes the top 15 words (excludes stop words)
+data("stop_words")
+
+top15_hgwells <- hgwells_data_tidy |>
+  anti_join(stop_words) |>
+  group_by(word) |>
+  summarise(n = n()) |>
+  arrange(-n) |>
+  head(15)
+
+# Create an ggplot image that shows top 15 words visually
+ggplot(top15_hgwells, aes(y = fct_reorder(word, n), x = n)) +
+  geom_col() +
+  labs(y = "words") +
+  theme_minimal()
+```
+
+## Sentiment Analysis
+
+Let’s address the topic of opinion mining or **sentiment analysis**.
+
+When human readers approach a text, we use our understanding of the emotional intent of words to infer whether a section of text is positive or negative, or perhaps characterized by some other more nuanced emotion like surprise or disgust.
+
+![](https://www.tidytextmining.com/images/tmwr_0201.png){width="423"}
+
+Of note, there is `inner_join()` between Tidy Text and Sentiment Lexicon.
+
+## Detour: inner_join()
+
+Let us revisit tableA and tableB but this time, we will use `inner_join()` instead of `anti_join()`. Let us run the next two R chunks:
+
+```{r}
+tableA <- tibble(word = c("A", "B", "C"))
+tableB <- tibble(word = c("B", "D", "Z"))
+
+tableA
+tableB
+```
+
+You may think of `inner_join()` as the opposite of `anti_join()`. In `anti_join()`, we used it to remove words that were present in the `stop_words` data. In the example below, we keep elements from tableA that it shares with tableB only (so B is the only row printed):
+
+```{r}
+tableA |>
+  inner_join(tableB)
+```
+
+**Detour complete!** Now let us go back to actual text analysis!
+
+## Sentiment Analysis Lexicon
+
+![](https://www.tidytextmining.com/images/tmwr_0201.png){width="423"}
+
+**What is a lexicon?** Think of it as a vocabulary or dictionary of specific words.
+
+In the context of our word, you may think of sentiment analysis lexicon as a database of words that identify words with their respective sentiment in whatever scale they provide.
+
+The tidytext package provides three lexicons we can leverage:
+
+-   `AFINN` from [Finn Årup Nielsen](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010),
+
+-   `bing` from [Bing Liu and collaborators](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html), and
+
+-   `nrc` from [Saif Mohammad and Peter Turney](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm).
+
+Let us preview the data that is provided across these three lexicons. But two of them require the installation of `textdata` beforehand so run this script in your console before moving forward (it doesn't have to be loaded however):
+
+> install.packages("textdata")
+
+...
+
+Now let us preview the afinn, bing, and nrc lexicon by running the scripts below:
+
+**Important note before running the three scripts below:** If this is your first time running them, you might see additional prompt in your Console for two of the lexicons we will run. It will likely ask you type in 1 in your Console, then press Enter/Return from your key board. I will take a two-minute pause to allow you to run the next three scripts (and raise your hands if you cant see any print out):
+
+```{r}
+# afinn assigns words with a score that runs between -5 and 5, with negative scores indicating negative sentiment and positive scores indicating positive sentiment.
+afinn_lexicon <- get_sentiments("afinn")
+
+head(afinn_lexicon)
+```
+
+```{r}
+# assigns words with either 'negative' or 'positive'
+bing_lexicon <- get_sentiments("bing")
+
+head(bing_lexicon)
+```
+
+```{r}
+# assigns each word with one of the 10 sentiments available
+nrc_lexicon <- get_sentiments("nrc")
+
+head(nrc_lexicon)
+
+# shows which sentiments are available
+nrc_lexicon |>
+  group_by(sentiment) |>
+  summarise(n = n())
+```
+
+```{r}
+# this is extra: you don't need to know this but paste0() is something you really use in the real world
+nrc_lexicon |>
+  group_by(word) |>
+  summarise(n = n(), sentiment = paste0(sentiment, collapse = ", ")) |>
+  filter(n > 1)
+```
+
+There are a lot of methods to do sentiment analysis. But the ones we are doing are called **dictionary-based sentiment analysis.** Dictionary-based methods like the ones we are discussing find the total sentiment of a piece of text by adding up the individual sentiment scores for each word in the text.
+
+Moreover, it important to note that not every English word is in the lexicons provided above because many English words are pretty neutral.
+
+## **Use cases of the nrc lexicon**
+
+Let us quickly revisit `austen_books_tidy` we created earlier:
+
+```{r}
+# properly saves the data as an R object in your R environment
+austen_books <- austen_books() 
+
+# tokenize austen_books
+austen_books_tidy <- austen_books |>
+  unnest_tokens(output = word, input = text)
+
+# prints a random sample of 10 rows
+sample_n(austen_books_tidy, 10)
+```
+
+**Quick reminder:** `inner_join()` will only keep data or words when words are found in both tables. If we are interested in sentiment analysis, it should make sense why we want to use `inner_join()`--we essentially only want to keep words that have sentiments if we are doing an analysis on sentiments.
+
+```{r}
+# saves the nrc lexicon as an R object
+nrc_lexicon <- get_sentiments("nrc")
+
+# inner joined data between austen_books_tidy and nrc_lexicon 
+austen_nrc_joined <- austen_books_tidy |>
+  inner_join(nrc_lexicon)
+
+# Prints random sample from austen_nrc_joined
+sample_n(austen_nrc_joined, 10)
+```
+
+Reminder: there are 10 sentiments within nrc. Below tallies the nrc sentiments for all the books combined from `austen_nrc_joined`:
+
+```{r}
+austen_nrc_joined |>
+  group_by(sentiment) |>
+  summarise(n = n()) |>
+  arrange(-n) # -n is a short cut notation for desc(n)
+```
+
+Tallying nrc sentiments per book to get insight on theme/messaging of specific books:
+
+```{r}
+austen_nrc_joined |>
+  group_by(book, sentiment) |>
+  summarise(n = n()) |>
+  arrange(book, -n) # -n is a short cut notation for desc(n)
+```
+
+## Practice 2 (5 mins)
+
+Complete the script below (run the script below first to remind yourself of the underlying data).
+
+Next write an R script that will tally the top 20 words related to the `anticipation` as a sentiment from the book `Sense & Sensibility`. Then save this R object as `anticipate20` then print a sample using `head()`:
+
+```{r}
+# run this script and remind yourself 
+head(austen_nrc_joined)
+
+# your additional code below:
+anticipate20 <- austen_nrc_joined |>
+  filter(sentiment == 'anticipation') |>
+  filter(book == 'Sense & Sensibility') |>
+  group_by(word) |> # group_by(sentiment, book, word) is more descriptive
+  summarise(n = n()) |>
+  arrange(-n) |>
+  head(20)
+
+anticipate20
+```
+
+## **afinn case uses:**
+
+Again, afinn assigns words with a score that runs between -5 and 5, with negative scores indicating negative sentiment and positive scores indicating positive sentiment.
+
+Here's the output if we were to `inner_join()` `austen_books_tidy` with `afinn_lexicon`:
+
+```{r}
+afinn_lexicon <- get_sentiments("afinn")
+
+merged_afinn <-  austen_books_tidy |>
+  inner_join(afinn_lexicon)
+
+head(merged_afinn)
+```
+
+**What can you do with these numbers?** Add them up!
+
+```{r}
+merged_afinn |>
+  group_by(book) |>
+  summarise(sentiment_sum = sum(value))
+```
+
+"I think out of Austen's works Emma was the most comical." - a quote I saw in Reddit after discussing Austen's work. It might be tied to the high sentiment sum seen in Emma above.
+
+## **bing case uses:**
+
+Again, bing assigns words with either a negative or a positive value.
+
+```{r}
+bing_lexicon <- get_sentiments("bing")
+
+merged_bing <-  austen_books_tidy |>
+  inner_join(bing_lexicon)
+
+head(merged_bing)
+```
+
+Not much we can do here. But tally the positive and negative words.
+
+```{r}
+merged_bing |>
+  group_by(sentiment) |>
+  summarize(n = n())
+```
+
+```{r}
+# book-specific sentiment analysis using bing
+merged_bing |>
+  group_by(book, sentiment) |>
+  summarize(n = n())
+```
+
+## Creating a plot with both positive and negative top 10 words:
+
+For this example, let us focus on `merged_bing` which looks like:
+
+```{r}
+head(merged_bing, 10)
+```
+
+Now, let us identify the top words under both positive and negative sentiment (we will keep building on the code here and build on it to create a finalize code):
+
+```{r}
+# preliminary code
+bing_lexicon <- get_sentiments("bing")
+
+merged_bing <-  austen_books_tidy |>
+  inner_join(bing_lexicon)
+
+sentiment_tally <- merged_bing |>
+  group_by(sentiment, word) |>
+  summarise(n = n())
+
+sentiment_tally
+```
+
+Is there an easy way to subset the data above so it only keeps the top 10 for both negative and positive words at the same time? Yes, by using `slice_max()`
+
+```{r}
+# preliminary code 
+bing_lexicon <- get_sentiments("bing")
+
+merged_bing <-  austen_books_tidy |>
+  inner_join(bing_lexicon)
+
+sentiment_tally <- merged_bing |>
+  group_by(sentiment, word) |>
+  summarise(n = n())
+
+# this part right here tells R that you want the top 10 words for negative/position sentiment: creates a sentiment-specific top 10
+top10_each_sentiment <- sentiment_tally |>
+  group_by(sentiment) |>
+  slice_max(n, n = 10)
+
+top10_each_sentiment
+```
+
+Let us create a preliminary ggplot image geom_col() which we used earlier for the word count example earlier but we want to color code by sentiment and use facet_wrap() to create separate boxes for negative and positive emotions:
+
+```{r}
+# Finalized code
+bing_lexicon <- get_sentiments("bing")
+
+merged_bing <-  austen_books_tidy |>
+  inner_join(bing_lexicon)
+
+sentiment_tally <- merged_bing |>
+  group_by(sentiment, word) |>
+  summarise(n = n())
+
+top10_each_sentiment <- sentiment_tally |>
+  group_by(sentiment) |>
+  slice_max(n, n = 10)
+
+ggplot(top10_each_sentiment, aes(x = n, 
+                                 y = fct_reorder(word, n), 
+                                 fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~sentiment, scales = "free_y") +
+  labs(x = "Contribution to sentiment",
+       y = "Words") +
+    theme_minimal()
+```
+
+## Practice 3 (15 mins)
+
+If we are pressed in time and skip this in class, this will be a homework problem 1 in the next homework.
+
+As with Problem 1, complete the R script below. But your goal is to create a ggplot similar to what we just did above:
+
+```{r}
+# Creates an R object called hgwells_data 
+# hgwells_data contains text data from the works of H.G. Wells' "The Time Machine"
+library(gutenbergr)
+hgwells_data <- gutenberg_download(c(35))
+head(hgwells_data, 10)
+
+# Tokenize hgwells_data and save the data frame into your R environment
+
+
+# Load the bing lexicon into the R env't and then use inner_join() to create a new data frame into your R environment
+
+
+# Create a table similar to the top10_each_sentiment data frame we created
+# Call it hgwells_top10 for this example. Use slice_max(n, n = 10).
+
+
+# Create an ggplot image that shows the top 10 words visually for both negative and positive sentiment
+
+
+```
+
+## **Creating Word Cloud For Top Words**
+
+For this task, let us reuse `austen_books_tidy` and modify prior code we went over to create a data frame with a top 50 word table called `top50words`:
+
+```{r}
+top50words <- austen_books_tidy |>
+  anti_join(stop_words) |>
+  group_by(word) |>
+  summarize(n = n()) |>
+  arrange(desc(n)) |>
+  head(50)
+
+top50words 
+```
+
+For this task, we will be using the `wordcloud` package. Please install it using your console. **Note:** If there is not enough space, wordcloud will ignore your max.words specification.
+
+```{r}
+# run this if not installed: 
+# install.packages("wordcloud")
+library(wordcloud)
+
+# Note: We did this in the first day of lecture
+# But $ tells R you want you use the variable from the specifed data frame to the left of the $ sign.
+wordcloud(words = top50words$word, 
+          freq = top50words$n, 
+          max.words = 50)
+```
+
+## Practice 4 (3 mins)
+
+Use `hgwells_data` from Practice 1 to create a word tally table. Then using that table, use `wordcloud()` to produce a word cloud.
+
+```{r}
+# Your code below
+
+```
